@@ -1,0 +1,1332 @@
+.home {
+	// This banner appears above the hero, just under the global-nav-desktop
+	&-banner {
+		width: 100%;
+		height: 72px; // 3/24/21 was 79
+		height:80px;
+		background: $color-black-1;
+		align-items: center;
+		color: $color-bkgd;
+		@include flex(1 1 0);
+		@include flex-container-display();
+		justify-content: center;
+		text-align: center;
+
+		@include mobile-only {
+			height: 49px;
+		}
+
+		@include tablet-only {
+			height: 49px;
+		}
+	}
+
+	&__section {
+		@extend %global-main-section;
+		@extend %apply-padding-for-left-and-right-sides;
+		@extend %typography-body-copy;
+
+		// Interactive map
+		&--hero {
+			z-index: 3 !important; // do this because it sub-loads webgl map which tries to steal focus
+			height: 660px !important;
+			min-height: unset;
+			margin: 0;
+			background: $color-bkgd;
+			padding: 0;
+			@include user-select();
+
+			@include mobile-only {
+				height: 619px !important;
+			}
+
+			@include tablet-only {
+				height: 619px !important;
+			}
+
+			@include tablet {
+				padding: 0 32px;
+			}
+
+			#map {
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+			}
+		}
+
+		&--case-studies {
+			background: $color-bkgd;
+
+			&:before {
+				//content: 'DEBUG: --case-studies';
+				//@extend %before-debug-info;
+			}
+		}
+
+		&--data-summary {
+			&:before {
+				//content: 'DEBUG: --data-summary';
+				//@extend %before-debug-info;
+			}
+		}
+
+		&--testimonial {
+			min-height: unset	;
+			background: $color-bkgd;
+
+			&:before {
+				//content: 'DEBUG: --testimonial';
+				//@extend %before-debug-info;
+			}
+		}
+	}
+}
+
+//  home-banner --- Home Banner (this banner appears above the hero, just under the global-nav-desktop)
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.home-banner {
+	@include user-select();
+
+	&__grid {
+		height: inherit;
+		@extend %grid-12;
+
+		h1, h2 {
+			height: inherit;
+			color: $color-bkgd;
+			align-items: center;
+			@include flex-container-display();
+			justify-content: center;
+			text-align: center;
+		}
+
+		h1 {
+			grid-area: 1 / 2 / 2 / 6;
+			@include flex-container-flow(nowrap row);
+			justify-self: flex-end;
+			@extend %typography-home-1;
+			@include mobile-only {
+				display: none;
+			}
+			@include tablet-only {
+				display: none;
+			}
+		}
+
+		&__verticalGridItem {
+			height: inherit;
+			align-items: center;
+			@include flex-container-display();
+			@include flex-container-flow(nowrap row);
+			justify-content: left;
+			grid-area: 1 / 6 / 2 / 6;
+
+			@include mobile-only {
+				justify-content: right;
+				grid-area: 1 / 1 / 2 / 1;
+			}
+
+			@include tablet-only {
+				justify-content: right;
+				grid-area: 1 / 2 / 2 / 2;
+			}
+
+			div {
+				width: 1px;
+				height: 60%;
+				background: $color-everyday-blue-500;
+				@include tablet-only {
+					margin-left: auto;
+				}
+				@include mobile-only {
+					margin-left: auto;
+				}
+			}
+		}
+
+		h2 {
+			padding: 0 0 0 12px;
+			grid-area: 1 / 6 / 2 / 12;
+			@extend %typography-home-2;
+
+			@include mobile-only {
+				padding: 0 44px;
+				grid-column: 1 / -1;
+			}
+
+			@include tablet-only {
+				padding: 0 44px;
+				grid-column: 2 / -2;
+			}
+		}
+	}
+}
+
+//  home-map --- Hero Section
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.home-hero-blades {
+	height: inherit;
+	@extend %grid-12;
+	@include user-select();
+
+	@include mobile-only {
+		height: inherit;
+		padding: 16px;
+	}
+
+	@include tablet-only {
+		height: inherit;
+		padding: 24px;
+	}
+
+	// This represents a layer that holds content above the map
+	&__map-layer {
+		position: relative;
+		@include opacity(0);
+		@include flex-container-display();
+		z-index: 4;
+		height: inherit;
+		padding: 0 84px;
+		background: rgba(255, 255, 255, 0);
+		font: normal normal normal 66pt/normal "Helvetica Neue", Roboto, Arial, Helvetica, sans-serif;
+		align-items: center;
+		grid-column: span 4;
+		@include transitionMultiple(opacity 1.4s linear .8s);
+
+		&--vis {
+			@include opacity(1);
+		}
+
+		&--desktop {
+			@include mobile-only {
+				display: none;
+			}
+
+			@include tablet-only {
+				display: none;
+			}
+		}
+
+		&[data-type='mobile-tablet'] {
+			height: 100%;
+			grid-column: span 12;
+			@include desktop {
+				display: none;
+			}
+		}
+	}
+
+	//  The blade is a single entity which lives inside the layer
+	&__blade {
+		position: absolute;
+		z-index: 5;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		@include translate3d(0, 95%, 0);
+		@include opacity(.5);
+		@include transitionMultiple(transform .4s $timingFuncEaseInOutSine, opacity .3s linear);
+
+		&:nth-of-type(1) {
+			@include opacity(1);
+			@include translate3d(0);
+		}
+
+		@include mobile-only {
+			top: 0;
+			height: 100%;
+			@include translate3d(calc(100% + 16px));
+		}
+
+		@include tablet-only {
+			top: 0;
+			height: 100%;
+			@include translate3d(calc(100% + 24px));
+		}
+	}
+
+	// The card lives inside the blade and presents the copy and images to users
+	&__card {
+		position: absolute;
+		z-index: 6;
+		top: 10%;
+		left: 0;
+		width: 100%;
+		height: 80%;
+		background: rgba(255, 255, 255, 1);
+		color: $color-black-1;
+		overflow: hidden;
+		@include borderRadius(8px);
+		@include box-shadow(0, 4px, 10px, 4px, rgba(0, 0, 0, 0.33));
+		@include user-select();
+
+		@include mobile-only {
+			top: 0;
+			height: 385px;
+		}
+
+		@include tablet-only {
+			top: 0;
+			height: 385px;
+		}
+	}
+
+	.global-cta-area {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		min-height: unset;
+		padding-bottom: 32px;
+	}
+
+	// Section within card
+	&__card-section {
+		position: relative;
+		width: 100%;
+		background: $color-everyday-blue-600;
+		@include clearfix();
+		// Top section
+		&:nth-of-type(1) {
+			//height: 212px;
+			padding: 16px;
+
+			// Top section but of type img
+			&[data-type='img'] {
+				margin-bottom: 24px;
+				padding: 8px 8px 0 8px;
+				background: $color-bkgd;
+
+				@include mobile-only {
+					margin-bottom: 16px;
+				}
+
+				@include tablet-only {
+					margin-bottom: 16px;
+				}
+
+				picture, img {
+					position: relative;
+					width: 100%;
+					height: (212px - 8px - 8px); //196
+					min-height: 84px;
+					margin: auto 0;
+					overflow: hidden;
+					@include borderRadius(4px);
+					-o-object-fit: cover;
+					object-fit: cover;
+
+					@include mobile-only {
+						height: (153px - 8px - 8px);
+					}
+
+					@include tablet-only {
+						height: (153px - 8px - 8px);
+					}
+				}
+
+				img {
+					display: block;
+				}
+			}
+
+			@include mobile-only {
+				//height: 153px;
+			}
+
+			@include tablet-only {
+				//height: 153px;
+			}
+		}
+
+		&:nth-of-type(2) {
+			background: $color-bkgd;
+
+			&[data-type='img'] {
+				padding: 0 16px 16px 16px;
+				color: $color-black-1;
+
+				h2 {
+					display: block;
+					margin: 0 0 8px 0;
+					color: $color-black-1;
+					@extend %typography-home-card-h2;
+				}
+
+				p {
+					color: $color-black-1;
+				}
+			}
+		}
+
+		h2 {
+			display: block;
+			margin: 0 0 10px 0;
+			color: $color-bkgd;
+			@extend %typography-home-card-h2;
+		}
+
+		p {
+			color: $color-bkgd;
+			@extend %typography-home-card-copy;
+		}
+	}
+
+	&__card-density-legend {
+		position: relative;
+		display: grid;
+		margin: 8px auto;
+		padding: 0 16px;
+		align-items: flex-start;
+		grid-gap: 16px;
+		grid-template-columns: repeat(4, [col-start] minmax(30px, 400px));
+
+		h4 {
+			padding: 8px 0 0 0;
+			color: $color-black-1;
+			grid-area: 1 / 2 / 2 / 4;
+			text-align: center;
+			@include flex-container-display();
+			@include flex-container-flow(column wrap);
+			align-items: center;
+			@extend %typography-home-card-legend-heading;
+		}
+
+		$legendColors: $color-teal, $color-everyday-blue-600, $color-everyday-blue-500, $color-mint;
+
+		@for $i from 1 through 4 {
+			& > div:nth-of-type(#{$i}) {
+				min-height: 70px;
+				grid-row-start: 2;
+				text-align: center;
+				color: $color-bkgd;
+				background: nth($legendColors, $i);
+				padding: 8px 2px;
+				@include borderRadius(8px);
+				@include flex-container-display();
+				@include flex-container-flow(column wrap);
+				align-items: center;
+				justify-content: center;
+				@extend %typography-home-card-legend;
+			}
+		}
+	}
+
+	&__card-stats-module {
+		position: relative;
+		float: left;
+		width: 50%;
+		height: 100%;
+		min-height: 181px;
+		padding: 0 16px 0 16px;
+		@include flex-container-display();
+		@include flex-container-flow(column wrap);
+		color: $color-bkgd;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+
+		@include mobile-only{
+			padding-top: 8px;
+			justify-content:flex-start;
+		}
+
+		&[data-pos='left'] {
+			&:after {
+				content: '';
+				position: absolute;
+				right: -0.5px;
+				width: 1px;
+				height: 50%;
+				background: $color-gray-2;
+			}
+		}
+
+		h3 {
+			position: relative;
+			display: inline-flex;
+			min-height: 42px;
+			@extend %typography-home-card-h4;
+			color: $color-black-1;
+
+			@include mobile-only{
+				min-height:40px;
+			}
+		}
+
+		span {
+			position: relative;
+			display: inline-flex;
+			width: 100%;
+			color: $color-deep-sea-400;
+			align-items: center;
+			justify-content: center;
+			@extend %typography-home-card-stats-module-number;
+
+			@include mobile-only{
+				height: 50px;
+				line-height:50px;
+			}
+		}
+
+		p {
+			position: relative;
+			display: inline-flex;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			color: $color-tech-gray-400;
+			align-items: center;
+			justify-content: center;
+			@extend %typography-home-card-stats-module-small-copy;
+		}
+	}
+}
+
+//  home-case-studies__grid --- Case Studies - Masonry presentation
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+// case studies helper for ios image overflowing element on active
+body {
+	&[data-device-ios="yes"]{
+		.home-case-studies__card{
+			&:focus, &:hover, &:active {
+				span {
+					img {
+						height: 100%;
+					}
+				}
+			}
+		}
+	}
+}
+
+.home-case-studies {
+	&__grid {
+		height: inherit;
+		@extend %grid-12;
+		align-items: unset;
+		grid-template-rows: minmax(200px, auto); /* top row is 100px in height */
+		grid-auto-rows: minmax(308px, auto);
+
+		@include mobile-only {
+			margin-top: (8px * 5);
+			margin-bottom: (8px * 5);
+			grid-auto-rows: minmax(284px, auto);
+		}
+
+		@include tablet-only {
+			margin-top: (8px * 5);
+			margin-bottom: (8px * 5);
+			grid-auto-rows: minmax(284px, auto);
+		}
+	}
+
+	&__card {
+		height: 100%;
+		padding: 16px;
+		overflow: hidden;
+		transform: translateZ(0);
+		transform-origin: center center;
+		transform-style: preserve-3d;
+		@include borderRadius(8px);
+		@include user-select(none);
+		@extend %add-hardware-acceleration;
+		@include transitionMultiple(box-shadow .32s linear 0s, transform .2s ease-in-out 0s);
+
+		&:focus, &:hover, &:active {
+			transform: scale(1.01);
+			//transform: scale(1.02) translateZ(20px) perspective(1400px) rotateX(2deg) rotateY(-2deg) rotateZ(.2deg);
+			@include box-shadow(0, 10px, 20px, 0, rgba(54, 54, 54, 0.29));
+
+			.home-case-studies__inner{
+				h3{
+					@include untruncate();
+				}
+			}
+
+			.home-case-studies__card-span {
+				overflow: hidden;
+				img {
+					overflow: hidden;
+					height: calc(100% + 40px);
+				}
+
+				&:after {
+					content: '';
+					position: absolute;
+					top: 0;
+					right: 0;
+					width: 100%;
+					height: 100%;
+					background-color: rgba(0, 0, 0, 0.7);
+					@include borderRadius(8px);
+					overflow: hidden;
+				}
+			}
+
+			.home-case-studies__inner {
+				@include translate3d(0, 0);
+			}
+
+			p {
+				&:nth-of-type(2) {
+					max-height: 200px;
+				}
+			}
+		}
+
+		&-span {
+			overflow: hidden;
+
+			picture, img {
+				position: absolute;
+				//position: relative;
+				z-index: 0;
+				top: 0;
+				left: 0;
+				float: left;
+				width: 100%;
+				height: 100%;
+				min-height: 100%;
+				margin: auto 0;
+				overflow: hidden;
+				transform-origin: bottom right 60px;
+				vertical-align: middle;
+				object-fit: cover;
+				@include borderRadius(8px);
+				@include transitionMultiple(height .32s linear 0s);
+			}
+
+			&:after {
+				content: '';
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0);
+				overflow: hidden;
+				@include borderRadius(8px);
+				@include linear-gradient(to top, rgba(0, 0, 0, 0.55) 15%, rgba(0, 0, 0, 0.25) 40%, rgba(0, 0, 0, 0) 100%);
+				@include transitionMultiple(background-color .3s linear 0s);
+
+				@include mobile-only {
+					background-color: rgba(0, 0, 0, 0.7);
+				}
+
+				@include tablet-only {
+					background-color: rgba(0, 0, 0, 0.7);
+				}
+			}
+		}
+
+		h3 {
+			position: relative;
+			z-index: 1;
+			@extend %typography-home-case-studies-h3;
+			@include truncate(100%);
+
+			@include tablet-0-959{
+				@include untruncate();
+			}
+		}
+
+		p {
+			position: relative;
+			z-index: 2;
+			@extend %typography-home-case-studies-copy;
+			@extend %text-that-needs-wrapping;
+
+			&:nth-of-type(2) {
+				max-height: 0;
+				margin: 16px 0 0 0;
+				@include transitionMultiple(max-height .3s linear);
+				overflow: hidden;
+
+				@include mobile-only {
+					max-height: 200px;
+				}
+
+				@include tablet-only {
+					max-height: 200px;
+				}
+			}
+
+		}
+
+		// Top card
+		&--header {
+			//min-height: 210px;
+			padding: 16px;
+			color: $color-cash-black;
+			text-align: center;
+			grid-column: col-start / -1;
+			@extend %remove-transition;
+			@include flex-container-display();
+			@include flex-container-flow(nowrap column);
+			align-items: center;
+			justify-content: center;
+
+			&:hover {
+				box-shadow: none;
+			}
+
+			h2 {
+				//margin: 24px 0;
+				@extend %typography-home-case-studies-h2;
+			}
+
+			p {
+				@extend %typography-home-case-studies-sub-title;
+			}
+		}
+
+		&--1 {
+			grid-column: span 5;
+			@include setPseudoClasses(rgba(255, 255, 255, 0), $color-bkgd, $color-everyday-blue-600, $color-bkgd, .6s);
+			@include tablet-0-959 {
+				grid-column: span 12;
+				p{
+					&:nth-of-type(2){
+						@include untruncate();
+					}
+				}
+			}
+
+			p{
+				&:nth-of-type(2){
+					@include line-clamp($font-size: 16px, $line-height: 1.5, $lines-to-show: 4);
+				}
+			}
+		}
+
+		&--2 {
+			grid-column: span 3;
+			@include setPseudoClasses(rgba(255, 255, 255, 0), $color-bkgd, $color-everyday-blue-600, $color-bkgd, .6s);
+
+			@include tablet-0-959 {
+				grid-column: span 12;
+
+				p{
+					&:nth-of-type(2){
+						@include untruncate();
+					}
+				}
+			}
+
+			p{
+				&:nth-of-type(2){
+					@include line-clamp($font-size: 16px, $line-height: 1.5, $lines-to-show: 3);
+				}
+			}
+		}
+
+		&--3 {
+			background: $color-ui-chrome-100;
+			color: $color-black-1;
+			grid-column: span 4;
+			grid-row-end: span 2;
+			text-align: center;
+			@include flex-container-display();
+			@include flex-container-flow(nowrap column);
+			align-items: flex-start;
+			justify-content: space-evenly;
+
+			@include mobile-only {
+				order: 5;
+				grid-column: 1 / -1;
+			}
+
+			@include tablet-only {
+				order: 5;
+				grid-column: 1 / -1;
+			}
+
+			header {
+				width: 100%;
+				margin: 0 auto;
+				padding: 16px;
+				@include flex-container-display();
+				@include flex-container-flow(nowrap column);
+				align-items: center;
+				align-self: flex-start;
+				justify-content: center;
+
+				svg {
+					width: 50px;
+					height: 40px;
+					align-self: center;
+				}
+
+				h3 {
+					margin-top: (8px * 3);
+					align-self: center;
+					@include flex-container-display();
+					@extend %typography-home-case-studies-h3;
+				}
+			}
+
+			ul {
+				align-self: flex-end;
+				list-style-type: none;
+				text-align: left;
+			}
+
+			ul, li {
+				width: 100%;
+			}
+
+			li {
+				display: block;
+				//min-height: (8px * 7);
+				padding: 16px 0;
+				border-bottom: 1px solid #D4DBE0;
+				@include flex-container-display();
+				align-items: center;
+				justify-content: center;
+
+				@include mobile-only {
+					height: 39px;
+				}
+
+				@include tablet-only {
+					height: 39px;
+				}
+			}
+		}
+	}
+
+	&__stats-label {
+		width: 70%;
+		color: $color-black-1;
+		@extend %typography-home-case-studies-stats;
+	}
+
+	&__stats-number {
+		width: 30%;
+		color: $color-gd-blue;
+		align-self: center;
+		text-align: right;
+		justify-self: center;
+		@extend %typography-home-case-studies-stats-numbers;
+	}
+
+	&__inner {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		padding: 16px;
+		@include translate3d(0, 66%);
+		@include transitionMultiple(transform .4s ease-out);
+
+		@include mobile-only {
+			@include translate3d();
+		}
+
+		@include tablet-only {
+			@include translate3d();
+		}
+	}
+}
+
+//  home-data-summary ---  Data Summary - Cut down of data page
+// "Online traffic and transactions surge during the pandemic"
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.home-data-summary {
+
+	// 12 column grid
+	&__grid {
+		height: inherit;
+		@extend %grid-12;
+		align-items: unset;
+	}
+
+	// Common card styles
+	&__card {
+		height: 100%;
+		padding: 32px;
+		background: $color-bkgd;
+		color: $color-black-1;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+		overflow: hidden;
+		transform: translateZ(0);
+		transform-origin: center center;
+		text-align: center;
+		transform-style: preserve-3d;
+		@include borderRadius(9px);
+		@include user-select(none);
+		@include transitionMultiple(box-shadow .32s linear 0s, transform .2s ease-in-out 0s);
+
+		&:focus, &:hover, &:active {
+			transform: scale(1.02);
+			@include box-shadow(0, 10px, 20px, 0, rgba(54, 54, 54, 0.29));
+		}
+
+		@include mobile-only{
+			padding: 24px;
+		}
+
+		h3 {
+			position: relative;
+			z-index: 1;
+			@extend %typography-home-case-studies-h3;
+			margin: 8px auto;
+
+			@include mobile-only{
+				margin: 24px 0 24px 0;
+			}
+		}
+	}
+
+	// Top/header card
+	&__card--header {
+		min-height: 210px;
+		padding: 16px;
+		background: unset;
+		box-shadow: none;
+		grid-column: col-start / -1;
+		text-align: center;
+		@extend %remove-transition;
+		@include flex-container-display();
+		@include flex-container-flow(nowrap column);
+		align-items: center;
+		justify-content: center;
+
+		&:hover {
+			box-shadow: none;
+		}
+
+		h2 {
+			margin: 24px 0;
+			@extend %typography-home-case-studies-h2;
+		}
+
+		p {
+			@extend %typography-home-case-studies-sub-title;
+		}
+
+		&-footer {
+			color: $color-tech-gray-400;
+			@extend %typography-home-case-studies-caption;
+		}
+	}
+
+	// Card 1
+	&__card--1 {
+		text-align: center;
+		grid-column: col-start / -1;
+
+		$table-header-font-weight: 400;
+		$table-header-font-color: #757575;
+		$table-cell-padding: 8px; //1.0rem
+		$table-condensed-cell-padding: $table-cell-padding/2;
+		$table-bg: #fff;
+		$table-bg-accent: #f5f5f5;
+		$table-bg-hover: rgba(0, 0, 0, .12);
+		$table-bg-active: $table-bg-hover;
+		$table-border-color: #e0e0e0;
+
+		table,
+		td,
+		th {
+			border-collapse: collapse;
+		}
+
+		table {
+			width: 100%;
+			max-width: (8px * 90);
+			margin: 8px auto;
+			border-collapse: collapse;
+			//table-layout: auto;
+			background-color: $table-bg;
+			table-layout: fixed;
+
+			th {
+				color: $color-tech-gray-400;
+				text-align: center;
+				text-transform: uppercase;
+				@extend %typography-home-data-summary-th;
+			}
+
+			> thead,
+			> tbody,
+			> tfoot {
+				> tr {
+					@include transitionMultiple(background-color .3s ease);
+
+					> th,
+					> td {
+						padding: $table-cell-padding;
+						border-top: 0;
+						vertical-align: middle;
+						@include transitionMultiple(background-color .3s ease);
+					}
+				}
+			}
+
+			> thead > tr > th {
+				//width: auto;
+				color: $color-tech-gray-400;
+				text-align: center;
+				vertical-align: middle;
+				text-align: center;
+				@extend %typography-home-data-summary-th;
+				text-transform: uppercase;
+			}
+
+			> caption + thead,
+			> colgroup + thead,
+			> thead:first-child {
+				> tr:first-child {
+					> th,
+					> td {
+						border-top: 0;
+					}
+				}
+			}
+
+			> tbody + tbody {
+				border-top: 1px solid rgba(0, 0, 0, .12);
+			}
+
+			> tbody > tr:hover {
+				> td,
+				> th {
+					//background-color: $table-bg-hover;
+				}
+			}
+		}
+	}
+
+	&__column-header {
+		color: $color-black-1;
+		@extend %typography-home-data-summary-column-header;
+	}
+
+	&__column-value {
+		@include borderRadius(8px);
+		@extend %typography-home-data-summary-values;
+		display: block;
+		width: 145px;
+		padding: 6px 10px;
+		background: $color-deep-sea-300;
+		color: $color-bkgd;
+		text-align: center;
+		margin: 0 auto;
+
+		&--positive {
+		}
+
+		&--negative {
+			background: $color-tech-gray-400;
+		}
+
+		@include mobile-only{
+			width: 100%;
+		}
+	}
+
+	// Card 2 Styles
+	&__card--2 {
+		grid-column: span 7;
+
+		@include tablet-0-959{
+			grid-column: span 12;
+		}
+
+		ul {
+			margin: 8px auto;
+			padding: 0;
+			align-self: flex-end;
+			list-style-type: none;
+			text-align: left;
+		}
+
+		ul, li {
+			width: 100%;
+		}
+
+		li {
+			display: inline-flex;
+			min-height: (8px * 7);
+			@include flex-container-display();
+			align-items: center;
+			justify-content: space-between;
+
+			@include mobile-only {
+				height: 39px;
+			}
+
+			@include tablet-only {
+				height: 39px;
+			}
+
+			picture {
+				height: 24px;
+				padding: 0 8px;
+
+				img {
+					justify-self: flex-start;
+					width: 24px;
+					height: 24px;
+					@include borderRadius(50%);
+				}
+			}
+
+			.global-cta--style-3{
+				//justify-self: flex-end;
+
+				margin: 0;
+
+				@include tablet-0-959{
+					align-self: center;
+					margin: 0;
+				}
+
+				@include mobile-320 {
+					font-size: 14px;
+
+					&:focus, &:hover, &:active {
+
+						span {
+							transition: inherit;
+							@include translate3d(4px);
+						}
+
+						img {
+							-webkit-filter: brightness(0);
+							filter: brightness(0);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&__downloads-logo-label-unit{
+		position: relative;
+		min-height: inherit;
+		justify-self: flex-start;
+		@include flex-container-display();
+		align-items: center;
+	}
+
+	&__downloads-label {
+		display: inline-block;
+		//width: 40%;
+		@extend %typography-home-data-summary-th;
+	}
+
+	/**
+	Card 3 styles
+	 */
+	&__card--3 {
+		align-items: flex-start;
+		justify-content: space-evenly;
+		text-align: center;
+		grid-column: span 5;
+		padding: 32px 47px 25px;
+		@include tablet-0-959{
+			padding:24px;
+			grid-column: span 12;
+		}
+	}
+
+	&__top-needs-list {
+		margin: 8px auto;
+		padding: 0;
+		align-self: flex-end;
+		list-style-type: none;
+		text-align: left;
+	}
+
+	&__top-needs-list-item {
+		min-height: (8px * 7);
+		margin: 0 0 18px;
+		padding: 0;
+		align-items: center;
+		justify-content: flex-start;
+		@include flex-container-display();
+
+		// Color each bar and the copy next to it
+		&:nth-child(2) > div.home-data-summary__top-needs-percentage-bar {
+			background: $color-gd-blue;
+		}
+
+		&:nth-child(2) > span.home-data-summary__top-needs-percentage {
+			color: $color-gd-blue;
+		}
+
+		&:nth-child(3) > div.home-data-summary__top-needs-percentage-bar {
+			background: $color-deep-sea-300;
+		}
+
+		&:nth-child(3) > span.home-data-summary__top-needs-percentage {
+			color: $color-deep-sea-300;
+		}
+	}
+
+	&__top-needs-percentage-bar {
+		height: 40px;
+		border-radius: 0 8px 8px 0;
+		background: $color-everyday-blue-400;
+		@include flex-container-display();
+	}
+
+	&__top-needs-percentage {
+		margin: 0 0 0 8px;
+		color: $color-everyday-blue-400;
+		@extend %typography-home-data-summary-percentage;
+	}
+
+	&__top-needs-label {
+		@extend %typography-size-4;
+		font-size: 16px;
+		margin: 0 0 0 8px;
+
+		@include tablet-0-959{
+			font-size: 18px;
+		}
+	}
+
+	&__card-footer{
+		color: $color-tech-gray-400;
+		font-size: 14px;
+		line-height: 16px;
+		margin: 32px auto;
+	}
+
+}
+
+//  home-testimonial --- Testimonial Pull quote
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.home-testimonial {
+
+	&__grid {
+		height: inherit;
+		@extend %grid-12;
+
+		.global-cta-area{
+			min-height: unset;
+			@include mobile-only{
+
+				margin: 0 auto 40px auto;
+			}
+		}
+	}
+
+	&__blockquote {
+		position: relative;
+		min-height: 325px;
+		quotes: "“" "”" "‘" "’";
+		grid-column: 2 / -2;
+		@extend %typography-home-testimonial-blockquote;
+
+		@include mobile-only {
+			grid-column: 2 / -1;
+		}
+
+		&:before {
+			content: open-quote;
+			position: absolute;
+			top: 0;
+			left: -40px;
+			width: 24px;
+			height: 24px;
+			font: inherit;
+			font-size: 95px;
+			@include mobile-only {
+				top: 9px;
+				left: -32px;
+				font-size: 70px;
+			}
+			@include tablet-only {
+				top: 9px;
+				left: -44px;
+			}
+		}
+
+		span {
+			&:nth-of-type(2) {
+				@include mobile-only {
+					display: block;
+				}
+				@include tablet-only {
+					display: block;
+				}
+			}
+		}
+
+		cite {
+			//background: yellow;
+			display: table;
+			width: 100%;
+			//height: 135px;
+			text-align: left;
+			margin: 20px auto;
+			margin-bottom: 0;
+
+			span {
+				position: relative;
+				display: table-cell;
+				width: 100%;
+				text-align: left;
+				vertical-align: middle;
+			}
+			@include mobile-only{
+				margin: 40px auto;
+			}
+		}
+	}
+
+	&__citation-img {
+		position: relative;
+		float: left;
+		width: 135px;
+		height: 135px;
+		margin: 0 38px 0 0;
+		object-fit: cover;
+		@include borderRadius(50%);
+
+		@include mobile-only {
+			margin: 0 16px 0 -13px;
+			width: 64px;
+			height: 64px;
+		}
+
+		@include tablet-only {
+			margin: 0 26px 0 (-135px/4);
+		}
+	}
+
+	&__citation-name {
+		@extend %typography-home-testimonial-blockquote;
+		font-size: 24px;
+
+		@include mobile-only {
+			font-size: 14px;
+		}
+
+		@include tablet-only {
+			font-size: 23px;
+		}
+	}
+
+	&__citation-title {
+		font-size: 20px;
+		@extend %typography-home-testimonial-blockquote;
+		color: $color-tech-gray-400;
+		@include mobile-only {
+			font-size: 14px;
+		}
+		@include tablet-only {
+			font-size: 17px;
+		}
+	}
+}

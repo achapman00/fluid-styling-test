@@ -1,0 +1,2572 @@
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+a, button {
+	outline: none;
+	text-decoration: none;
+	text-overflow: ellipsis;
+	@include user-select();
+	@include setPseudoClasses(rgba(255, 255, 255, 0), $color-black-1, $color-everyday-blue-600, $color-bkgd, .6s);
+
+	&.underline {
+		text-decoration: underline;
+	}
+}
+
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.body {
+	@include flex-container-display();
+	@include flex-container-flow(nowrap column);
+	height: 100%;
+	min-height: 100vh;
+	// This keeps the hero section in view due to a fixed global nav on mobile and tablet
+	padding: $global-nav-height-mobile 0 0 0;
+
+	// This keeps the hero section in view due to a fixed global nav on desktop
+	@include desktop {
+		padding: $global-nav-height-desktop 0 0 0;
+	}
+
+	&--blacked-out {
+		height: 100vh;
+		height: -webkit-fill-available;
+		overflow: hidden;
+	}
+}
+
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.html {
+	//height: 100%;
+	min-height: 100vh;
+	background: $color-bkgd;
+
+	&--blacked-out {
+		height: 100vh;
+		height: -webkit-fill-available;
+		overflow: hidden;
+	}
+}
+
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+img {
+	//max-width: 100%;
+}
+
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+main {
+	//overflow: hidden;
+	//height: 100vh;
+	color: $color-black-1;
+	@include desktop {
+		/**
+		Do not touch – we must use important to ensure hiding menu on mobile/tablet doesn't keep it hidden on desktop
+		 */
+		display: block !important;
+	}
+
+	&[disabled="true"] {
+		display: none;
+	}
+}
+
+//  global-button --- General use button
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-button {
+	&,
+	&--normal {
+		@extend %button;
+	}
+
+	&--large {
+		@extend %button;
+		padding: 7px 20px;
+		font-size: 20px;
+		line-height: 23px;
+	}
+
+	&--medium {
+		@extend %button;
+		font-size: 16px;
+		line-height: 22px;
+	}
+}
+
+//  global-direction-controls --- Directional controls for various components
+// These buttons allow users to control the map and the blades (up, down, left, and right arrows) as well as carousel/slider
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-direction-controls {
+
+	// Setup home hero styles for all 4 directions,
+	// then follow this by setting up specific requirements for other components
+	&__button {
+		position: absolute;
+		z-index: 100;
+		width: 44px;
+		height: 44px;
+		overflow: visible;
+		cursor: pointer;
+		align-items: center;
+		@include flex(1 1 0);
+		@include flex-container-display();
+		justify-content: center;
+		transform-origin: center center;
+		@include opacity(1);
+		@include user-select();
+		@include borderRadius(50%);
+		@include transitionMultiple(opacity .4s ease-out, transform .4s ease-in);
+		@extend %add-hardware-acceleration;
+
+		&:active {
+			@include transitionMultiple(opacity .3s linear, transform .3s linear);
+			-webkit-filter: brightness(89%);
+			filter: brightness(89%);
+		}
+
+		@include hover-check{
+			&:hover {
+				@include transitionMultiple(opacity .3s linear, transform .3s linear);
+				-webkit-filter: brightness(89%);
+				filter: brightness(89%);
+			}
+		}
+
+		&[disabled] {
+			@include opacity(0);
+			@include user-select();
+		}
+
+		img {
+			width: 44px;
+			height: 44px;
+			@extend %add-hardware-acceleration;
+		}
+
+		// Unfortunately, we have to forgo :focus due to the map constantly stealing focus.
+		// This prevents the last keyframe from transitioning back to the original state until user taps/clicks somewhere else on the page.
+		&[aria-label="Up"] {
+			@include transformMultiple(rotate(-90deg) scale(1.0));
+
+			&:hover, &:active {
+				@include transformMultiple(rotate(-90deg) scale(1.2));
+			}
+		}
+
+		&[aria-label="Down"] {
+			@include transformMultiple(rotate(90deg) scale(1.0));
+
+			&:hover, &:active {
+				@include transformMultiple(rotate(90deg) scale(1.2));
+			}
+		}
+
+		&[aria-label="Left"] {
+			@include transformMultiple(rotate(-180deg) scale(1.0));
+
+			&:hover, &:active {
+				@include transformMultiple(rotate(-180deg) scale(1.2));
+			}
+		}
+
+		&[aria-label="Right"] {
+			@include transformMultiple(rotate(0) scale(1.0));
+
+			&:hover, &:active {
+				@include transformMultiple(rotate(0) scale(1.2));
+			}
+		}
+
+		&.paused:before, &.paused:after, > span.paused {
+			//display: none;
+			visibility: hidden;
+			@extend %animation-paused;
+		}
+
+		// Setup ripple/pulse rings
+		&:before, &:after, span {
+			content: '';
+			position: absolute;
+			display: block;
+			z-index: -1;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border-radius: inherit;
+			background: inherit;
+			transform: scale(0.1);
+			@include opacity(0);
+			@include transitionMultiple(opacity .3s, transform .3s);
+			@include animation(0, 1500ms, pulse-ripple, normal, forwards, infinite, ease-out);
+			@extend %add-hardware-acceleration;
+		}
+
+		&:after {
+			background: $color-everyday-blue-400;
+			@include animation(.4s, 1500ms, pulse-ripple, normal, forwards, infinite, cubic-bezier(0.24, 0, 0.38, 1));
+		}
+
+		span {
+			background: $color-everyday-blue-400;
+			@include animation(0.6s, 1500ms, pulse-ripple, normal, forwards, infinite, cubic-bezier(0.24, 0, 0.38, 1));
+		}
+
+		&[aria-label="Up"][aria-controls*="map"] {
+			top: calc(4% - (44px / 2));
+			left: calc(50% - (44px / 2));
+
+			&:before, &:after {
+				display: none;
+				transition: unset;
+				animation: unset;
+			}
+		}
+
+		// Position all buttons pertaining to the Home Hero Map
+		&[aria-label="Down"][aria-controls*="map"] {
+			bottom: calc(4% - (44px / 2));
+			left: calc(50% - (44px / 2));
+		}
+
+		&[aria-label="Left"][aria-controls*="map"] {
+			top: 385px + 16px;
+			left: 0;
+
+			@include tablet-only {
+				top: 385px + 24px;
+			}
+
+			&:before, &:after {
+				display: none;
+				transition: unset;
+				animation: unset;
+			}
+		}
+
+		&[aria-label="Right"][aria-controls*="map"] {
+			top: 385px + 16px;
+			right: 0;
+			bottom: 0;
+			left: unset;
+			padding: 0;
+
+			@include tablet-only {
+				top: 385px + 24px;
+			}
+		}
+
+		&[aria-label="Left"][aria-controls*="slider"] {
+			top: calc(50% - 22px);
+			left: -22px;
+
+			@include mobile-only {
+				display: none;
+			}
+
+			@include tablet-only {
+				display: none;
+			}
+		}
+
+		&[aria-label="Right"][aria-controls*="slider"] {
+			top: calc(50% - 22px);
+			right: -22px;
+
+			@include mobile-only {
+				display: none;
+			}
+
+			@include tablet-only {
+				display: none;
+			}
+		}
+	}
+
+}
+
+@include animation-keyframes(pulse-ripple) {
+	0% {
+		transform: scale(0.14);
+		@include opacity(0);
+	}
+	50% {
+		@include opacity(0.8);
+	}
+	100% {
+		transform: scale(1.75);
+		@include opacity(0);
+	}
+}
+
+//  global-cta-area --- Contains CTAs across the website
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-cta-area {
+	width: 100%;
+	min-height: (8px * 23);
+	@include flex-container-display();
+	align-items: center;
+	grid-column: 1 / -1;
+	justify-items: center;
+
+	@include mobile-only {
+		min-height: (8px * 15);
+	}
+}
+
+//  global-cta --- Refers to the pill-shaped CTA buttons scattered throughout the website
+// These buttons come in several different flavors or styles and are always contained within a div with class global-cta-area
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-cta {
+	position: relative;
+	display: inline-flex;
+	width: auto;
+	min-width: 122px;
+	max-width: 100%;
+	min-height: 33px;
+	margin: 0 auto;
+	padding: 0 16px;
+	border: 2px solid $color-everyday-blue-500;
+	align-items: center;
+	@include flex-container-flow(nowrap row);
+	justify-content: center;
+	text-align: center;
+	@include opacity(1);
+	@include borderRadius(20px);
+	@extend %typography-rounded-cta;
+	@include setPseudoClasses(rgba(255, 255, 255, 0), $color-everyday-blue-500, $color-everyday-blue-500, $color-bkgd, .6s);
+	@include transitionMultiple(transform .4s $timingFuncEaseOutQuad);
+	@extend %add-hardware-acceleration;
+
+	span {
+		@include transitionMultiple(transform .44s $timingFuncEaseOutQuad);
+	}
+
+	.download-ani{
+		margin: 0 0 0 10px;
+		width: 24px !important;
+		height: 24px !important;
+		overflow: hidden;
+		@include translate3d(0, -2px);
+		@include background-img-sprite('../assets/imgs/global/godaddy-venture-forward_download_sequence.svg',0,0,408px 24px);
+		&:link, &:visited {
+			color: $color-everyday-blue-500;
+			background: rgba(255, 255, 255, 0);
+		}
+
+
+		&:active{
+			//background: $color-everyday-blue-500;
+			background: transparent !important;
+			//color: rgba(255, 255, 255, 0);
+		}
+
+		&.reveal {
+			@include animation(0, .67s, ani-download-paper-bin, normal, forwards, 1, steps(16));
+		}
+	}
+
+
+	img {
+		width: auto;
+		height: 14px;
+		margin: 0 0 0 10px;
+		@extend %add-hardware-acceleration;
+		@include transitionMultiple(transform .4s $timingFuncEaseOutQuad, filter .41s $timingFuncEaseIn);
+
+		&.download {
+			width: 16px;
+		}
+
+		&.right-arrow {
+			width: 20px;
+			margin-left: 8px;
+		}
+	}
+
+	&:focus, &:hover, &:active {
+
+		span {
+			transition: inherit;
+			@include translate3d(4px);
+		}
+
+		img {
+			//transition: inherit;
+			@include translate3d(6px);
+			-webkit-filter: brightness(0) invert(1);
+			filter: brightness(0) invert(1);
+		}
+
+		.download-ani{
+			@include translate3d(4px, -2px);
+			-webkit-filter: brightness(0) invert(1);
+			filter: brightness(0) invert(1);
+		}
+	}
+
+	@include mobile-only {
+		// GoogleTouch target size
+		min-height: 48px;
+		@include borderRadius(100px);
+	}
+
+	&--style-1 {
+		border: 2px solid $color-bkgd;
+		@include setPseudoClasses($color-black-1, $color-bkgd, $color-bkgd, $color-black-1, .6s);
+	}
+
+	&--style-2 {
+		padding: 0 4px;
+		border: none;
+		justify-content: flex-end;
+		@include setPseudoClasses(rgba(0, 0, 0, 0), $color-everyday-blue-500, rgba(0, 0, 0, 0), $color-black-1, .4s);
+
+		&:focus, &:hover, &:active {
+
+			span {
+				transition: inherit;
+				@include translate3d(4px);
+			}
+
+			img {
+				-webkit-filter: brightness(0);
+				filter: brightness(0);
+			}
+		}
+	}
+
+	// Used on home testimonial
+	&--style-3 {
+		min-width: 145px;
+		padding: 0 12px;
+		@include borderRadius(100px);
+
+		@include mobile-only{
+			padding: 0 12px;
+		}
+	}
+
+	&--dark {
+		border: 2px solid $color-bkgd;
+		@include setPseudoClasses(rgba(0, 0, 0, 0), $color-bkgd, $color-bkgd, $color-teal, .6s);
+
+		img,span {
+			-webkit-filter: brightness(0) invert(1);
+			filter: brightness(0) invert(1);
+		}
+
+		&:focus, &:hover, &:active {
+			//padding: 0 20px;
+
+			img,span {
+				@include translate3d(3px);
+				-webkit-filter: unset !important;
+				filter: unset !important;
+			}
+		}
+	}
+
+	&--dark-2 {
+		border: 2px solid $color-bkgd;
+		@include setPseudoClasses(rgba(0, 0, 0, 0), $color-bkgd, $color-bkgd, $color-teal, .6s);
+
+		img,span {
+			-webkit-filter: brightness(0) invert(1);
+			filter: brightness(0) invert(1);
+		}
+
+		&:focus, &:hover, &:active {
+			//padding: 0 20px;
+
+			img,span {
+				@include translate3d(3px);
+				-webkit-filter: unset !important;
+				filter: unset !important;
+			}
+		}
+	}
+
+	&--light-1 {
+		outline: none;
+		color: $color-white-1;
+
+		img,
+		svg,
+		path {
+			fill: $color-white-1;
+
+		}
+		span{
+			-webkit-filter: brightness(0) invert(1);
+			filter: brightness(0) invert(1);
+		}
+	}
+
+	&--light-2 {
+		outline: none;
+		color: $color-white-1;
+
+		img,
+		svg,
+		path {
+			fill: $color-white-1;
+
+		}
+		span{
+			&:nth-of-type(2){
+				-webkit-filter: brightness(0) invert(1);
+				filter: brightness(0) invert(1);
+			}
+		}
+	}
+
+	&--http-status {
+		margin: 0 16px;
+
+		@include mobile-only {
+			width: 100%;
+			margin: 0 auto;
+		}
+
+		@include tablet-only {
+			width: 100%;
+			margin: 0 auto;
+		}
+	}
+}
+
+@include animation-keyframes(ani-download-paper-bin) {
+	// currently sprite sheet 408px wide
+	100% {
+		background-position: -(24px * 16);
+	}
+}
+
+//  global-filter-button --- This section refers to the 2 state buttons used for filtering down content
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-filter {
+
+	&__checkbox {
+		display: none;
+	}
+
+	&__checkbox:checked + &__label {
+		background-color: $color-deep-sea-400;
+		color: $color-bkgd;
+	}
+
+	&__label {
+		margin: 0 auto;
+	}
+
+	&__a {
+		margin: 4px;
+	}
+
+
+	&__label, &__a {
+		position: relative;
+		min-width: 160px;
+		max-width: 180px;
+		min-height: 32px;
+		padding: 0 20px;
+		background: $color-bkgd;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+		cursor: pointer;
+		align-items: center;
+		@include flex-container-display();
+		@include flex-container-flow(nowrap column);
+		@include flex(1 1 0);
+		justify-content: center;
+		text-align: center;
+		@include user-select();
+		@include opacity(1);
+		@include borderRadius(20px);
+		@extend %typography-body-copy;
+
+		@include setPseudoClasses($color-bkgd, $color-black-1, $color-deep-sea-400, $color-bkgd, .6s);
+
+		&--active {
+			background: $color-deep-sea-400 !important;
+			color: $color-bkgd !important;
+		}
+
+	}
+}
+
+//  global-footer --- This is the footer at the bottom of each page
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-footer {
+	position: relative;
+	display: block;
+	z-index: 1000;
+	width: 100%;
+	background: $color-footer-black;
+	color: $color-bkgd;
+	@extend %typography-footer-copy;
+	@include flex(1 0 auto);
+	@include user-select(none);
+	@extend %apply-padding-for-left-and-right-sides;
+
+	@include desktop {
+		/**
+		Do not touch – we must use important to ensure hiding menu on mobile/tablet doesn't keep it hidden on desktop
+		 */
+		display: block !important;
+	}
+
+	&[disabled="true"] {
+		display: none;
+	}
+
+	&__grid {
+		@extend %grid-12;
+	}
+
+
+	ul, ol {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+	}
+
+	li, a {
+
+		@include mobile-only {
+			display: block;
+		}
+		@include tablet-only {
+			display: block;
+		}
+	}
+
+	a {
+		outline: 0;
+		color: $color-bkgd;
+		text-decoration: none;
+		@extend %typography-footer-links;
+		user-select: inherit;
+		@include setPseudoClasses(rgba(255, 255, 255, 0), $color-bkgd, rgba(255, 255, 255, 0), $color-everyday-blue-500, .4s);
+	}
+
+	&--style-1 {
+		min-height: (377px + 105px);
+	}
+
+	&__section {
+		width: 100%;
+		min-height: 377px;
+		@include flex-container-display();
+		@include flex-container-flow(nowrap column);
+		padding: 80px 0 40px 0;
+		align-items: center;
+		justify-content: center;
+
+		&:nth-of-type(2) {
+			min-height: unset;
+			padding: 40px 0 40px 0;
+		}
+	}
+
+	&__hr {
+		//display: inline-table;
+		position: relative;
+		//display: block;
+		width: auto;
+		height: 1px;
+		margin: 0 -32px 0 -32px;
+		border-top: 1px solid hsla(0, 0%, 100%, .3); // took from existing GD VF site
+
+		@include mobile-only {
+			padding: 0 -16px;
+			flex-grow: 1;
+		}
+
+		@include tablet-only {
+			padding: 0 -24px;
+		}
+	}
+
+	&__tm {
+		color: $color-bkgd;
+		grid-column-end: span 3;
+
+		img {
+			width: 100%;
+			max-width: 155px;
+			height: auto;
+			cursor: inherit;
+		}
+
+		@include mobile-only {
+			grid-column-end: span 12;
+		}
+	}
+
+	&__h2 {
+		margin: 0 0 17px 0;
+		color: $color-bkgd;
+		@extend %typography-footer-h2;
+	}
+
+	&__menu {
+		grid-column-end: span 3;
+
+		&--style-1 {
+			grid-column-start: 7;
+
+			@include mobile-only {
+				margin: 0 0 42px 0;
+				grid-column-start: 1;
+				grid-column-end: span 12;
+			}
+			@include tablet-only {
+				margin: 0 0 42px 0;
+				grid-column-start: 1;
+				grid-column-end: span 12;
+			}
+		}
+
+		&--style-2 {
+			grid-column-start: 10;
+
+			@include mobile-only {
+				grid-column-start: 1;
+				grid-column-end: span 12;
+			}
+			@include tablet-only {
+				grid-column-start: 1;
+				grid-column-end: span 12;
+			}
+		}
+	}
+
+	&__menu-legal-links {
+		grid-column-end: span 6;
+
+		@include desktop {
+			height: 105px;
+			@include flex-container-display();
+			align-items: center;
+		}
+
+		ul > li {
+			display: inline;
+		}
+
+		a {
+			@include desktop {
+				padding: 0 14px;
+				line-height: 44px;
+				&:first-child {
+					padding: 0 14px 0 0;
+				}
+			}
+			@include mobile-only {
+				line-height: 44px;
+			}
+			@include tablet-only {
+				line-height: 44px;
+			}
+		}
+
+		@include mobile-only {
+			grid-column-start: 1;
+			grid-column-end: span 12;
+		}
+	}
+
+	&__copyright {
+		height: 105px;
+		line-height: 14px;
+		align-items: flex-start;
+		justify-content: center;
+		@include flex-container-display();
+		@include flex-container-flow(nowrap column);
+		text-align: left;
+		white-space: nowrap;
+		grid-column-start: 8;
+		grid-column-end: span 5;
+
+		@include mobile-320{
+			font-size: 12px;
+		}
+		@include mobile-only {
+			height: 24px;
+			justify-content: left;
+			grid-column-start: 1;
+			grid-column-end: span 12;
+		}
+		@include tablet-only {
+			height: 24px;
+			justify-content: left;
+			grid-column-start: 1;
+			grid-column-end: span 12;
+		}
+
+		time {
+			//height: 14px;
+		}
+
+		p {
+			justify-content: left;
+		}
+	}
+}
+
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-headline {
+	color: $color-teal;
+
+	&--color-blue-2 {
+		color: $color-blue-2;
+	}
+
+	&--color-blue-3 {
+		color: $color-blue-3;
+	}
+
+	&--color-lightest {
+		color: $color-white-1;
+	}
+
+	&--color-light {
+		color: $color-gray-3;
+	}
+
+	&--micro {
+		@extend %typography-micro;
+	}
+
+	&--size-1 {
+		@extend %typography-size-1;
+	}
+
+	&--size-2 {
+		@extend %typography-size-2;
+	}
+
+	&--size-3 {
+		@extend %typography-size-3;
+	}
+
+	&--size-4 {
+		@extend %typography-size-4;
+	}
+
+	&--subtitle {
+		@extend %typography-subtitle;
+	}
+
+	&--tiny {
+		@extend %typography-tiny;
+	}
+}
+
+.global-horizontal-story-card {
+	@extend %card-node;
+	@extend %card-node-rollover;
+	display: flex;
+	justify-content: space-between;
+
+	&__content {
+		width: 50%;
+		padding: 28px;
+	}
+
+	&__headline {
+		margin-top: 12px;
+	}
+
+	&__image {
+		position: relative;
+		width: 50%;
+
+		img {
+			position: absolute;
+			z-index: 1;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	&__paragraph {
+		margin-top: 12px;
+	}
+
+	&__preheadline {
+	}
+}
+
+// Applied to main element
+.global-main {
+	z-index: 1;
+	min-height: 80vh;
+}
+
+// Applied to header element
+.global-nav {
+	position: fixed;
+	z-index: 99999;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: $color-bkgd;
+	@include transitionMultiple(background .33s $timingFuncEaseInOutSine, color .33s $timingFuncEaseInOutSine);
+
+	a, button {
+		outline: 0;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	a > *, button > * {
+		pointer-events: none;
+	}
+
+	menu, ol, ul {
+		margin: 0;
+		padding: 0;
+	}
+
+	&:focus, &:hover, &:active {
+		//background: $color-everyday-blue-600;
+
+		img {
+			//-webkit-filter: invert(100%);
+			//filter: invert(100%);
+		}
+
+		.global-nav-desktop__a {
+			//color: $color-bkgd;
+		}
+
+		.global-nav-mobile-tablet__button {
+			//img {
+			//	-webkit-filter: brightness(0) invert(1);
+			//	filter: brightness(0) invert(1);
+			//}
+		}
+	}
+
+	&--blacked-out {
+		display: none;
+	}
+
+}
+
+// This is applied to the nav element within the header element (above - global-nav)
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-nav-desktop {
+	@extend %grid-12;
+	@include user-select(none);
+	@extend %apply-padding-for-left-and-right-sides;
+	height: $global-nav-height-desktop;
+
+
+	@include mobile-only {
+		display: none;
+	}
+
+	@include tablet-only {
+		display: none;
+	}
+
+	> *, ul > *, li > * {
+		height: 100%;
+		color: $color-black-1;
+	}
+
+	&__tm {
+		align-items: center;
+		@include flex-container-display();
+		@include flex-container-flow(nowrap column);
+		justify-content: center;
+		grid-column-end: span 2;
+
+		img {
+			width: 100%;
+			height: auto;
+			cursor: inherit;
+		}
+
+		&:focus, &:hover, &:active {
+			background: unset;
+		}
+
+	}
+
+	&__ul {
+		z-index: 1;
+		@include flex-container-display();
+		@include flex-container-flow(nowrap row);
+		margin: 0;
+		padding: 0;
+		align-items: center;
+		justify-content: flex-end;
+		grid-column-start: 3;
+		grid-column-end: span 10;
+	}
+
+	&__li {
+		@include flex-container-display();
+		@include flex-container-flow(nowrap row);
+		margin: 0 19px;
+		justify-content: space-between;
+
+		&:last-child{
+			margin-right: 0;
+		}
+
+	}
+
+	// global nav desktop nav/menu item
+	&__a {
+		@include flex-container-display();
+		@include flex-container-flow(nowrap column);
+		margin: 0;
+		align-items: center;
+		justify-content: center;
+		@extend %typography-global-nav-desktop;
+		@include setPseudoClasses(rgba(255, 255, 255, 0), $color-black-1, rgba(255, 255, 255, 0), $color-everyday-blue-500, .4s);
+
+		span {
+			position: relative;
+
+			&:after {
+				@include translate3d(0, 8px);
+				content: '';
+				position: absolute;
+				display: block;
+				top: 100%;
+				width: 0;
+				height: 3px;
+				background: $color-everyday-blue-400;
+				@include transitionMultiple(width .45s ease-out);
+			}
+		}
+
+		&:focus, &:hover, &:active {
+			outline: none;
+			span {
+				&:after {
+					width: 100%;
+					@include transitionMultiple(width .36s linear);
+				}
+			}
+		}
+
+		&[aria-current="page"] {
+			span {
+				&:after {
+					width: 100%;
+					background: $color-everyday-blue-400;
+				}
+			}
+		}
+	}
+}
+
+.global-nav-mobile-tablet {
+	@extend %grid-12;
+	@include user-select(none);
+	grid-gap: unset;
+
+	@include desktop {
+		display: none;
+	}
+
+	// Change color of backgrounds for demo purposes
+	//$colorChoices: #56c7fa, #f76540, #ffcb05, #62cd9f, #b67baa, #56c7fa, #f76540, #ffcb05, #62cd9f, #b67baa;
+
+	@for $i from 1 through 10 {
+		ul li:nth-child(#{$i}) a {
+			@include transitionMultiple(opacity $i/4 +s linear $i/3+s);
+			//background: nth($colorChoices, $i);
+		}
+	}
+
+	&__button {
+		//background-color: red;
+		width: $global-nav-height-mobile;
+		height: $global-nav-height-mobile;
+		@include flex-container-display();
+		align-items: center;
+		justify-content: center;
+
+		// open button
+		img {
+			width: 14px;
+			height: auto;
+			cursor: inherit;
+			&.hide {
+				display: none;
+			}
+		}
+
+		//	Close button
+		div {
+			display: none;
+			width: 24px;
+			height: 24px;
+			@include background-img-sprite('../assets/imgs/global/godaddy-venture-forward_mobile_tablet-close-button_sequence.svg',0,0,(24px * 9) 24px);
+
+			&.reveal {
+				display: block;
+				@include animation(0, .2s, ani-close-button-x, normal, forwards, 1, steps(8));
+			}
+
+		}
+
+		&:focus, &:hover, &:active {
+			background: unset;
+		}
+	}
+
+	&__tm {
+		height: $global-nav-height-mobile;
+		align-items: center;
+		justify-content: center;
+		@include flex-container-display();
+		@include flex-container-flow(nowrap column);
+		grid-column-end: span 4;
+		grid-column-start: 5;
+
+		@include tablet-only {
+			padding: 14px 0;
+		}
+
+		&:focus, &:hover, &:active {
+			background: unset;
+		}
+
+		img {
+			width: 100%;
+			height: auto;
+			min-height: 22px;
+			max-height: 50px;
+			cursor: inherit;
+			@include mobile-only {
+				max-height: 31px;
+			}
+		}
+	}
+
+	&__section {
+		grid-column-end: span 12;
+
+		&:first-child {
+			@extend %grid-12;
+			height: $global-nav-height-mobile;
+			margin: 0;
+			padding: 0;
+			grid-gap: unset;
+		}
+
+		&:last-child {
+			@include translate3d(0, -1000px);
+			height: 0;
+			background: $color-bkgd;
+
+			ul > *, li > * {
+				width: 100%;
+				height: $global-nav-height-mobile-anchors;
+			}
+
+			&[aria-expanded="true"] {
+				//display: block;
+				height: unset;
+				@include translate3d(0, 0);
+
+				.global-nav-mobile-tablet__a {
+					//@include opacity(1);
+					//visibility: visible;
+				}
+			}
+
+			&[aria-expanded="false"] {
+				.global-nav-mobile-tablet__a {
+					//@include opacity(0);
+					//visibility: hidden;
+				}
+			}
+		}
+	}
+
+	&__ul {
+		z-index: 1;
+		width: 100%;
+		@include flex-container-display();
+		@include flex-container-flow(nowrap column);
+		margin: 0;
+		padding: 0;
+		align-items: center;
+		justify-content: center;
+		grid-column-start: 4;
+		grid-column-end: span 9;
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: -24px;
+			width: 24px;
+			height: 100%;
+			background: $color-bkgd;
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: -24px;
+			width: 24px;
+			height: 100%;
+			background: $color-bkgd;
+		}
+	}
+
+	&__li {
+		@include flex-container-display();
+		@include flex-container-flow(nowrap column);
+		height: $global-nav-height-mobile;
+	}
+
+	&__a {
+		height: inherit;
+		@include flex-container-display();
+		@include flex-container-flow(nowrap column);
+		margin: 0;
+		padding: 0;
+		align-items: center;
+		justify-content: center;
+		@extend %typography-global-nav-desktop;
+		@include setPseudoClasses(rgba(255, 255, 255, 0), $color-black-1, rgba(255, 255, 255, 0), $color-everyday-blue-500, .4s);
+		@include opacity(1);
+		//visibility: hidden;
+
+		&--vis {
+			//@include opacity(1);
+			//@include animation(0, 2s, mobile-menu-fade-in, normal, none, infinite, linear);
+		}
+	}
+}
+
+@include animation-keyframes(ani-close-button-x) {
+	// currently sprite sheet 24px * 9 wide, but we leave 24px off as this is ori. state
+	100% {
+		background-position: -(24px * 8);
+	}
+}
+
+@include animation-keyframes(mobile-menu-fade-in) {
+	0% {
+		@include opacity(0);
+	}
+	100% {
+		@include opacity(1);
+	}
+}
+
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-rte {
+	* {
+		color: $color-white-1;
+	}
+
+	p {
+		@extend %typography-paragraph;
+	}
+
+	ul {
+		list-style: disc;
+
+		li {
+			font-size: 16px;
+			font-weight: 400;
+			line-height: 24px;
+		}
+	}
+}
+
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-section-header-text-stack {
+	@extend %grid-12;
+	row-gap: 0;
+
+	&__headline,
+	&__subtitle {
+		@extend %col-12;
+		@extend %col-d-8;
+		@extend %col-d-offset-2;
+		text-align: center;
+	}
+
+	&__headline {
+		@extend %typography-size-2;
+	}
+
+	&__subtitle {
+		@extend %typography-subtitle;
+		margin-top: 24px;
+	}
+}
+
+//  global-small-dual-bar-chart  --- bar chart used on Reports and Resources plus 1 or 2 other pages
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-small-dual-bar-chart {
+	position: relative;
+	position: relative;
+	width: 100%;
+	height: 400px;
+	overflow-x: visible;
+	overflow-y: hidden;
+	@include flex-container-display();
+	@include flex-container-flow(wrap row);
+	align-items: flex-end;
+	justify-content: space-evenly;
+
+	@include mobile-only {
+		height: 192px;
+	}
+
+	&__bar {
+		position: relative;
+		width: 35%;
+		@include flex-container-display();
+		@include flex-container-flow(nowrap column);
+		padding: 16px 8px 8px 8px;
+		background-color: $color-mellow-dark-blue;
+		color: $color-white-1;
+		align-items: flex-start;
+		justify-content: flex-start;
+		@include border-radii(8px, 8px, 0, 0);
+		@include transitionMultiple(height 1s ease-in-out 2s);
+		text-align: center;
+
+		&:nth-child(odd) {
+			background-color: $color-blue-3;
+		}
+	}
+
+	&__above-number {
+		position: absolute;
+		top: -54px;
+		right: 0;
+		left: 0;
+		width: 100%;
+		line-height: 52px;
+		color: $color-go-green;
+		text-align: center;
+		@extend %typography-size-2;
+	}
+
+	&__inside-number {
+		display: block;
+		width: 100%;
+		padding: 0 0 8px 0;
+		color: inherit;
+		text-align: inherit;
+		@extend %typography-size-2;
+	}
+
+	&__inside-label {
+		display: block;
+		width: 100%;
+		color: inherit;
+		text-align: inherit;
+		@extend %typography-size-4;
+	}
+
+	&__background {
+		position: absolute;
+		bottom: -256px;
+		left: 50%;
+		width: 50%;
+		//top: 50%;
+		height: 339px;
+		background: #0DD0D0;
+		transition: unset;
+		transform: translate(-50%);
+		@include borderRadius(50%);
+		@include opacity(1);
+		filter: blur(100px);
+	}
+}
+
+
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-stats-table {
+	width: 100%;
+	border-spacing: 0 8px;
+	border-collapse: separate;
+
+	td {
+		@extend %typography-caption;
+		padding: 12px;
+		color: $color-black-1;
+		text-align: left;
+
+		@include tablet {
+			padding: 4px 12px;
+		}
+	}
+
+	th {
+		@extend %typography-caption;
+		padding: 12px;
+		color: $color-tech-gray-400;
+		text-align: left;
+
+		@include tablet {
+			padding: 4px 12px 16px;
+		}
+	}
+
+	tr {
+		&:not(:first-child) {
+			background-color: $color-white-1;
+		}
+	}
+}
+
+
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-stories-grid {
+	&__grid {
+		@extend %grid-12;
+	}
+
+	&__grid-item {
+		@extend %col-d-4;
+
+		@include mobile-only {
+			grid-column: span 6;
+		}
+
+		@include tablet-only {
+			grid-column: span 6;
+		}
+	}
+}
+
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-text {
+	@extend %typography-body-copy;
+	color: $color-teal;
+
+	&--color-lightest {
+		color: $color-white-1;
+	}
+
+	&--color-light {
+		color: $color-gray-3;
+	}
+}
+
+//  Global Carousel Section
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-horizontal-carousel {
+	position: relative;
+	width: 100%;
+	min-height: (8px * 50);
+	grid-column: span 12;
+
+	@include mobile-only{
+		min-height: unset;
+	}
+
+	&__grid {
+		@extend %grid-12;
+
+		@include mobile-only {
+			row-gap: 0;
+		}
+	}
+
+	&__section {
+		@extend %global-main-section;
+		@extend %apply-padding-for-left-and-right-sides;
+		@extend %typography-body-copy;
+		min-height: unset;
+	}
+
+	&__pagination-dots {
+		position: relative;
+		width: 100%;
+		height: auto;
+		@include flex-container-display();
+		padding: 24px 0;
+		justify-content: center;
+
+		@include desktop{
+			padding: 48px 0 24px 0;
+		}
+	}
+
+	&__pagination-dot {
+		width: 8px;
+		height: 8px;
+		margin: 0 4px;
+		@include borderRadius(50%);
+		background-color: $color-ui-chrome-700;
+		cursor: pointer;
+
+		@include transitionMultiple(background-color .4s linear);
+
+		&:focus, &:hover, &:active {
+			outline: none;
+			background-color: $color-everyday-blue-500;
+		}
+
+		&--active {
+			background-color: $color-everyday-blue-500;
+		}
+	}
+
+	&__slider {
+		position: relative;
+		min-height: inherit;
+		-webkit-touch-callout: none;
+		touch-action: pan-y;
+		-webkit-tap-highlight-color: transparent;
+		@include flex-container-display();
+		@include user-select();
+	}
+
+	&__img {
+		position: relative;
+		float: left;
+		width: 50%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	&__copyCont {
+		display: inline;
+		float: left;
+		width: 50%;
+		padding: 16px;
+	}
+
+	&__category {
+		@extend %typography-micro;
+		margin-top: 24px;
+		color: $color-blue-2;
+		text-transform: uppercase;
+		@include transitionMultiple(transform .3s linear);
+
+		@include mobile-only {
+			margin-top: 12px;
+		}
+	}
+
+	&__title {
+		padding: 8px 0 0 0;
+		@extend %typography-size-3;
+		@include transitionMultiple(transform .3s linear .1s);
+	}
+
+	&__p {
+		padding: 8px 0 0 0;
+		@extend %typography-body-copy;
+		color: $color-tech-gray-400;
+		@include mobile-only {
+			display: none;
+		}
+	}
+}
+
+.global-horizontal-carousel__slider[data-keen-slider-v] {
+	flex-wrap: wrap;
+}
+
+.global-horizontal-carousel__slider[data-keen-slider-v] .keen-slider__slide {
+	width: 100%;
+}
+
+.global-horizontal-carousel__slider[data-keen-slider-moves] * {
+	pointer-events: none;
+}
+
+.keen-slider {
+
+	&__slide {
+		min-height: 394px;
+		background: $color-bkgd;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+		overflow: hidden;
+		@include borderRadius(8px);
+		@include transitionMultiple(box-shadow .32s linear 0s);
+
+		&:focus, &:hover, &:active {
+			transform: scale(1.02);
+			@include box-shadow(0, 8px, 10px, 2px, rgba(54, 54, 54, 0.29));
+		}
+
+		@include mobile-only {
+			min-height: unset;
+			height: 203px;
+		}
+
+		@include tablet-only {
+			min-height: unset;
+		}
+	}
+}
+
+
+//  Global Featured Stories Grid Row / Stories & Use Cases
+// This is presented as a 3-up card and is considered a global component (appears on Blog Detail or Story page)
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-featured-stories-grid-row {
+	&__section {
+		@extend %global-main-section;
+		@extend %apply-padding-for-left-and-right-sides;
+		@extend %typography-body-copy;
+
+		&--stories-and-use-cases {
+			min-height: unset;
+			padding-top: 72px;
+			padding-bottom: 36px;
+
+			&:before {
+				//content: 'DEBUG: --stories-and-use-cases';
+				//@extend %before-debug-info;
+			}
+
+			@include mobile-only {
+				padding-top: 24px;
+				padding-bottom: 22px;
+			}
+		}
+
+		&--style-1 {
+			background-color: $color-ui-chrome-300;
+		}
+	}
+
+	&__grid {
+		@extend %grid-12;
+	}
+
+	&__grid-lower {
+		position: relative;
+		display: grid;
+		grid-column: span 12;
+		grid-gap: 16px;
+		grid-template-columns: repeat(3, [col-start] minmax(30px, 400px));
+
+		.global-featured-stories-grid-row__card {
+			&:nth-of-type(4) {
+				display: none;
+			}
+		}
+
+		@include mobile-only {
+			grid-template-columns: repeat(12, [col-start] minmax(0, 400px));
+
+			.global-featured-stories-grid-row__card {
+				grid-column: span 6;
+
+				&:nth-of-type(4) {
+					display: block;
+				}
+			}
+		}
+
+
+		@include desktop {
+			grid-gap: 32px;
+		}
+		@include tablet-only {
+			grid-gap: 24px;
+		}
+	}
+
+	&__card {
+		@include mobile-only {
+			grid-column: span 12;
+		}
+	}
+}
+
+//  Used to create a full grid width header
+//	This contains a heading and a CTA
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-horizontal-section-header {
+	position: relative;
+	display: table;
+	width: 100%;
+	//min-height: (8px * 14);
+	grid-column: span 12;
+
+	&__heading {
+		position: relative;
+		display: table-cell;
+		width: 80%;
+		color: $color-black-1;
+		text-align: left;
+		vertical-align: middle;
+		@extend %typography-home-case-studies-h2;
+
+
+		@include mobile-only {
+			display: block;
+			width: 100%;
+			text-align: center;
+		}
+
+		@include tablet-only {
+			display: block;
+			width: 100%;
+			text-align: center;
+		}
+	}
+
+	&__action {
+		position: relative;
+		display: table-cell;
+		top: 0;
+		right: 0;
+		width: 20%;
+		height: 100%;
+		text-align: right;
+		vertical-align: middle;
+
+		@include mobile-only {
+			display: block;
+			width: 100%;
+			text-align: center;
+		}
+
+		@include tablet-only {
+			display: block;
+			width: 100%;
+			text-align: center;
+		}
+	}
+}
+
+//  Global Modal
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-modal {
+	position: absolute;
+	z-index: 1011;
+	top: 50%;
+	left: 50%;
+	width: 92vw;
+	//max-width: 98vw;
+	max-height: 90vh;
+	//padding: 16px;
+	//background: $color-bkgd;
+	background: rgba(0, 0, 0, 0);
+	overflow: hidden;
+	pointer-events: none;
+	@include opacity(0);
+	@include transitionMultiple(width 4.4s ease-in-out, height 4.5s ease-in-out, transform 1s $timingFuncEaseInOutBack);
+	@include translate3d(-50%, -10%);
+	//@include borderRadius(8px);
+	@include box-shadow(0, 1px, 3px, 0, rgba(0, 0, 0, 0.05));
+
+	@include mobile-only {
+
+	}
+
+	&--visible {
+		@include opacity();
+		@include translate3d(-50%, -50%);
+		pointer-events: auto;
+
+		#video_player {
+			&:before {
+				//@include opacity();
+			}
+		}
+	}
+
+	[data-modal='about'] {
+
+	}
+
+	#video_player {
+		background: $color-black-1;
+
+		&:before {
+			//@include opacity(0);
+			content: '';
+			position: absolute;
+			display: block;
+			top: calc(50% - 25px);
+			//@include translate3d(-50%, -50%);
+			left: calc(50% - 25px);
+			width: 50px;
+			height: 50px;
+			border: 3px solid rgba(255, 255, 255, .3);
+			@include borderRadius(50%);
+			border-top-color: $color-bkgd;
+			@include animation(0.1s, 1s, spin-spin-suga, normal, forwards, infinite, ease-in-out);
+		}
+	}
+
+	&__close-btn {
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		width: 48px;
+		height: 48px;
+		@include borderRadius(8px);
+		@include translate3d(-10000px, -10000); // hiding temp.
+	}
+}
+
+.global-body-blackout {
+	position: absolute;
+	display: none;
+	z-index: 1010;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: calc(100% + 116px);
+	background-color: rgba(0, 0, 0, .65);
+	cursor: pointer;
+
+	@include mobile-only {
+		height: calc(100% + 56px);
+	}
+
+	@include tablet-only {
+		height: calc(100% + 56px);
+	}
+
+	&--blacked-out {
+		display: block;
+		//height: 100vh;
+		//height: -webkit-fill-available;
+		height: 105%;
+	}
+}
+
+
+@include animation-keyframes(spin-spin-suga) {
+	to {
+		@include transformMultiple(rotate(360deg));
+	}
+}
+
+
+//  global-http-status pages such as 404
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-http-status {
+
+	&__section {
+		@extend %global-main-section;
+		@extend %apply-padding-for-left-and-right-sides;
+		@extend %typography-body-copy;
+
+		/*&--hero {
+			&:before {
+				content: 'DEBUG: --hero';
+				@extend %before-debug-info;
+			}
+		}*/
+	}
+
+	&__grid {
+		@extend %grid-12;
+
+		.global-cta-area {
+			grid-column: 2 / -2;
+
+			@include mobile-only {
+				min-height: (8px * 36);
+				grid-column: span 12;
+			}
+
+			@include tablet-only {
+				grid-column: span 12;
+			}
+		}
+	}
+
+
+	&__h1 {
+		text-align: center;
+		grid-column: span 12;
+		@extend %typography-h1-serif;
+	}
+
+	&__h2 {
+		text-align: center;
+		grid-column: span 12;
+		@extend %typography-body-copy;
+	}
+
+	> *, ul > *, li > * {
+		height: 100%;
+		color: $color-black-1;
+	}
+
+	&__ul {
+		z-index: 1;
+		width: 100%;
+		@include flex-container-display();
+		@include flex-container-flow(nowrap row);
+		margin: 0;
+		padding: 0;
+		align-items: center;
+		justify-content: center;
+
+		@include mobile-only {
+			@include flex-container-flow(nowrap column);
+		}
+
+		@include tablet-only {
+			@include flex-container-flow(nowrap column);
+		}
+
+	}
+
+	&__li {
+
+		@include flex-container-display();
+		@include flex(1 1 0);
+
+		@include mobile-only {
+			width: 100%;
+			margin: 0 0 16px 0;
+		}
+
+		@include tablet-only {
+			width: 100%;
+			margin: 0 0 16px 0;
+		}
+	}
+}
+
+//  global-header-filters-touch -- This is the container which holds the drop-down for touch  devices
+// Inside of the container, the drop-down menu styles.
+// This is used on Reports and Resources and Stories
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-header-filters-touch {
+	position: relative;
+	max-width: #{ map_get($media-rules, desktop-width-max)};
+	justify-content: center;
+	text-align: center;
+	@include flex-container-display();
+	grid-column: span 12;
+
+	&:focus > div.select, &:hover > div.select, &:active > div.select {
+		// took out because it makes the arrow disappear
+		//background: #00A4A6 !important;
+		//color: $color-bkgd;
+
+		//> select{
+		//	&:after {
+		//		@include background-img-sprite('../assets/imgs/global/godaddy-venture-forward_drop_down_arrow_12x9_ffffff-on-trans.svg', 0, 0, 12px 9px);
+		//	}
+		//}
+	}
+
+	@include desktop {
+		display: none;
+	}
+
+	// Remove as many browser default styles as possible
+	select {
+		// A reset of styles, including removing the default dropdown arrow
+		width: 100%;
+		margin: 0;
+		padding: 0 1em 0 0;
+		border: none;
+		outline: none;
+		background-color: transparent;
+		font-family: inherit;
+		font-size: inherit;
+		line-height: inherit;
+		cursor: inherit;
+		appearance: none;
+		-moz-appearance: none;
+		-webkit-appearance: none;
+	}
+
+	select::-ms-expand {
+		display: none;
+	}
+
+	.select {
+		position: relative;
+		display: grid;
+		width: 100%;
+		min-width: 15ch;
+		height: 44px;
+		@include borderRadius(8px);
+		@extend %typography-caption;
+		padding: 0.25em 0.5em;
+		border: 1px solid var(--select-border);
+		background-color: transparent;
+		background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+		font-size: 1.25rem;
+		line-height: 1.1;
+		cursor: pointer;
+		align-items: center;
+		grid-template-areas: "select";
+
+		&:hover {
+			background-color: var(--select-arrow);
+		}
+
+		select,
+		&::after {
+			grid-area: select;
+		}
+
+		// Custom arrow
+		&:not(.select--multiple)::after {
+			content: "";
+			width: 0.8em;
+			height: 0.5em;
+			//background-color: var(--select-arrow);
+			justify-self: end;
+			//clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+			@include background-img-sprite('../assets/imgs/global/godaddy-venture-forward_drop_down_arrow_12x9_00A4A6-on-trans.svg', 0, 0, 12px 9px);
+		}
+	}
+
+	select:focus + .focus {
+		position: absolute;
+		top: -1px;
+		right: -1px;
+		bottom: -1px;
+		left: -1px;
+		border: 2px solid var(--select-focus);
+		border-radius: inherit;
+	}
+
+	select[multiple] {
+		height: 6rem;
+
+		/*
+		 * Required for Safari
+		 */
+		padding-right: 0;
+
+		option {
+			outline-color: var(--select-focus);
+			// Required for Chrome
+			white-space: normal;
+		}
+	}
+
+	.select--disabled {
+		background-color: $color-ui-chrome-700;
+		background-image: linear-gradient(to top, $color-ui-chrome-700, $color-bkgd 33%);
+		cursor: not-allowed;
+	}
+
+	label {
+		display: none; // If we choose to be accessible, this will need to be visible and styled
+		@extend %typography-body-copy;
+		background: transparent;
+	}
+
+	// If we choose to be accessible, this will need to be visible and styled
+	.select + label {
+		margin-top: 16px;
+	}
+}
+
+
+// • grid of the Stories and Use Cases page
+// • These are the cards that exist within the grid of the Stories and Use Cases page
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-story {
+	&__grid {
+		@extend %grid-12;
+		grid-auto-flow: dense; // Using this to avoid gaps in the grid when the size of grid items fluctuate
+	}
+
+	&__card {
+		position: relative;
+		height: 100%;
+		background: $color-bkgd;
+		text-align: center;
+		@include borderRadius(8px);
+		@include transitionMultiple(transform .2s $timingFuncEaseInOut);
+		@extend %add-hardware-acceleration;
+
+		&:not(.global-story__card--block) {
+			grid-column: span 4;
+			@include mobile-only {
+				grid-column: span 6;
+			}
+		}
+
+		.global-cta-area {
+			min-height: (8px * 14);
+			align-items: flex-end;
+
+			.global-cta {
+				margin-bottom: 16px;
+			}
+		}
+
+		&:not(.global-story__card--extra-card):focus,
+		&:not(.global-story__card--extra-card):hover,
+		&:not(.global-story__card--extra-card):active {
+			transform: scale(1.03);
+
+
+			.global-story {
+				&__image > img {
+					@include box-shadow(0, 10px, 20px, 0, rgba(54, 54, 54, 0.29));
+					// @include border-radii(8px, 8px, 0, 0);
+				}
+
+				// &__category, &__title{
+				// 	@include translate3d(8px);
+				// }
+			}
+
+		}
+
+		&--extra-card {
+			padding: 16px;
+			@include flex-container-display();
+			@include flex-container-flow(nowrap column);
+			align-items: center;
+			justify-content: center;
+
+			&:not(.global-story__card--block) {
+				@include mobile-only {
+					grid-column: span 12;
+				}
+
+				@include tablet-only {
+					grid-column: span 6;
+				}
+			}
+
+			&-dark {
+				background: $color-everyday-blue-700;
+				color: $color-bkgd;
+
+				& > h6,
+				& > h3 {
+					color: inherit;
+				}
+			}
+
+			&-light{
+				picture, img {
+					position: relative;
+					width: 100%;
+					height: auto;
+					overflow: hidden;
+					vertical-align: middle;
+					float: left;
+					margin: auto 0;
+					object-fit: cover;
+				}
+			}
+
+			& > h6 {
+				margin: 0 0 32px 0;
+			}
+
+			& > img {
+				max-width:100%;
+				margin-bottom:32px;
+			}
+		}
+
+		// Standard post/article card found on the Stories and Use Cases page
+		&--style-1 {
+			background: unset;
+			text-align: left;
+
+			&:not(.global-story__card--block) {
+				@include tablet-only {
+					grid-column: span 6;
+				}
+			}
+		}
+
+
+		// First card type found on right side of Story page
+		// Second card type found on right side of Story page
+		&--explore-the-data-story, &--story-style-2 {
+			min-height: 440px;
+			@include flex-container-display();
+			@include flex-container-flow(nowrap column);
+			padding: 16px;
+			align-items: center;
+			justify-content: center;
+
+			&:not(.global-story__card--block) {
+				max-height: 500px;
+				grid-column: 9 / 12;
+			}
+
+			@include mobile-only {
+				display: none;
+			}
+
+			@include tablet-only {
+				display: none;
+			}
+
+			h3 {
+				@extend %typography-h3;
+			}
+		}
+
+		&--story-style-2 {
+
+		}
+	}
+
+
+	&__h6 {
+		color: $color-ui-chrome-700;
+		@extend %typography-micro;
+	}
+
+	&__h3 {
+		margin: 0 0 8px 0;
+		color: $color-black-1;
+		@extend %typography-h3-serif;
+	}
+
+
+	&__category {
+		@extend %typography-micro;
+		margin-top: 24px;
+		color: $color-blue-2;
+		text-transform: uppercase;
+		@include transitionMultiple(transform .3s linear);
+
+		@include mobile-only {
+			margin-top: 12px;
+		}
+	}
+
+	&__card-graph {
+		position: relative;
+		width: 79px;
+		height: auto;
+		margin: 12px auto;
+	}
+
+	&__img {
+		width: 100%;
+		height: auto;
+		margin: 0 0 16px 0;
+	}
+
+	&__image {
+		position: relative;
+		padding-bottom: 100%;
+
+		img {
+			position: absolute;
+			z-index: 1;
+			width: 100%;
+			height: 100%;
+			border-radius: 8px;
+			transition: box-shadow .2s ease-in-out;
+			object-fit: cover;
+			@include box-shadow(0, 10px, 20px, 0, rgba(54, 54, 54, 0));
+		}
+	}
+
+	&__title {
+		padding: 8px 0 0 0;
+		@extend %typography-size-3;
+		@include transitionMultiple(transform .3s linear .1s);
+	}
+
+	&__p {
+		padding: 8px 0 0 0;
+		@extend %typography-body-copy;
+
+		@include mobile-only {
+			display: none;
+		}
+	}
+
+	&__hotspot {
+		position: absolute;
+		z-index: 100;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0);
+		@include borderRadius(8px);
+
+		&:focus, &:hover, &:active {
+			background: rgba(0, 0, 0, 0);
+		}
+	}
+
+}
+
+//  Use the global-screen-reader-copy to embed copy within links that are used as hotspots.
+// This allows screen readers to read the links but hides then copy visually.
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-screen-reader-copy {
+	position: absolute !important;
+	top: -9999px !important;
+	left: -9999px !important;
+}
+
+// This is used to display Stories pagination footer and links
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-pagination {
+	&__grid {
+		@extend %grid-12;
+	}
+
+	&__footer {
+		position: relative;
+		width: 100%;
+		padding: 16px 0;
+		@include flex-container-display();
+		background: #F5F7F8;
+		align-items: center;
+		text-align: center;
+		@extend %apply-padding-for-left-and-right-sides;
+		justify-items: center;
+	}
+
+	&__links-area {
+		position: relative;
+		max-width: #{ map_get($media-rules, desktop-width-max)};
+		justify-content: center;
+		text-align: center;
+		@include flex-container-display();
+		@include flex-container-flow(wrap row);
+		grid-column: span 12;
+
+		> a {
+			position: relative;
+			display: inline-flex;
+			width: auto;
+			min-width: 172px;
+			max-width: 286px;
+			min-height: 48px;
+			margin: 0 auto;
+			padding: 0 18px;
+			border: 2px solid $color-everyday-blue-500;
+			@include flex-container-display();
+			align-items: center;
+			@include flex-container-flow(nowrap row);
+			justify-content: center;
+			text-align: center;
+			@include opacity(1);
+			@include borderRadius(100px);
+			@extend %typography-rounded-cta;
+			@include setPseudoClasses(rgba(255, 255, 255, 0), $color-everyday-blue-500, $color-everyday-blue-500, $color-bkgd, .6s);
+			@include transitionMultiple(transform .4s $timingFuncEaseOutQuad);
+			@extend %add-hardware-acceleration;
+
+			@include mobile-only {
+				min-width: 100px;
+			}
+		}
+	}
+}
+
+//  global-stories-and-use-cases --- Hero
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-stories-hero {
+	&__section {
+		@extend %global-main-section;
+		@extend %apply-padding-for-left-and-right-sides;
+		@extend %typography-body-copy;
+
+		&--hero {
+			min-height: (8px * 62);
+			background-color: $color-teal;
+			color: $color-bkgd;
+			text-align: center;
+
+			@include desktop {
+				text-align: left;
+			}
+
+			@include mobile-only {
+				min-height: (8px * 52);
+			}
+
+			@include tablet-only {
+				min-height: (8px * 52);
+			}
+
+			&-dark {
+				min-height: (8px * 56);
+				background-color: $color-ui-chrome-300;
+				color: $color-black-1;
+			}
+		}
+	}
+
+	&__bkgd-img-shade {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		@include linear-gradient(180deg, rgba(0, 0, 0, 0) 56%, $color-teal 92%);
+
+		@include desktop {
+			@include linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, $color-teal 81.25%);
+		}
+	}
+
+	&__bkgd-img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		-webkit-filter: grayscale(100%) contrast(160%) brightness(110%);
+		filter: grayscale(100%) contrast(160%) brightness(110%);
+		@include opacity(.5);
+	}
+
+	&__grid {
+		@extend %grid-12;
+		z-index: 22;
+		row-gap: 0;
+
+		&--dark {
+			min-height: (8px * 56);
+			align-items: center;
+		}
+	}
+
+	&__dark-theme-time-author-cont {
+		position: relative;
+		min-height: (8px * 6);
+		border-bottom: 1px solid #D7D7D7;
+		align-self: flex-end;
+		grid-column: span 12;
+	}
+
+	&__time {
+		margin: 0 0 24px 0;
+		font-weight: 500;
+		font-weight: 600;
+		@extend %typography-p;
+		@include user-select();
+		color: inherit;
+		text-align: inherit;
+		grid-column: 1 / -1;
+
+		&--dark {
+			position: absolute;
+			bottom: 16px;
+			left: 0;
+			margin: 0;
+			@include mobile-only {
+				position: relative;
+			}
+		}
+	}
+
+	&__min-read-wrapper {
+		padding: 2px 8px;
+		@include borderRadius(24px);
+		border: 2px solid $color-bkgd;
+
+		&--dark {
+			border-color: $color-black-1;
+			background-color: $color-black-1;
+			color: $color-bkgd;
+		}
+	}
+
+	&__time-min {
+		display: inline-block;
+		font-family: 'GD Sherpa';
+		font-weight: bold;
+		font-style: normal;
+		text-align: center;
+	}
+
+	&__category-h1-cont {
+		position: relative;
+		@include translate3d(0, -50%);
+		top: 50%;
+		width: 100%;
+		grid-column: span 7;
+		@include tablet-only {
+			grid-column: span 12;
+		}
+		@include mobile-only {
+			grid-column: span 12;
+		}
+	}
+
+	&__category {
+		height: 14px;
+		margin: 0 0 8px 0;
+		line-height: 14px;
+		color: $color-mint;
+		text-align: inherit;
+		//grid-column: 1 / -1;
+		@extend %typography-micro;
+		@include user-select();
+
+		&--dark {
+			color: $color-teal;
+		}
+
+	}
+
+	&__h1 {
+		margin: 0 0 16px 0;
+		color: inherit;
+		@extend %typography-h1-serif;
+		@include user-select();
+		text-align: inherit;
+		@include desktop {
+			grid-column: span 7;
+		}
+	}
+
+	&__excerpt {
+		color: inherit;
+		text-align: inherit;
+		grid-column: 1 / -1;
+		@extend %typography-p;
+		@include user-select();
+
+	}
+
+	&__author {
+		color: inherit;
+		text-align: inherit;
+		grid-column: 1 / -1;
+		@extend %typography-p;
+		@include user-select();
+		@include opacity(.5);
+
+		@include mobile-only {
+			@include opacity(.8);
+		}
+
+		&--dark {
+			position: absolute;
+			right: 0;
+			bottom: 16px;
+			@include mobile-only {
+				position: relative;
+				bottom: unset;
+			}
+		}
+	}
+}
+

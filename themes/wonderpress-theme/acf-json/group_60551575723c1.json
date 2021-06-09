@@ -1,0 +1,108 @@
+{
+    "key": "group_60551575723c1",
+    "title": "Options > Global > Meta Tags",
+    "fields": [
+        {
+            "key": "field_6055157f5c498",
+            "label": "Meta Tags",
+            "name": "global_meta_tags",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add Meta Tag",
+            "sub_fields": [
+                {
+                    "key": "field_605516285c499",
+                    "label": "Key Type",
+                    "name": "key_type",
+                    "type": "select",
+                    "instructions": "Select whether this meta tag's key will be a name or property attribute.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "name": "Name",
+                        "property": "Property"
+                    },
+                    "default_value": "name",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_605516385c49a",
+                    "label": "Key",
+                    "name": "key",
+                    "type": "text",
+                    "instructions": "This will populate either the \"name\" or \"property\" attribute (depending on which is selected).",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_6055169e5c49b",
+                    "label": "Value",
+                    "name": "value",
+                    "type": "text",
+                    "instructions": "The value of the meta tag",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-global-meta-tags"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1616189168
+}

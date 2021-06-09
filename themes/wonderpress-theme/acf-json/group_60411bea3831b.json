@@ -1,0 +1,48 @@
+{
+    "key": "group_60411bea3831b",
+    "title": "Stories",
+    "fields": [
+        {
+            "key": "field_60411befeac4a",
+            "label": "Horizontal Slider Image",
+            "name": "horizontal_slider_image",
+            "type": "image",
+            "instructions": "This image will be used only for the horizontal story slider (such as on the home page). This image has different aspect ratios than images used elsewhere. Note: the height remains consistent, but the width will change - therefore there is not a specified aspect ratio to follow.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1614879912
+}

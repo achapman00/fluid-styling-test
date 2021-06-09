@@ -1,0 +1,105 @@
+{
+    "key": "group_6012f35718212",
+    "title": "Stories > Category > Testimonials",
+    "fields": [
+        {
+            "key": "field_6013071e687b2",
+            "label": "Contact Image",
+            "name": "contact_image",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_6012f3571b93b",
+            "label": "Contact Name",
+            "name": "contact_name",
+            "type": "text",
+            "instructions": "The name of the contact for this case study. This will be used on the home page when this case study is used as a testimonial.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_6012f3bd73848",
+            "label": "Contact Job Title",
+            "name": "contact_title",
+            "type": "text",
+            "instructions": "The job title of the contact for this case study. This will be used on the home page when this case study is used as a testimonial.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_6012f3d373849",
+            "label": "Testimonial Quote (Part 1)",
+            "name": "testimonial_quote_part_1",
+            "type": "textarea",
+            "instructions": "The first part of a testimonial quote from the case study's contact. This will be used on the home page when this case study is used as a testimonial, and will be in dark blue.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_category",
+                "operator": "==",
+                "value": "category:testimonial"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1617125955
+}

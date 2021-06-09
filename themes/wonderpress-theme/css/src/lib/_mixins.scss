@@ -1,0 +1,626 @@
+// Media queries
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+$media-rules: (
+		tablet-width-min: 720px,
+		desktop-width-min: 960px,
+		desktop-width-max: 1120px,
+		sm-container-max: 540px,
+		md-container-max: 720px,
+		lg-container-max: 960px,
+		xl-container-max: 1140px,
+		xxl-container-max: 1320px
+);
+
+@mixin mobile-320 {
+	@media (max-width: #{321px}) {
+		@content;
+	}
+}
+
+@mixin mobile-321-719 {
+	@media (min-width: 321px) and (max-width: #{ map_get($media-rules, tablet-width-min) - 1px}) {
+		@content;
+	}
+}
+
+@mixin mobile-only {
+	@media (max-width: #{ map_get($media-rules, tablet-width-min) - 1px}) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (min-width: #{ map_get($media-rules, tablet-width-min)}) {
+		@content;
+	}
+}
+
+@mixin tablet-0-959 {
+	@media (max-width: #{ map_get($media-rules, desktop-width-min) - 1px}) {
+		@content;
+	}
+}
+
+@mixin tablet-only {
+	@media (min-width: #{ map_get($media-rules, tablet-width-min)}) and (max-width: #{ map_get($media-rules, desktop-width-min) - 1px}) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: #{ map_get($media-rules, desktop-width-min)}) {
+		@content;
+	}
+}
+
+@mixin hover-check {
+	@media(hover: hover) and (pointer: fine) {
+		@content;
+	}
+}
+
+
+@mixin clearfix {
+	zoom: 1;
+	&:before, &:after {
+		content: "\0020";
+		display: block;
+		height: 0;
+		overflow: hidden;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// ▒ Mixins
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+//
+// translate3d --- Force hardware acceleration
+// $usage       @include translate3d(0);
+@mixin translate3d($x:0, $y: 0, $z: 0) {
+	-webkit-transform: translate3d($x, $y, $z);
+	-moz-transform: translate3d($x, $y, $z);
+	-ms-transform: translate3d($x, $y, $z);
+	-o-transform: translate3d($x, $y, $z);
+	transform: translate3d($x, $y, $z);
+}
+
+// transitionMultiple --- Handle multiple CSS3 transitions in a single statement
+// @usage	.transitionMultiple(width .33s linear 0s, height .2s linear 0s);
+// /* property name | duration | timing function | delay */
+@mixin transitionMultiple($arguments...) {
+	-webkit-transition: $arguments;
+	-moz-transition: $arguments;
+	-ms-transition: $arguments;
+	-o-transition: $arguments;
+	transition: $arguments;
+}
+
+// setPseudoClasses --- Button states
+// @usage	.setPseudoClasses($brown_1, darkolivegreen, rgba(1, 22, 36, 0.4), rgba(1, 22, 36, 0.99));
+@mixin setPseudoClasses($def_bkgd:darkgray, $def_color: #888888, $hover_bkgd: gray, $hover_color: black, $time_bkgd:.3s, $time_foreground:.3s, $focus:true) {
+
+	color: $def_color;
+	background: $def_bkgd;
+
+	// Keep order: LVHA-order: :link — :visited — :hover — :active
+	&:link, &:visited {
+		color: $def_color;
+		background: $def_bkgd;
+	}
+
+	&.disabled, &[disabled] {
+		color: $def_color;
+		background: $def_bkgd;
+	}
+
+	@if $focus {
+		&:focus {
+			color: $hover_color;
+			background: $hover_bkgd;
+			// /* property name | duration | timing function | delay */
+			@include transitionMultiple(background-color $time_bkgd ease-out, color $time_foreground linear);
+		}
+	}
+
+
+	&:hover {
+		color: $hover_color;
+		background: $hover_bkgd;
+		@include transitionMultiple(background-color $time_bkgd ease-out, color $time_foreground linear);
+	}
+
+	&:active {
+		color: $hover_color;
+		background: $hover_bkgd;
+	}
+
+}
+
+// Scale
+@mixin scale($sx:0, $sy:0) {
+	-webkit-transform: scale($sx, $sy);
+	-moz-transform: scale($sx, $sy);
+	-ms-transform: scale($sx, $sy);
+	-o-transform: scale($sx, $sy);
+	transform: scale($sx, $sy);
+}
+
+// Border Radius
+@mixin borderRadius($radius: 5px) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	border-radius: $radius;
+}
+
+/**
+ * border-radii --- Used to set border-radius unequally
+ */
+@mixin border-radii($topleft, $topright, $bottomright, $bottomleft) {
+	border-top-left-radius: $topleft;
+	border-top-right-radius: $topright;
+	border-bottom-right-radius: $bottomright;
+	border-bottom-left-radius: $bottomleft;
+	-webkit-border-top-left-radius: $topleft;
+	-webkit-border-top-right-radius: $topright;
+	-webkit-border-bottom-right-radius: $bottomright;
+	-webkit-border-bottom-left-radius: $bottomleft;
+	-moz-border-radius-topleft: $topleft;
+	-moz-border-radius-topright: $topright;
+	-moz-border-radius-bottomright: $bottomright;
+	-moz-border-radius-bottomleft: $bottomleft;
+}
+
+// Opacity
+@mixin opacity($opacity:1) {
+	-moz-opacity: $opacity;
+	-ms-opacity: $opacity;
+	-o-opacity: $opacity;
+	-webkit-opacity: $opacity;
+	opacity: $opacity;
+}
+
+// Box Shadow
+// @usage	@include box-shadow(1px,1px,1px,0, #fff, true);
+@mixin box-shadow($top, $left, $blur, $size, $color, $inset: false) {
+	@if $inset {
+		-webkit-box-shadow: inset $top $left $blur $size $color;
+		-moz-box-shadow: inset $top $left $blur $size $color;
+		box-shadow: inset $top $left $blur $size $color;
+	} @else {
+		-webkit-box-shadow: $top $left $blur $size $color;
+		-moz-box-shadow: $top $left $blur $size $color;
+		box-shadow: $top $left $blur $size $color;
+	}
+}
+
+// flex-container-display --- This defines a flex container
+@mixin flex-container-display() {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+// flex-order --- This defines flow of items in a flex container.
+// You may put the values in any order (e.g. row wrap || wrap row || nowrap column || row nowrap…).
+// flex-flow: <‘flex-direction’> || <‘flex-wrap’>
+// Default: row nowrap
+// @usage	@include flex-container-flow(nowrap column);
+@mixin flex-container-flow($vals) {
+	-webkit-flex-flow: $vals;
+	flex-flow: $vals;
+}
+
+// Flex --- This property is the shorthand for the flex-grow, flex-shrink and flex-basis properties. Among other values it also can be set to auto (1 1 auto) and none (0 0 auto).
+// Values: none | auto | [  ? ||  ]
+// Default: 0 1 auto
+// @usage	@include flex(1 0 auto);
+@mixin flex($values) {
+	-webkit-box-flex: $values;
+	-moz-box-flex: $values;
+	-webkit-flex: $values;
+	-ms-flex: $values;
+	flex: $values;
+}
+
+// flex-items-order --- This defines a flex items order within the flex container.
+// Default: 0
+// @usage	@include flex-items-order(1);
+@mixin flex-items-order($val) {
+	-webkit-box-ordinal-group: $val;
+	-moz-box-ordinal-group: $val;
+	-ms-flex-order: $val;
+	-webkit-order: $val;
+	order: $val;
+}
+
+// truncate --- Use an ellipsis when truncating a single line of copy.
+// @usage	@include truncate(50px);
+@mixin truncate($truncation-boundary) {
+	max-width: $truncation-boundary;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+// untruncate --- Remove truncating a single line of copy.
+// @usage	@include untruncate();
+@mixin untruncate() {
+	white-space: normal;
+	overflow: visible !important;
+	//text-overflow: unset !important;
+}
+
+@mixin background-img-sprite($img, $x:0, $y:0, $size:48px 24px) {
+	@if $img != "NA"{
+		background-image: url($img);
+	}
+	background-repeat: no-repeat;
+	background-position-x: $x;
+	background-position-y: $y;
+	background-position: $x $y;
+	background-size: $size;
+}
+
+// Linear Gradient
+@mixin linearGradient($stop1:0, $color1:#eeff99, $stop2:50%, $color2:#ff3300, $stop3:100%, $color3:#ccc) {
+	background-color: $color2;
+	background: -webkit-gradient(linear, left bottom, left top, color-stop($stop1, $color1), color-stop($stop2, $color2), color-stop($stop3, $color3));
+	background: -moz-linear-gradient(center bottom, $color1 $stop1, $color2 $stop2, $color3 $stop3);
+	background: -ms-linear-gradient(center bottom, $color1 $stop1, $color2 $stop2, $color3 $stop3);
+	background: -o-linear-gradient(center bottom, $color1 $stop1, $color2 $stop2, $color3 $stop3);
+	background: linear-gradient(center bottom, $color1 $stop1, $color2 $stop2, $color3 $stop3);
+	-pie-background: linear-gradient($color1, $color2, $color3);
+}
+
+@mixin vertical-align($position: relative) {
+	position: $position;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+/**
+ * user-select: auto|none|text|all;
+ */
+@mixin user-select($val: none) {
+	-webkit-user-select: $val;
+	-moz-user-select: $val;
+	-ms-user-select: $val;
+	user-select: $val;
+}
+
+@mixin animation-keyframes($animation_name) {
+	@-webkit-keyframes #{$animation_name} {
+		@content;
+	}
+
+	@-moz-keyframes #{$animation_name} {
+		@content;
+	}
+
+	@-o-keyframes #{$animation_name} {
+		@content;
+	}
+
+	@keyframes #{$animation_name} {
+		@content;
+	}
+}
+
+/*
+<single-animation>#
+where
+<single-animation> = <time> || <timing-function> || <time> || <single-animation-iteration-count> || <single-animation-direction> || <single-animation-fill-mode> || <single-animation-play-state> || [ none | <keyframes-name> ]
+
+where
+<timing-function> = linear | <cubic-bezier-timing-function> | <step-timing-function>
+<single-animation-iteration-count> = infinite | <number>
+<single-animation-direction> = normal | reverse | alternate | alternate-reverse
+<single-animation-fill-mode> = none | forwards | backwards | both
+<single-animation-play-state> = running | paused
+<keyframes-name> = <custom-ident> | <string>
+
+where
+<cubic-bezier-timing-function> = ease | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>)
+<step-timing-function> = step-start | step-end | steps(<integer>[, <step-position>]?)
+
+where
+<step-position> = jump-start | jump-end | jump-none | jump-both | start | end
+ */
+
+@mixin animation($delay, $duration, $animation, $direction: normal, $fillmode: forwards, $iteration-count: infinite, $easing: linear) {
+	-webkit-animation-delay: $delay;
+	-webkit-animation-duration: $duration;
+	-webkit-animation-name: $animation;
+	-webkit-animation-fill-mode: $fillmode;
+	-webkit-animation-direction: $direction;
+	-webkit-animation-iteration-count: $iteration-count;
+	-webkit-animation-timing-function: $easing;
+	-webkit-animation-play-state: running;
+
+	-moz-animation-delay: $delay;
+	-moz-animation-duration: $duration;
+	-moz-animation-name: $animation;
+	-moz-animation-fill-mode: $fillmode;
+	-moz-animation-direction: $direction;
+	-moz-animation-iteration-count: $iteration-count;
+	-moz-animation-timing-function: $easing;
+	-moz-animation-play-state: running;
+
+	animation-delay: $delay;
+	animation-duration: $duration;
+	animation-name: $animation;
+	animation-fill-mode: $fillmode;
+	animation-direction: $direction;
+	animation-iteration-count: $iteration-count;
+	animation-timing-function: $easing;
+	animation-play-state: running;
+}
+
+/**
+ * legacy-direction --- Test if a legacy direction is required for producing liner gradients
+ * @param {Keyword | Angle} $value - Value to convert
+ * @require {function} is-direction
+ * @require {function} convert-angle
+ */
+@function legacy-direction($value) {
+	@if is-direction($value) == false {
+		@warn "Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be an angle or a direction";
+	}
+
+	// Old to new
+	$conversion-map: (
+			to top : bottom,
+			to top right : bottom left,
+			to right top : left bottom,
+			to right : left,
+			to bottom right : top left,
+			to right bottom : left top,
+			to bottom : top,
+			to bottom left : top right,
+			to left bottom : right top,
+			to left : right,
+			to left top : right bottom,
+			to top left : bottom right
+	);
+
+	@if map-has-key($conversion-map, $value) {
+		@return map-get($conversion-map, $value);
+	}
+
+	@return 90deg - convert-angle($value, 'deg');
+}
+
+/**
+ * linear-gradient --- Create a simplem or complex liner-gradient, provide a fallback
+ * @param {String | List | Angle} $direction - Linear gradient direction
+ * @param {Arguments List} $color-stops - List of color-stops composing the gradient
+ * @usage	@include liner-gradient-simple(50px);
+ * to left, rgba(0, 171, 64, 0) 50%, rgba(0, 171, 64, 1) 100%)
+ * @include linear-gradient(#31B7D7, #EDAC7D);
+ * @include linear-gradient(to right, #E47D7D 0%, #C195D3 50%, #4FB4E8 100%);
+ * @include linear-gradient(42deg, #B58234 0%, #D2B545 50%, #D7C04D 50.01%, #FFFFFF 100%);
+ */
+@mixin linear-gradient($direction, $color-stops...) {
+	@if is-direction($direction) == false {
+		$color-stops: ($direction, $color-stops);
+		$direction: 180deg;
+	}
+
+	/* For browsers that do not support gradients */
+	background: nth(nth($color-stops, 1), 1);
+	/* For Safari 5.1 to 6.0 */
+	background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+	/* For Opera 11.1 to 12.0 */
+	background: -o-linear-gradient(legacy-direction($direction), $color-stops);
+	/* For Firefox 3.6 to 15 */
+	background: -moz-linear-gradient(legacy-direction($direction), $color-stops);
+	/* Standard syntax */
+	background: linear-gradient($direction, $color-stops);
+}
+
+@mixin col-12 {
+	grid-column-end: span 12;
+}
+
+@mixin col-11 {
+	grid-column-end: span 11;
+}
+
+@mixin col-10 {
+	grid-column-end: span 10;
+}
+
+@mixin col-9 {
+	grid-column-end: span 9;
+}
+
+@mixin col-8 {
+	grid-column-end: span 8;
+}
+
+@mixin col-7 {
+	grid-column-end: span 7;
+}
+
+@mixin col-6 {
+	grid-column-end: span 6;
+}
+
+@mixin col-5 {
+	grid-column-end: span 5;
+}
+
+@mixin col-4 {
+	grid-column-end: span 4;
+}
+
+@mixin col-3 {
+	grid-column-end: span 3;
+}
+
+@mixin col-2 {
+	grid-column-end: span 2;
+}
+
+@mixin col-1 {
+	grid-column-end: span 1;
+}
+
+// Column Offsets
+@mixin col-offset-1 {
+	grid-column-start: 2;
+}
+
+@mixin col-offset-2 {
+	grid-column-start: 3;
+}
+
+@mixin col-offset-3 {
+	grid-column-start: 4;
+}
+
+@mixin col-offset-4 {
+	grid-column-start: 5;
+}
+
+@mixin col-offset-5 {
+	grid-column-start: 6;
+}
+
+@mixin col-offset-6 {
+	grid-column-start: 7;
+}
+
+@mixin col-offset-7 {
+	grid-column-start: 8;
+}
+
+@mixin col-offset-8 {
+	grid-column-start: 9;
+}
+
+@mixin col-offset-9 {
+	grid-column-start: 10;
+}
+
+@mixin col-offset-10 {
+	grid-column-start: 11;
+}
+
+@mixin col-offset-11 {
+	grid-column-start: 12;
+}
+
+
+// Column Starts
+@mixin col-start-1 {
+	grid-column-start: 1;
+}
+
+@mixin col-start-2 {
+	grid-column-start: 2;
+}
+
+@mixin col-start-3 {
+	grid-column-start: 3;
+}
+
+@mixin col-start-4 {
+	grid-column-start: 4;
+}
+
+@mixin col-start-5 {
+	grid-column-start: 5;
+}
+
+@mixin col-start-6 {
+	grid-column-start: 6;
+}
+
+@mixin col-start-7 {
+	grid-column-start: 7;
+}
+
+@mixin col-start-8 {
+	grid-column-start: 8;
+}
+
+@mixin col-start-9 {
+	grid-column-start: 9;
+}
+
+@mixin col-start-10 {
+	grid-column-start: 10;
+}
+
+@mixin col-start-11 {
+	grid-column-start: 11;
+}
+
+@mixin col-start-12 {
+	grid-column-start: 12;
+}
+
+// line-clamp --- Truncates multi-line text. Non-webkit browsers will not see the ellipsis.
+// @param {Value}	$font-size     - Font size of the text
+// @param {Value}	$line-height   - Line height of the text; -> must be a unitless value <-
+// @param {Number}	$lines-to-show - Number of lines to show
+//
+// @usage @include line-clamp($font-size: 16px, $line-height: 1.5, $lines-to-show: 3);
+@mixin line-clamp($font-size, $line-height,$lines-to-show) {
+	display: block; // Fallback for non-webkit browsers
+	display: -webkit-box;
+	font-size: $font-size;
+	line-height: $line-height;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: $lines-to-show;
+	// /Fallback for non-webkit browsers
+	@if $line-height {
+		max-height: $line-height * $lines-to-show * 1px;
+	}
+}
+
+// transformMultiple --- Handle multiple CSS3 transforms in a single statement
+// @usage	@include transformMultiple(skew(-30deg) translateX(-100%));
+@mixin transformMultiple($arguments...) {
+	-webkit-transform: $arguments;
+	-moz-transform: $arguments;
+	-ms-transform: $arguments;
+	-o-transform: $arguments;
+	transform: $arguments;
+}
+
+//  columns --- Responsible for adding to an element the ability to be divided up into columns
+// @usage	@include columns(24px, 3);
+// @usage	@include columns(24px, 4, 100px);
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+@mixin columns ($gap, $No:2, $width:auto) {
+	-webkit-columns: $No $width;
+	-moz-columns: $No $width;
+	-o-columns: $No $width;
+	columns: $No $width;
+
+	-webkit-column-gap: $gap;
+	-moz-column-gap: $gap;
+	-o-column-gap: $gap;
+	column-gap: $gap;
+
+	//-webkit-column-fill: auto;
+	//-moz-column-fill: auto;
+	//-o-column-fill: auto;
+	//column-fill: auto;
+}
+
+

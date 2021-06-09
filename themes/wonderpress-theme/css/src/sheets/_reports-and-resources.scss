@@ -1,0 +1,574 @@
+.reports-and-resources {
+
+	&__section {
+		@extend %global-main-section;
+		@extend %apply-padding-for-left-and-right-sides;
+		@extend %typography-body-copy;
+
+		&--hero {
+			min-height:unset;
+			padding-top:32px;
+		}
+
+		&--reports-and-filters {
+			z-index: 0;
+			background: $color-bkgd;
+			align-items: flex-start;
+			min-height:auto;
+		}
+
+		&--highlights-1 {
+			z-index: 300;
+			min-height: unset;
+			background: $color-bkgd;
+			align-items: flex-start;
+		}
+
+		&--highlights-2 {
+			z-index: 301;
+			min-height: unset;
+			background: $color-bkgd;
+		}
+
+		&--quick-facts {
+			z-index: 302;
+			background: $color-bkgd;
+		}
+	}
+
+	&__h3 {
+		position: relative;
+		padding: 44px 0 0 0;
+		border-top: 1px solid #D7D7D7;
+		grid-column: span 12;
+		@extend %typography-size-3;
+
+		@include mobile-only {
+			display: none;
+		}
+
+		&--hero {
+			margin-bottom:24px;
+		}
+	}
+
+	&__h6 {
+		position: relative;
+		margin: (8px * 2) 0;
+		color: $color-tech-gray-400;
+		@extend %typography-micro;
+
+		@include mobile-only {
+			display: none;
+		}
+	}
+
+	&__report {
+		position: relative;
+		padding: 16px 16px 24px 16px;
+		background: $color-ui-chrome-100;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+		transform-origin: center center;
+		grid-column: span 6;
+		transform-style: preserve-3d;
+		@include borderRadius(8px);
+		// @include transitionMultiple(box-shadow .32s linear 0s, transform .2s ease-in-out 0s);
+
+		// &:focus, &:hover, &:active {
+		// 	transform: scale(1.03);
+		// 	@include box-shadow(0, 10px, 20px, 0, rgba(54, 54, 54, 0.29));
+		// }
+
+		@include mobile-only {
+			grid-column: span 12;
+		}
+
+		@include tablet-only {
+			grid-column: span 12;
+		}
+
+		&--dark {
+			background: $color-teal;
+			color: $color-bkgd;
+
+			.reports-and-resources__report-publication-date {
+				color:$color-white-1;
+			}
+		}
+
+		&-img {
+			display: block;
+			z-index: 300;
+			float: left;
+			width: 30px;
+			height: auto;
+		}
+
+		h6 {
+			display: block;
+			float: left;
+			clear: right;
+			height: 30px;
+			margin: 0 0 8px 8px;
+			line-height: 30px;
+
+			&.dark {
+				background: $color-teal;
+				color: $color-bkgd;
+			}
+		}
+
+		h4 {
+			clear: left;
+			margin: 16px 0;
+			@extend %typography-h3-serif;
+		}
+
+		p {
+			@extend %typography-body-copy;
+		}
+	}
+
+	&__report-cta-area {
+		margin-top:32px;
+
+		.global-cta {
+			margin-left:0;
+		}
+	}
+
+	&__report-publication-date {
+		@extend %typography-body-copy;
+		color:$color-gray-2;
+		clear:left;
+	}
+}
+
+//  reports-and-resources-hero --- Hero
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.reports-and-resources-hero {
+	&__grid {
+		@extend %grid-12;
+		row-gap: 0;
+
+		.global-cta-area{
+			justify-items: flex-start;
+			.global-cta{
+				margin: 0;
+			}
+			@include tablet-0-959{
+				justify-items: center;
+				.global-cta{
+					margin: 0 auto;
+				}
+			}
+
+		}
+	}
+
+	&__h1 {
+		text-align: center;
+		grid-column: 1 / -1;
+		@extend %typography-h1-serif;
+		@include user-select();
+	}
+
+	&__header {
+		position: relative;
+		width: 100%;
+		@extend %grid-12;
+		@extend %escape-grid;
+		padding-bottom: 32px;
+		align-items: center;
+		grid-column: 1 / -1;
+
+		[role="doc-subtitle"] {
+			grid-column: 4 / -4;
+			@extend %typography-about-subtitle;
+
+			@include mobile-only {
+				grid-column: 2 / -2;
+			}
+		}
+	}
+
+	&__featured-report-section {
+		order: 1;
+		grid-column: span 5;
+
+		&:nth-of-type(2) {
+			padding: 16px;
+			background: $color-bkgd;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+			transform-origin: center center;
+			grid-column: span 7;
+			transform-style: preserve-3d;
+			overflow: hidden;
+			@include borderRadius(8px);
+			@include transitionMultiple(box-shadow .32s linear 0s, transform .2s ease-in-out 0s);
+
+			@include mobile-only {
+				margin-top: 16px;
+				order: 2;
+				grid-column: span 12;
+			}
+
+			&:focus, &:hover, &:active {
+				transform: scale(1.02);
+				@include box-shadow(0, 10px, 20px, 0, rgba(54, 54, 54, 0.29));
+			}
+
+			img{
+				width: 100%;
+				height: auto;
+			}
+
+		}
+
+		@include mobile-only {
+			grid-column: span 12;
+		}
+	}
+
+	&__featured-report-h2 {
+		margin: (8px * 2) 0;
+		@extend %typography-size-2-serif;
+
+		@include mobile-only {
+			text-align: center;
+		}
+	}
+}
+
+.reports-and-resources-reports-and-filters {
+
+	&__grid {
+		@extend %grid-12;
+
+		> .reports-and-resources-reports-and-filters__grid-block:nth-child(1) {
+			.reports-and-resources__h3 {
+				border: unset;
+			}
+		}
+	}
+
+	&__grid-block {
+		@extend %grid-12;
+		@extend %col-12;
+	}
+
+	&__header {
+		position: fixed; /*fallback (might switch to fixed in future) */
+		position: -webkit-sticky;
+		position: sticky;
+		z-index: 1;
+		top: $global-nav-height-desktop - 1px;
+		left: 0;
+		width: 100%;
+		min-height: 80px;
+		background: $color-ui-chrome-300;
+		align-items: center;
+		@include flex-container-display();
+		text-align: center;
+		justify-items: center;
+		@extend %apply-padding-for-left-and-right-sides;
+
+		@include mobile-only {
+			top: $global-nav-height-mobile - 1px;
+		}
+
+		@include tablet-only {
+			top: $global-nav-height-mobile - 1px;
+		}
+
+		&.pinned {
+			-moz-box-shadow:0 5px 5px rgba(0, 0, 0, 0.15);
+			-webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+			box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+		}
+
+	}
+
+	&__header-grid {
+		position: relative;
+		@extend %grid-12;
+		row-gap: 0;
+	}
+
+	&__header-filters {
+		position: relative;
+		max-width: #{ map_get($media-rules, desktop-width-max)};
+		justify-content: center;
+		text-align: center;
+		@include flex-container-display();
+		grid-column: span 12;
+
+		@include mobile-only {
+			display: none;
+		}
+
+		@include tablet-only {
+			display: none;
+		}
+	}
+}
+
+:root {
+	--select-border: #AAB7C2;
+	--select-focus: #004249;
+	--select-arrow: #00A4A6;
+}
+
+//  reports-and-resources-data-sets
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.reports-and-resources-data-sets {
+	&__grid {
+		@extend %grid-12;
+	}
+}
+
+//  reports-and-resources-highlights-1
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.reports-and-resources-highlights-1 {
+	&__grid {
+		@extend %grid-12;
+
+		> .reports-and-resources__h3:nth-child(1) {
+			//border: unset;
+		}
+
+		.reports-and-resources__report {
+			background: $color-bkgd;
+			box-shadow: unset;
+			transform: unset;
+			.global-cta{
+				margin: 0;
+
+				@include mobile-only{
+					margin: 0 auto;
+				}
+				@include tablet-only{
+					margin: 0 auto;
+				}
+			}
+		}
+	}
+
+	&__section {
+		grid-column: span 6;
+		&:nth-of-type(2) {
+			overflow: visible;
+		}
+
+		@include mobile-only {
+			grid-column: span 12;
+		}
+
+		@include tablet-only {
+			grid-column: span 12;
+		}
+	}
+}
+
+//  reports-and-resources-highlights-2
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.reports-and-resources-highlights-2 {
+	&__grid {
+		@extend %grid-12;
+		.reports-and-resources__report {
+			background: $color-bkgd;
+			box-shadow: unset;
+			transform: unset;
+			.global-cta{
+				margin: 0;
+
+				@include mobile-only{
+					margin: 0 auto;
+				}
+				@include tablet-only{
+					margin: 0 auto;
+				}
+			}
+		}
+	}
+
+	&__section {
+		grid-column: span 6;
+
+		&:nth-of-type(2) {
+			grid-column-start: 7;
+			grid-column: 8 / span 5;
+			overflow: visible;
+		}
+
+		@include mobile-only {
+			grid-column: span 12;
+
+			&:nth-of-type(2) {
+				grid-column: span 12;
+			}
+		}
+
+		@include tablet-only {
+			grid-column: span 12;
+			&:nth-of-type(2) {
+				grid-column: span 12;
+			}
+		}
+	}
+
+	&__cell {
+		position: relative;
+		width: 100%;
+		@include flex-container-display();
+		align-items: center;
+		justify-content: space-evenly;
+		margin: 0 0 16px 0;
+	}
+
+	&__bullet {
+		display: inline-block;
+		position: relative;
+		width: 130px;
+		height: 130px;
+		background: $color-score-very-high;
+		line-height: 130px;
+		color: $color-bkgd;
+		text-align: center;
+		margin-right: 16px;
+		@extend %typography-size-2;
+		@include borderRadius(50%);
+
+		@include mobile-only{
+			width: 64px;
+			height: 64px;
+			line-height: 64px;
+		}
+
+		&--teal {
+			background: $color-score-very-high;
+		}
+
+		&--light-blue {
+			background: $color-blue-3;
+		}
+
+		&--dark-blue {
+			background: $color-score-average;
+		}
+	}
+
+	&__p{
+		width: calc(100% - 130px);
+		display: inline-block;
+	}
+}
+
+//  reports-and-resources-quick-facts
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.reports-and-resources-quick-facts {
+
+	&__cta-area {
+		@extend %col-12;
+		text-align: center;
+
+		@include mobile-only{
+			min-height: 80px;
+		}
+	}
+
+	&__grid {
+		@extend %grid-12;
+
+		> .reports-and-resources__h3:nth-child(1) {
+			@include flex-container-display();
+			border: unset;
+			align-content: center;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			justify-items: center;
+
+			@include mobile-only {
+				line-height: 30px;
+			}
+
+			@include tablet-only {
+				line-height: 30px;
+			}
+
+			hr {
+				position: absolute;
+				top: 50%;
+				left: 0;
+				width: 100%;
+				height: 1px;
+				background-color: #D7D7D7;
+			}
+
+			span {
+				@include translate3d(0, -50%);
+				padding: 0 16px;
+				background-color: $color-bkgd;
+			}
+		}
+	}
+
+	&__card {
+		min-height: (8px * 48);
+		padding: 16px;
+		background: $color-bkgd;
+		text-align: center;
+		//background: palegoldenrod;
+		grid-column: span 4;
+
+		@include mobile-only {
+			grid-column: span 12;
+		}
+
+		@include tablet-only {
+			grid-column: span 12;
+		}
+	}
+
+	&__info-graphic-arrow {
+		position: relative;
+		display: inline-block;
+		width: 140px;
+		height: 140px;
+		background: rgba(0, 194, 255, .15);
+		@include borderRadius(50%);
+
+		&[data-icon="down"] {
+			@include background-img-sprite('../assets/imgs/reports-and-resources/godaddy-venture-forward_info_graphic_arrow_down_79x48.svg', (140px / 2) - (79px / 2), 54px, 79px 48px);
+		}
+
+		&[data-icon="up"] {
+			@include background-img-sprite('../assets/imgs/reports-and-resources/godaddy-venture-forward_info_graphic_arrow_79x48.svg', (140px / 2) - (79px / 2), 46px, 79px 48px);
+		}
+
+		&[data-icon="up-to-the-right"] {
+			@include background-img-sprite('../assets/imgs/reports-and-resources/godaddy-venture-forward_info_graphic_arrow_up_tick_81x50.svg', (140px / 2) - (81px / 2), 50px, 81px 50px);
+		}
+	}
+
+	&__info-stat {
+		@extend %typography-subtitle;
+		font-size: 75px;
+		line-height: 152px;
+
+		@include mobile-only {
+			font-size: 75px;
+			line-height: 117px;
+		}
+
+		@include tablet-only {
+			font-size: 75px;
+			line-height: 117px;
+		}
+	}
+
+	&__info_copy {
+		@extend %typography-subtitle;
+	}
+}

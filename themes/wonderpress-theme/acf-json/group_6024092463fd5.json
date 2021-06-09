@@ -1,0 +1,40 @@
+{
+    "key": "group_6024092463fd5",
+    "title": "CPT > Data Sources",
+    "fields": [
+        {
+            "key": "field_6024092837942",
+            "label": "Url",
+            "name": "url",
+            "type": "url",
+            "instructions": "This will be used to link users to the external datasource.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "data-source"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1614631413
+}

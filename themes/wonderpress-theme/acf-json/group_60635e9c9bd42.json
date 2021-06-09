@@ -1,0 +1,115 @@
+{
+    "key": "group_60635e9c9bd42",
+    "title": "Pages > Meta Tags",
+    "fields": [
+        {
+            "key": "field_60635e9ca7b16",
+            "label": "Ad-Hoc Meta Tags",
+            "name": "page_specific_meta_tags",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add Meta Tag",
+            "sub_fields": [
+                {
+                    "key": "field_60635e9cada62",
+                    "label": "Key Type",
+                    "name": "key_type",
+                    "type": "select",
+                    "instructions": "Select whether this meta tag's key will be a name or property attribute.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "name": "Name",
+                        "property": "Property"
+                    },
+                    "default_value": "name",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_60635e9cada6b",
+                    "label": "Key",
+                    "name": "key",
+                    "type": "text",
+                    "instructions": "This will populate either the \"name\" or \"property\" attribute (depending on which is selected).",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_60635e9cada6f",
+                    "label": "Value",
+                    "name": "value",
+                    "type": "text",
+                    "instructions": "The value of the meta tag",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 100,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1617929374
+}

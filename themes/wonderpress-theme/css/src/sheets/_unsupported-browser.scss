@@ -1,0 +1,94 @@
+.unsupported-browsers {
+
+	&__section {
+		@extend %global-main-section;
+		@extend %apply-padding-for-left-and-right-sides;
+		@extend %typography-body-copy;
+
+		&--hero{
+			background: $color-everyday-blue-100;
+		}
+	}
+}
+
+.unsupported-browsers-hero{
+	&__grid {
+		@extend %grid-12;
+		align-items: start;
+	}
+
+	&__h1 {
+		text-align: center;
+		grid-column: 1 / -1;
+		@extend %typography-h1-serif;
+		@include user-select();
+	}
+
+	&__h2 {
+		text-align: center;
+		grid-column: 1 / -1;
+		@extend %typography-subtitle;
+		@include user-select();
+	}
+
+	&__browser-card{
+		text-align: center;
+		grid-column: span 4;
+		min-height: 246px;
+		@include flex-container-display();
+		@include flex-container-flow(wrap column);
+		align-items: center;
+		justify-content: center;
+		@include opacity(0);
+
+		// Change color of backgrounds for demo purposes
+		//$colorChoices: #56c7fa, #f76540, #ffcb05, #62cd9f, #b67baa, #56c7fa, #f76540, #ffcb05, #62cd9f, #b67baa;
+
+		@for $i from 1 through 6 {
+			&:nth-of-type(#{$i}) {
+				@include transitionMultiple(opacity .44s linear $i/8+s);
+				//background: nth($colorChoices, $i);
+			}
+		}
+
+		@include tablet-only{
+			//grid-column: span 6;
+		}
+
+		@include mobile-only{
+			min-height: unset;
+			grid-column: span 6;
+		}
+	}
+
+	&__img{
+		width: 160px;
+		height: 160px;
+		object-fit: cover;
+		margin: 0 0 16px 0;
+
+		@include tablet-only{
+			width: (8px * 12);
+			height: (8px * 12);
+		}
+
+		@include mobile-only{
+			width: (8px * 8);
+			height: (8px * 8);
+		}
+	}
+
+	&__h3 {
+		position: relative;
+		width: 100%;
+		@extend %typography-h3;
+		@include user-select();
+		margin: 0 0 16px 0;
+	}
+
+	&__version{
+		color: $color-tech-gray-400;
+		margin: 0 0 16px 0;
+	}
+
+}

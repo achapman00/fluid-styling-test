@@ -1,0 +1,45 @@
+{
+    "key": "group_60553de32162b",
+    "title": "Options > Global > Unsupported Browser",
+    "fields": [
+        {
+            "key": "field_60553deda22e2",
+            "label": "Unsupported Browser Page",
+            "name": "global_unsupported_browser_page",
+            "type": "page_link",
+            "instructions": "Select the page to redirect users to if their browser is unsupported.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "allow_archives": 0,
+            "multiple": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-unsupported-browser-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1616199223
+}

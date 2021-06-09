@@ -1,0 +1,96 @@
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// ▒ Fonts --- Home to any custom webfonts + preferred font properties
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+$fonts-sans-serif: 'GD Sherpa', Arial, Helvetica, sans-serif;
+$fonts-serif: serif;
+$fonts-load-GDSherpa-Regular: 'GDSherpa-Regular';
+$fonts-load-GDSherpa-Semibold: 'GDSherpa-Semibold';
+$fonts-load-GDSherpa-Bold: 'GDSherpa-Bold';
+$fonts-load-GDSage-Bold: 'GDSage-Bold';
+$fonts-load-directory: '../assets/fonts/';
+
+/**
+ * Set preferred font properties across the board
+ * Note: Newer descriptor `font-display` utilizes `swap` (also see Google Webmasters preferred options).
+ * By doing so, this enables the font face an extremely small block period and an infinite swap period.
+ * Liken this to that of the progressive option for images in that it renders a fallback font face until
+ * the primary is available. If the primary font face is loaded during the font face display timeline,
+ * it will swap to that.
+ */
+* {
+	font-family: $fonts-sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	font-style: normal;
+	font-variant: normal;
+	letter-spacing: normal;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-display: swap;
+}
+
+//  Load externals
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+@font-face {
+	font-family: 'GD Sherpa';
+	src: url($fonts-load-directory + $fonts-load-GDSherpa-Bold + '.eot');
+	src: url($fonts-load-directory + $fonts-load-GDSherpa-Bold + '.eot?#iefix') format('embedded-opentype'),
+	url($fonts-load-directory + $fonts-load-GDSherpa-Bold + '.woff2') format('woff2'),
+	url($fonts-load-directory + $fonts-load-GDSherpa-Bold + '.woff') format('woff'),
+	url($fonts-load-directory + $fonts-load-GDSherpa-Bold + '.ttf') format('truetype'),
+	url($fonts-load-directory + $fonts-load-GDSherpa-Bold + '.svg#' + $fonts-load-GDSherpa-Bold) format('svg');
+	font-weight: bold;
+	font-style: normal;
+	font-variant: normal;
+	font-stretch: 100%;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'GD Sherpa';
+	src: url($fonts-load-directory + $fonts-load-GDSherpa-Semibold + '.eot');
+	src: url($fonts-load-directory + $fonts-load-GDSherpa-Semibold + '.eot?#iefix') format('embedded-opentype'),
+	url($fonts-load-directory + $fonts-load-GDSherpa-Semibold + '.woff2') format('woff2'),
+	url($fonts-load-directory + $fonts-load-GDSherpa-Semibold + '.woff') format('woff'),
+	url($fonts-load-directory + $fonts-load-GDSherpa-Semibold + '.ttf') format('truetype'),
+	url($fonts-load-directory + $fonts-load-GDSherpa-Semibold + '.svg#' + $fonts-load-GDSherpa-Semibold) format('svg');
+	font-weight: 600;
+	font-style: normal;
+	font-variant: normal;
+	font-stretch: 100%;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'GD Sherpa';
+	src: url($fonts-load-directory + $fonts-load-GDSherpa-Regular + '.eot');
+	src: url($fonts-load-directory + $fonts-load-GDSherpa-Regular + '.eot?#iefix') format('embedded-opentype'),
+	url($fonts-load-directory + $fonts-load-GDSherpa-Regular + '.woff2') format('woff2'),
+	url($fonts-load-directory + $fonts-load-GDSherpa-Regular + '.woff') format('woff'),
+	url($fonts-load-directory + $fonts-load-GDSherpa-Regular + '.ttf') format('truetype'),
+	url($fonts-load-directory + $fonts-load-GDSherpa-Regular + '.svg#' + $fonts-load-GDSherpa-Regular) format('svg');
+	font-weight: 500;
+	font-style: normal;
+	font-variant: normal;
+	font-stretch: 100%;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'GD Sage';
+	src: url($fonts-load-directory + $fonts-load-GDSage-Bold + '.eot');
+	src: url($fonts-load-directory + $fonts-load-GDSage-Bold  + '.eot?#iefix') format('embedded-opentype'),
+	url($fonts-load-directory + $fonts-load-GDSage-Bold + '.woff2') format('woff2'),
+	url($fonts-load-directory + $fonts-load-GDSage-Bold + '.woff') format('woff'),
+	url($fonts-load-directory + $fonts-load-GDSage-Bold + '.ttf') format('truetype'),
+	url($fonts-load-directory + $fonts-load-GDSage-Bold + '.svg#' + $fonts-load-GDSage-Bold) format('svg');
+	font-weight: bold;
+	font-style: normal;
+	font-variant: normal;
+	font-stretch: 100%;
+	font-display: swap;
+}
+

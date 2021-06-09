@@ -1,0 +1,752 @@
+{
+    "key": "group_601d6ec5227e8",
+    "title": "Pages > Data",
+    "fields": [
+        {
+            "key": "field_6054d5539c1e4",
+            "label": "STICKY BAR",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_606237f92c758",
+            "label": "EID Section Slug",
+            "name": "sticky_bar_eid_section_slug",
+            "type": "clone",
+            "instructions": "This copy will appear to the left of the search field.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_6054d55f9c1e5",
+            "label": "Search Instructions",
+            "name": "sticky_bar_search_instructions",
+            "type": "text",
+            "instructions": "This copy will appear to the left of the search field.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": 48
+        },
+        {
+            "key": "field_6054d58a9c1e6",
+            "label": "Action Button",
+            "name": "sticky_bar_action_button",
+            "type": "clone",
+            "instructions": "This button will appear as a download button on the right side of the sticky bar.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_60116d4ce17a3"
+            ],
+            "display": "group",
+            "layout": "row",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_601d6ed0f726c",
+            "label": "HERO",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_606238132c759",
+            "label": "EID Section Slug",
+            "name": "hero_eid_section_slug",
+            "type": "clone",
+            "instructions": "This copy will appear to the left of the search field.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_601d6f2df726e",
+            "label": "Headline",
+            "name": "hero_headline",
+            "type": "text",
+            "instructions": "This will appear at the top of the hero.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_6054d6492f983",
+            "label": "Paragraph",
+            "name": "hero_paragraph",
+            "type": "textarea",
+            "instructions": "This will appear underneath the headline.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_601d6f10f726d",
+            "label": "REPORTS & RESOURCES",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_606238232c75a",
+            "label": "EID Section Slug",
+            "name": "reports_eid_section_slug",
+            "type": "clone",
+            "instructions": "This copy will appear to the left of the search field.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_601d708efcf96",
+            "label": "Headline",
+            "name": "reports_headline",
+            "type": "text",
+            "instructions": "This will appear at the top of the section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_601d71b54303f",
+            "label": "Featured Stats",
+            "name": "reports_featured_stats",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 4,
+            "layout": "block",
+            "button_label": "Add Statistic Module",
+            "sub_fields": [
+                {
+                    "key": "field_601d724b43041",
+                    "label": "Number",
+                    "name": "number",
+                    "type": "text",
+                    "instructions": "This will appear at the top of the module. Please add any special characters, such as -, +, $, or %.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_601d728c43042",
+                    "label": "Headline",
+                    "name": "headline",
+                    "type": "text",
+                    "instructions": "This will always appear underneath the number.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": 48
+                },
+                {
+                    "key": "field_601d72a543043",
+                    "label": "Date Range",
+                    "name": "date_range",
+                    "type": "text",
+                    "instructions": "The applicable data range for this statistic.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": 25
+                },
+                {
+                    "key": "field_601d734943045",
+                    "label": "Paragraph",
+                    "name": "paragraph",
+                    "type": "textarea",
+                    "instructions": "No line breaks allowed.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_6049aa69a8169",
+                    "label": "Attribution Link",
+                    "name": "attribution_link",
+                    "type": "clone",
+                    "instructions": "This will be an external",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_60116d4ce17a3"
+                    ],
+                    "display": "group",
+                    "layout": "row",
+                    "prefix_label": 0,
+                    "prefix_name": 1
+                },
+                {
+                    "key": "field_6049aa98a816a",
+                    "label": "Attribution Icon",
+                    "name": "attribution_icon",
+                    "type": "image",
+                    "instructions": "This will be prepended to the link.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                }
+            ]
+        },
+        {
+            "key": "field_601d70c4fcf97",
+            "label": "Button",
+            "name": "reports_button",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_60116d4ce17a3"
+            ],
+            "display": "group",
+            "layout": "row",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_601d7848d79c7",
+            "label": "EXPLORE",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_606238382c75b",
+            "label": "EID Section Slug",
+            "name": "explore_eid_section_slug",
+            "type": "clone",
+            "instructions": "This copy will appear to the left of the search field.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_601d7853d79c8",
+            "label": "Headline",
+            "name": "explore_headline",
+            "type": "text",
+            "instructions": "This will appear at the top of the section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_604fcdc35a000",
+            "label": "Stories Grid",
+            "name": "explore_stories_grid",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "post"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "taxonomy"
+            ],
+            "elements": [
+                "featured_image"
+            ],
+            "min": "",
+            "max": 3,
+            "return_format": "object"
+        },
+        {
+            "key": "field_601d7920276ee",
+            "label": "COMPARE",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6062384a2c75c",
+            "label": "EID Section Slug",
+            "name": "compare_eid_section_slug",
+            "type": "clone",
+            "instructions": "This copy will appear to the left of the search field.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_601d7928276ef",
+            "label": "Headline",
+            "name": "compare_headline",
+            "type": "text",
+            "instructions": "This will appear at the top of the section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_601d794c276f0",
+            "label": "Paragraph",
+            "name": "compare_paragraph",
+            "type": "textarea",
+            "instructions": "This will appear underneath the headline.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_606de9e4a868d",
+            "label": "Links",
+            "name": "compare_links",
+            "type": "repeater",
+            "instructions": "A horizontal list of links.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_606de9f5a868e",
+                    "label": "Link",
+                    "name": "link",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_60116d4ce17a3"
+                    ],
+                    "display": "group",
+                    "layout": "row",
+                    "prefix_label": 0,
+                    "prefix_name": 1
+                }
+            ]
+        },
+        {
+            "key": "field_604fde8aaa15c",
+            "label": "AT A GLANCE",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6062385b2c75d",
+            "label": "EID Section Slug",
+            "name": "at_a_glance_eid_section_slug",
+            "type": "clone",
+            "instructions": "This copy will appear to the left of the search field.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_604fde96aa15d",
+            "label": "Headline",
+            "name": "at_a_glance_headline",
+            "type": "text",
+            "instructions": "This will appear at the top of this section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_604fdeaeaa15e",
+            "label": "Download Button",
+            "name": "at_a_glance_download_button",
+            "type": "clone",
+            "instructions": "This will appear on the right side of the header in this section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_60116d4ce17a3"
+            ],
+            "display": "group",
+            "layout": "row",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_601d7e48c4cda",
+            "label": "FEATURED STORIES",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_606238702c75e",
+            "label": "EID Section Slug",
+            "name": "featured_stories_eid_section_slug",
+            "type": "clone",
+            "instructions": "This copy will appear to the left of the search field.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_601d7e56c4cdb",
+            "label": "Horizontal Header",
+            "name": "featured_stories_horizontal_header",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_601d79adf420c"
+            ],
+            "display": "group",
+            "layout": "row",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_601da7aa60d76",
+            "label": "Featured Stories Slider",
+            "name": "featured_stories_featured_stories_slider",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_601d7f1f35f90"
+            ],
+            "display": "group",
+            "layout": "row",
+            "prefix_label": 0,
+            "prefix_name": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "template-data.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1617816077
+}

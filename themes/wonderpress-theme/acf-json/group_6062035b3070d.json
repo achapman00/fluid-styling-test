@@ -1,0 +1,43 @@
+{
+    "key": "group_6062035b3070d",
+    "title": "Pages > Global > Analytics",
+    "fields": [
+        {
+            "key": "field_6062036144cb5",
+            "label": "EID Page Slug",
+            "name": "eid_page_slug",
+            "type": "text",
+            "instructions": "This slug will prefix all EID's on this page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1617038791
+}

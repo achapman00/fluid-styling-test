@@ -1,0 +1,52 @@
+{
+  "name": "wonderpress-theme",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-runtime": "^7.12.15",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/runtime": "^7.12.13",
+    "@turf/bbox": "^6.3.0",
+    "autoprefixer": "^9.8.6",
+    "babelify": "^10.0.0",
+    "bootstrap": "^4.5.2",
+    "browserify": "^16.5.2",
+    "chart.js": "^2.9.4",
+    "colors": "^1.4.0",
+    "fuzzysort": "^1.1.4",
+    "gulp": "^4.0.2",
+    "gulp-changed": "^4.0.2",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "hrn": "^1.0.1",
+    "jquery": "^3.5.1",
+    "turf": "^3.0.14",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wndrfl/wonderpress-theme.git"
+  },
+  "author": "Johnnie Munger <johnnie@wonderful.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wndrfl/wonderpress-theme/issues"
+  },
+  "homepage": "https://github.com/wndrfl/wonderpress-theme",
+  "description": "The official Wonderful boilerplate theme for WordPress.",
+  "keywords": [],
+  "dependencies": {
+    "@vimeo/player": "^2.15.0",
+    "keen-slider": "^5.4.0"
+  }
+}

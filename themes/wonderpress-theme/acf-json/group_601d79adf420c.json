@@ -1,0 +1,64 @@
+{
+    "key": "group_601d79adf420c",
+    "title": "_ > Horizontal Section Header",
+    "fields": [
+        {
+            "key": "field_601d79bb5ac62",
+            "label": "Headline",
+            "name": "headline",
+            "type": "text",
+            "instructions": "This will appear on the left of the section header.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_601d79cb5ac63",
+            "label": "Button",
+            "name": "button",
+            "type": "clone",
+            "instructions": "This will appear on the right of the section header.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_60116d4ce17a3"
+            ],
+            "display": "group",
+            "layout": "row",
+            "prefix_label": 0,
+            "prefix_name": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "",
+    "modified": 1612545911
+}

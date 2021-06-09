@@ -1,0 +1,13 @@
+name: wonderpress-coding-standards
+
+on: push
+
+jobs:
+  wonderpress-coding-standards:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Codesniff against the Wonderpress Coding Standards...
+      run: |
+        composer install
+        composer run lint

@@ -1,0 +1,734 @@
+{
+    "key": "group_6023147e09cda",
+    "title": "Pages > Reports",
+    "fields": [
+        {
+            "key": "field_60240450b18ee",
+            "label": "HERO",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_606232e326f27",
+            "label": "EID Section Slug",
+            "name": "hero_eid_section_slug",
+            "type": "clone",
+            "instructions": "This will appear at the top of the hero section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_60240467b18ef",
+            "label": "Headline",
+            "name": "hero_headline",
+            "type": "text",
+            "instructions": "This will appear at the top of the hero section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_60240478b18f0",
+            "label": "Paragraph",
+            "name": "hero_paragraph",
+            "type": "textarea",
+            "instructions": "This will appear underneath the headline.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_60240b2b187b1",
+            "label": "Featured Resource",
+            "name": "hero_featured_resource",
+            "type": "post_object",
+            "instructions": "Select the Resource that will be highlighted in this setion.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "resource"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
+            "ui": 1
+        },
+        {
+            "key": "field_60240b619e340",
+            "label": "CATEGORIES",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6062330626f28",
+            "label": "EID Section Slug",
+            "name": "categories_eid_section_slug",
+            "type": "clone",
+            "instructions": "This will appear at the top of the hero section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_60240b6a9e341",
+            "label": "Resource Categories",
+            "name": "categories_categories",
+            "type": "repeater",
+            "instructions": "This will control the filter buttons that appear at the top of the page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add Resource Category",
+            "sub_fields": [
+                {
+                    "key": "field_60240b739e342",
+                    "label": "Category",
+                    "name": "category",
+                    "type": "taxonomy",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "taxonomy": "resource_categories",
+                    "field_type": "select",
+                    "allow_null": 0,
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "object",
+                    "multiple": 0
+                }
+            ]
+        },
+        {
+            "key": "field_60240bd7fe373",
+            "label": "DOWNLOAD GRID",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6062331c26f29",
+            "label": "EID Section Slug",
+            "name": "download_grid_eid_section_slug",
+            "type": "clone",
+            "instructions": "This will appear at the top of the hero section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_60240bebfe374",
+            "label": "Sections",
+            "name": "download_grid_sections",
+            "type": "repeater",
+            "instructions": "Each section is intended to be a group of Resources, grouped by an arbitrary context such as \"GoDaddy Reports\" or \"3rd Party Reports\".",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add Resource Section",
+            "sub_fields": [
+                {
+                    "key": "field_60240c25fe375",
+                    "label": "Headline",
+                    "name": "headline",
+                    "type": "text",
+                    "instructions": "This will appear at the top of this Resource section.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_60240c89e7e6e",
+                    "label": "Color Scheme",
+                    "name": "color_scheme",
+                    "type": "select",
+                    "instructions": "Whether the Resources displayed in this section should have a light or dark color scheme.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "light": "Light",
+                        "dark": "Dark"
+                    },
+                    "default_value": "light",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "return_format": "value",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_60240c3dfe376",
+                    "label": "Resources",
+                    "name": "resources",
+                    "type": "relationship",
+                    "instructions": "Select and order the Resources to display in this Resource section.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "resource"
+                    ],
+                    "taxonomy": "",
+                    "filters": [
+                        "search",
+                        "taxonomy"
+                    ],
+                    "elements": "",
+                    "min": "",
+                    "max": "",
+                    "return_format": "object"
+                }
+            ]
+        },
+        {
+            "key": "field_60241c3779a98",
+            "label": "HIGHLIGHTS",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6062332f26f2a",
+            "label": "EID Section Slug",
+            "name": "highlights_eid_section_slug",
+            "type": "clone",
+            "instructions": "This will appear at the top of the hero section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_60241c4279a99",
+            "label": "Headline",
+            "name": "highlights_headline",
+            "type": "text",
+            "instructions": "This will appear at the top of this section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_60241c5d79a9a",
+            "label": "Featured Resource",
+            "name": "highlights_featured_resource",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "resource"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
+            "ui": 1
+        },
+        {
+            "key": "field_603e65996ee27",
+            "label": "Small Dual Bar Chart",
+            "name": "highlights_small_dual_bar_chart",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_603e63d990fce"
+            ],
+            "display": "group",
+            "layout": "row",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
+            "key": "field_60242c145ddda",
+            "label": "HIGHLIGHTS CONTINUED",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6062334626f2b",
+            "label": "EID Section Slug",
+            "name": "highlights_continued_eid_section_slug",
+            "type": "clone",
+            "instructions": "This will appear at the top of the hero section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_60242c285dddb",
+            "label": "Bullets",
+            "name": "highlights_continued_bullets",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 3,
+            "layout": "row",
+            "button_label": "Add Bullet",
+            "sub_fields": [
+                {
+                    "key": "field_60242c785ddde",
+                    "label": "Color Scheme",
+                    "name": "color_scheme",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "teal": "Teal",
+                        "light-blue": "Light Blue",
+                        "dark-blue": "Dark Blue"
+                    },
+                    "default_value": "teal",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "return_format": "value",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_60242c3e5dddc",
+                    "label": "Number",
+                    "name": "number",
+                    "type": "text",
+                    "instructions": "Include special characters, like % or $",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": 3
+                },
+                {
+                    "key": "field_60242c645dddd",
+                    "label": "Paragraph",
+                    "name": "paragraph",
+                    "type": "textarea",
+                    "instructions": "No new lines allowed.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": ""
+                }
+            ]
+        },
+        {
+            "key": "field_60242ca95dddf",
+            "label": "Featured Resource",
+            "name": "highlights_continued_featured_resource",
+            "type": "post_object",
+            "instructions": "This will appear on the right side of this section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "resource"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
+            "ui": 1
+        },
+        {
+            "key": "field_60242dba1bca1",
+            "label": "QUICK FACTS",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6062335e26f2c",
+            "label": "EID Section Slug",
+            "name": "quick_facts_eid_section_slug",
+            "type": "clone",
+            "instructions": "This will appear at the top of the hero section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_6062056b09b97"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_60242dd41bca3",
+            "label": "Headline",
+            "name": "quick_facts_headline",
+            "type": "text",
+            "instructions": "This will appear at the top of this section.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_60242dc41bca2",
+            "label": "Facts",
+            "name": "quick_facts_facts",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 3,
+            "layout": "block",
+            "button_label": "Add Fact Module",
+            "sub_fields": [
+                {
+                    "key": "field_60242e111bca4",
+                    "label": "Icon Type",
+                    "name": "icon_type",
+                    "type": "select",
+                    "instructions": "Select the top of icon that will appear at the top of this fact module.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "up": "Up",
+                        "up-to-the-right": "Up to the right",
+                        "down": "Down"
+                    },
+                    "default_value": "up",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "return_format": "value",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_60242e641bca5",
+                    "label": "Number",
+                    "name": "number",
+                    "type": "text",
+                    "instructions": "This will appear as the number for this fact. Include special characters, such as $ or %.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": 8
+                },
+                {
+                    "key": "field_60242e8c1bca6",
+                    "label": "Paragraph",
+                    "name": "paragraph",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        {
+            "key": "field_60242e991bca7",
+            "label": "Button",
+            "name": "quick_facts_button",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_60116d4ce17a3"
+            ],
+            "display": "group",
+            "layout": "row",
+            "prefix_label": 0,
+            "prefix_name": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "template-reports.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1617048438
+}

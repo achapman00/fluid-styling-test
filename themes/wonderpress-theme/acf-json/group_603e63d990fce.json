@@ -1,0 +1,214 @@
+{
+    "key": "group_603e63d990fce",
+    "title": "_ > Small Dual Bar Chart",
+    "fields": [
+        {
+            "key": "field_603e63f9c5ebe",
+            "label": "Left Bar",
+            "name": "left_bar",
+            "type": "group",
+            "instructions": "Controls for the left side bar in this chart.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "row",
+            "sub_fields": [
+                {
+                    "key": "field_603e64bdc5ec2",
+                    "label": "Height Percentage",
+                    "name": "height_percentage",
+                    "type": "number",
+                    "instructions": "The percentage that this bar should represent, between 0% and 100% (this will control the height of the bar).",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1
+                },
+                {
+                    "key": "field_603e64a4c5ec1",
+                    "label": "Number Above Bar",
+                    "name": "number_above_bar",
+                    "type": "text",
+                    "instructions": "The number to display above the bar. Please include all special characters, such as $ and %.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_603e6446c5ebf",
+                    "label": "Number Inside Bar",
+                    "name": "number_inside_bar",
+                    "type": "text",
+                    "instructions": "The textual number to display inside the bar. Please include all special characters, such as $ and %.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_603e6483c5ec0",
+                    "label": "Label Inside Bar",
+                    "name": "label_inside_bar",
+                    "type": "text",
+                    "instructions": "A short description of the number inside this bar.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": 48
+                }
+            ]
+        },
+        {
+            "key": "field_603e650bc5ec3",
+            "label": "Right Bar",
+            "name": "right_bar",
+            "type": "group",
+            "instructions": "Controls for the right side bar in this chart.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "row",
+            "sub_fields": [
+                {
+                    "key": "field_603e650bc5ec4",
+                    "label": "Height Percentage",
+                    "name": "height_percentage",
+                    "type": "number",
+                    "instructions": "The percentage that this bar should represent, between 0% and 100% (this will control the height of the bar).",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1
+                },
+                {
+                    "key": "field_603e650bc5ec5",
+                    "label": "Number Above Bar",
+                    "name": "number_above_bar",
+                    "type": "text",
+                    "instructions": "The number to display above the bar. Please include all special characters, such as $ and %.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_603e650cc5ec6",
+                    "label": "Number Inside Bar",
+                    "name": "number_inside_bar",
+                    "type": "text",
+                    "instructions": "The textual number to display inside the bar. Please include all special characters, such as $ and %.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_603e650cc5ec7",
+                    "label": "Label Inside Bar",
+                    "name": "label_inside_bar",
+                    "type": "text",
+                    "instructions": "A short description of the number inside this bar.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": 48
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "",
+    "modified": 1614701868
+}
