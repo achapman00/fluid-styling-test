@@ -53,6 +53,12 @@ $media-rules: (
 	}
 }
 
+@mixin full-screen {
+	@media (min-width: #{ map_get($media-rules, xl-container-max)}) {
+		@content;
+	}
+}
+
 @mixin hover-check {
 	@media(hover: hover) and (pointer: fine) {
 		@content;

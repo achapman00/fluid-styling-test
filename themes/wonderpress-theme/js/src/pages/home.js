@@ -18,9 +18,9 @@ const choroplethColor = () => {
 
     window.app.global.vars.counties.forEach(row => {
 
-    	var vd_avg = parseFloat(row.vd_avg);
+    	const vd_avg = parseFloat(row.vd_avg);
 
-    	var color = '#ffffff';
+    	let color = '#ffffff';
     	if(vd_avg <= 3.0) {
     		color = '#004249';
 
@@ -33,7 +33,7 @@ const choroplethColor = () => {
     		color = '#1bdbdb';
     	}
 
-		var county = (row.county.length < 5) ? '0' + row.county : row.county;
+		const county = (row.county.length < 5) ? '0' + row.county : row.county;
 		expression.push(county, color);
     });
 
@@ -49,7 +49,7 @@ module.exports = function () {
 
 	const NAME = 'HOME';
 
-	w.log.log(NAME + ' > page was loaded.');
+	w.log.log(`${NAME} > page was loaded.`);
 
 	// Stash the counties
 	window.app.global.vars.counties = window.home_vars.vf_get_all_locations.counties;
@@ -73,16 +73,22 @@ module.exports = function () {
 	 * init --- Initialize the view
 	 */
 	function init() {
-		// w.log.log(NAME + ' > init');
+		// w.log.log(`${NAME} > init`);
 		bdy         = document.body;
 		main        = document.getElementsByTagName('main')[0];
 		footer      = w.el.id('footer');
 		mapbox_map  = w.el.id('map');
 		steps       = JSON.parse(home_vars.map_steps);
-		SwipeSensor = new window.SwipeSensor001();
+		SwipeSensor = new SwipeSensor001();
 		SwipeSensor.powerUp(mapbox_map);
 		addHandlers();
 		onLoop();
+
+		setTimeout(() => {
+			document.querySelectorAll(".global-featured-articles__a").forEach(function (element) {
+				element.style.opacity = '1';
+			});
+		}, 333);
 	}
 
 	/**
@@ -90,13 +96,15 @@ module.exports = function () {
 	 */
 	function addHandlers() {
 		// w.log.log(NAME + ' >  addHandlers');
+		// console.log(bdy);
+		// console.log(mapbox_map);
 		w.evt.add(mapbox_map, VentureEvts.ON_MAP_BLADE_NAVIGATE, onBladeNavigate);
 		w.evt.add(bdy, SwipeSensor.EVT_ON_SWIPE_LEFT, onSwipe);
 		w.evt.add(bdy, SwipeSensor.EVT_ON_SWIPE_RIGHT, onSwipe);
 	}
 
 	function onSwipe(evt) {
-		// w.log.log(NAME + ' > onSwipe');
+		w.log.log(`${NAME} > onSwipe`);
 
 		clearInterval(heroMapEngagement.interval); // cancels autoplay
 		heroMapEngagement.autoplay = false;
@@ -104,12 +112,14 @@ module.exports = function () {
 
 		switch (evt.type) {
 			case SwipeSensor.EVT_ON_SWIPE_LEFT:
+				w.log.log(`${NAME} > onSwipe > ${evt.type}`);
 				w.evt.fire(mapbox_map, VentureEvts.ON_MAP_BLADE_NAVIGATE, {
 					direction: "Down",
 					autoplay: false
 				});
 				break;
 			case SwipeSensor.EVT_ON_SWIPE_RIGHT:
+				w.log.log(`${NAME} > onSwipe > ${evt.type}`);
 				w.evt.fire(mapbox_map, VentureEvts.ON_MAP_BLADE_NAVIGATE, {
 					direction: "Up",
 					autoplay: false
@@ -167,8 +177,8 @@ module.exports = function () {
 				setTranslate3D(document.getElementsByClassName("home-hero-blades__blade mobile")[currentBlade + 1], 0, 0);
 				currentBlade++;
 				if (currentBlade === currentBladeTotal) {
-					blade_down.setAttribute('disabled', true);
-					blade_right.setAttribute('disabled', true);
+					blade_down.setAttribute('disabled', 'true');
+					blade_right.setAttribute('disabled', 'true');
 					heroMapEngagement.autoplay = false;
 					clearInterval(heroMapEngagement.interval);
 				}
@@ -177,8 +187,8 @@ module.exports = function () {
 			// w.log.log(NAME + ' > onBladeNavigate > global-direction-controls__button > up > before: ' + currentBlade);
 			if (currentBlade === 1) {
 				//	Reveal down arrow button
-				blade_up.setAttribute('disabled', true);
-				blade_left.setAttribute('disabled', true);
+				blade_up.setAttribute('disabled', 'true');
+				blade_left.setAttribute('disabled', 'true');
 				setTranslate3D(document.getElementsByClassName("home-hero-blades__blade")[currentBlade], 0, '95%');
 				setTranslate3D(document.getElementsByClassName("home-hero-blades__blade")[0], 0, 0);
 				setTranslate3D(document.getElementsByClassName("home-hero-blades__blade mobile")[currentBlade], '120%', 0);
@@ -223,8 +233,8 @@ module.exports = function () {
 				setTranslate3D(document.getElementsByClassName("home-hero-blades__blade mobile")[currentBlade + 1], 0, 0);
 				currentBlade++;
 				if (currentBlade === currentBladeTotal) {
-					blade_down.setAttribute('disabled', true);
-					blade_right.setAttribute('disabled', true);
+					blade_down.setAttribute('disabled', 'true');
+					blade_right.setAttribute('disabled', 'true');
 				}
 			} else {
 				// this would be 3
@@ -368,6 +378,7 @@ module.exports = function () {
 				link.setAttribute('rel', "noopener");
 			}
 		}
+
 		if (heroMapEngagement.interaction === true) return;
 		setTimeout(() => {
 			heroMapEngagement.autoplay = true;

@@ -12,7 +12,7 @@ $slider_id  = isset( $slider_id ) ? $slider_id : 'slider';
 $story_objs = isset( $story_objs ) ? $story_objs : array();
 
 if ( ! $story_objs && $acf ) {
-	$story_objs = ( isset( $acf['stories'] ) ) ? $acf['stories'] : $story_objs;
+	$story_objs = ( isset( $acf['cards'] ) ) ? $acf['cards'] : $story_objs;
 }
 
 $eid_page_slug = isset( $eid_page_slug ) ? $eid_page_slug : null;
@@ -26,21 +26,21 @@ $eid_section_slug = isset( $eid_section_slug ) ? $eid_section_slug : null;
 		<?php foreach ( $story_objs as $story_obj ) { ?>
 			<div id="global-horizontal-carousel_<?php echo esc_html( $iter_x ); ?>_slide" class="keen-slider__slide number-slide<?php echo esc_html( $iter_x ); ?>" role="tabpanel" aria-labelledby="global-horizontal-carousel_<?php echo esc_html( $iter_x ); ?>_slide">
 				<?php
-				$img = get_field( 'horizontal_slider_image', $story_obj );
+				$img = ( 'internal_content' == $story_obj['type'] ) ? get_field( 'horizontal_slider_image', $story_obj['internal_link'] ) : $story_obj['image'];
 
 				wonder_include_template_file(
 					'partials/image.php',
 					array(
-						'src' => $img ? $img['sizes']['large'] : get_the_post_thumbnail_url( $story_obj, 'large' ),
-						'alt' => get_the_title( $story_obj ),
+						'src' => $img ? $img['sizes']['large'] : get_the_post_thumbnail_url( $story_obj['internal_link'], 'large' ),
+						'alt' => get_the_title( $story_obj['internal_link'] ),
 						'class' => 'global-horizontal-carousel__img',
 					)
 				);
 				?>
 				<div class="global-horizontal-carousel__copyCont">
-					<h4 class="global-horizontal-carousel__category"><?php echo esc_html( get_the_category( $story_obj )[0]->name ); ?></h4>
-					<h3 class="global-horizontal-carousel__title"><?php echo esc_html( get_the_title( $story_obj ) ); ?></h3>
-					<p class="global-horizontal-carousel__p"><?php echo esc_html( get_the_excerpt( $story_obj ) ); ?></p>
+					<h4 class="global-horizontal-carousel__category"><?php echo esc_html( ( 'internal_content' == $story_obj['type'] ) ? get_the_category( $story_obj['internal_link'] )[0]->name : $story_obj['preheadline'] ); ?></h4>
+					<h3 class="global-horizontal-carousel__title"><?php echo esc_html( ( 'internal_content' == $story_obj['type'] ) ? get_the_title( $story_obj['internal_link'] ) : $story_obj['headline'] ); ?></h3>
+					<p class="global-horizontal-carousel__p"><?php echo esc_html( ( 'internal_content' == $story_obj['type'] ) ? get_the_excerpt( $story_obj['internal_link'] ) : $story_obj['excerpt'] ); ?></p>
 				</div>
 				<?php
 				$iter_x++;
@@ -49,11 +49,11 @@ $eid_section_slug = isset( $eid_section_slug ) ? $eid_section_slug : null;
 				$eid = wonder_create_eid_string(
 					$eid_page_slug,
 					$eid_section_slug,
-					get_the_title( $story_obj ),
+					( ( 'internal_content' == $story_obj['type'] ) ? get_the_title( $story_obj['internal_link'] ) : $story_obj['headline'] ),
 					'click'
 				);
 				?>
-				<a data-eid="<?php echo esc_attr( $eid ); ?>" class="global-story__hotspot" href="<?php echo esc_url( get_permalink( $story_obj ) ); ?>" title="<?php echo esc_attr( get_the_title( $story_obj ) ); ?>"><span class="global-screen-reader-copy">Read the article entitled “<?php echo esc_html( get_the_title( $story_obj ) ); ?>”</span></a>
+				<a data-eid="<?php echo esc_attr( $eid ); ?>" class="global-story__hotspot" href="<?php echo esc_url( ( 'internal_content' == $story_obj['type'] ) ? get_permalink( $story_obj['internal_link'] ) : $story_obj['url'] ); ?>" title="<?php echo esc_attr( ( 'internal_content' == $story_obj['type'] ) ? get_the_title( $story_obj['internal_link'] ) : $story_obj['headline'] ); ?>"><span class="global-screen-reader-copy">Read the article entitled “<?php echo esc_html( ( 'internal_content' == $story_obj['type'] ) ? get_the_title( $story_obj['internal_link'] ) : $story_obj['headline'] ); ?>”</span></a>
 			</div>
 		<?php } ?>
 		<button id="slider-left_btn" class="global-direction-controls__button"

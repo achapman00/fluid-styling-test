@@ -1,6 +1,6 @@
 module.exports = function() {
 
-	const NAME = 'GLOBAL-SMALL-DUAL-BAR-SHART';
+	const NAME = 'GLOBAL-SMALL-DUAL-BAR-CHART';
 
 	w.log.log(NAME + ' > service was loaded.');
 

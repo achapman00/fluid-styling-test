@@ -23,6 +23,12 @@ $vf_data_ingestor_county_to_cbsa_table_name = $wpdb->prefix . 'vf_county_to_cbsa
 global $vf_data_ingestor_cbsa_data_table_name;
 $vf_data_ingestor_cbsa_data_table_name = $wpdb->prefix . 'vf_cbsa_data';
 
+global $vf_data_ingestor_cbsa_index_data_table_name;
+$vf_data_ingestor_cbsa_index_data_table_name = $wpdb->prefix . 'vf_cbsa_index_data';
+
+global $vf_data_ingestor_county_index_data_table_name;
+$vf_data_ingestor_county_index_data_table_name = $wpdb->prefix . 'vf_county_index_data';
+
 global $vf_data_ingestor_county_data_table_name;
 $vf_data_ingestor_county_data_table_name = $wpdb->prefix . 'vf_county_data';
 
@@ -35,10 +41,16 @@ $vf_data_ingestor_counties_table_name = $wpdb->prefix . 'vf_counties';
 global $vf_data_ingestor_wam_data_table_name;
 $vf_data_ingestor_wam_data_table_name = $wpdb->prefix . 'vf_wam_data';
 
+global $vf_data_ingestor_city_portal_data_table_name;
+$vf_data_ingestor_city_portal_data_table_name = $wpdb->prefix . 'vf_city_portal_data';
+
 function vf_data_ingestor_install() {
 	global $wpdb;
 	global $vf_data_ingestor_db_version;
 	global $vf_data_ingestor_cbsa_data_table_name;
+	global $vf_data_ingestor_cbsa_index_data_table_name;
+	global $vf_data_ingestor_county_index_data_table_name;
+	global $vf_data_ingestor_city_portal_data_table_name;
 	global $vf_data_ingestor_county_data_table_name;
 	global $vf_data_ingestor_county_to_cbsa_table_name;
 	global $vf_data_ingestor_cbsas_table_name;
@@ -46,6 +58,105 @@ function vf_data_ingestor_install() {
 	global $vf_data_ingestor_wam_data_table_name;
 
 	$charset_collate = $wpdb->get_charset_collate();
+
+	// Create the CITY PORTAL DATA table
+	$sql = "CREATE TABLE $vf_data_ingestor_city_portal_data_table_name (
+		id mediumint(9) NOT NULL AUTO_INCREMENT,
+		sum_micro mediumint(6) UNSIGNED NOT NULL,
+		sum_smb mediumint(6) UNSIGNED NOT NULL,
+		sum_medlrg mediumint(6) UNSIGNED NOT NULL,
+		pop19 mediumint(9) UNSIGNED NOT NULL,
+		pop17 mediumint(9) UNSIGNED NOT NULL,
+		city_id mediumint(6) UNSIGNED NOT NULL,
+		q1_21vd decimal(14,6) NOT NULL,
+		change_vd decimal(14,6) NOT NULL,
+		bb19 decimal(13,6),
+		medinc19 decimal(13,6),
+		housing19 decimal(13,6),
+		college19 decimal(13,6),
+		poverty19 decimal(13,6),
+		unemp_dec20 decimal(13,6),
+		city_size varchar(25) NOT NULL,
+		city_name varchar(100) NOT NULL,
+		pop_3yr decimal(14,6) NOT NULL,
+		avg_pop19_sm decimal(12,3),
+		avg_pop19_med decimal(12,3),
+		avg_pop19_lrg decimal(12,3),
+		avg_q1_21vd_sm decimal(14,6),
+		avg_q1_21vd_med decimal(14,6),
+		avg_q1_21vd_lrg decimal(14,6),
+		avg_change_vd_sm decimal(14,6),
+		avg_change_vd_med decimal(14,6),
+		avg_change_vd_lrg decimal(14,6),
+		avg_bb19_sm decimal(14,6),
+		avg_bb19_med decimal(14,6),
+		avg_bb19_lrg decimal(14,6),
+		avg_medinc19_sm decimal(12,3),
+		avg_medinc19_med decimal(12,3),
+		avg_medinc19_lrg decimal(12,3),
+		avg_housing19_sm decimal(13,4),
+		avg_housing19_med decimal(13,4),
+		avg_housing19_lrg decimal(13,4),
+		avg_college19_sm decimal(14,6),
+		avg_college19_med decimal(14,6),
+		avg_college19_lrg decimal(14,6),
+		avg_poverty19_sm decimal(14,6),
+		avg_poverty19_med decimal(14,6),
+		avg_poverty19_lrg decimal(14,6),
+		avg_unemp_dec20_sm decimal(14,6),
+		avg_unemp_dec20_med decimal(14,6),
+		avg_unemp_dec20_lrg decimal(14,6),
+		avg_pop_3yr_sm decimal(14,6),
+		avg_pop_3yr_med decimal(14,6),
+		avg_pop_3yr_lrg decimal(14,6),
+		pop19_peercomparison_sm decimal(14,6),
+		pop19_peercomparison_med decimal(14,6),
+		pop19_peercomparison_lrg decimal(14,6),
+		q1_21vd_peercomparison_sm decimal(14,6),
+		q1_21vd_peercomparison_med decimal(14,6),
+		q1_21vd_peercomparison_lrg decimal(14,6),
+		change_vd_peercomparison_sm decimal(14,6),
+		change_vd_peercomparison_med decimal(14,6),
+		change_vd_peercomparison_lrg decimal(14,6),
+		bb19_peercomparison_sm decimal(14,6),
+		bb19_peercomparison_med decimal(14,6),
+		bb19_peercomparison_lrg decimal(14,6),
+		medinc19_peercomparison_sm decimal(14,6),
+		medinc19_peercomparison_med decimal(14,6),
+		medinc19_peercomparison_lrg decimal(14,6),
+		housing19_peercomparison_sm decimal(14,6),
+		housing19_peercomparison_med decimal(14,6),
+		housing19_peercomparison_lrg decimal(14,6),
+		college19_peercomparison_sm decimal(14,6),
+		college19_peercomparison_med decimal(14,6),
+		college19_peercomparison_lrg decimal(14,6),
+		poverty19_peercomparison_sm decimal(14,6),
+		poverty19_peercomparison_med decimal(14,6),
+		poverty19_peercomparison_lrg decimal(14,6),
+		unemp_dec20_peercomparison_sm decimal(14,6),
+		unemp_dec20_peercomparison_med decimal(14,6),
+		unemp_dec20_peercomparison_lrg decimal(14,6),
+		pop_3yr_peercomparison_sm decimal(14,6),
+		pop_3yr_peercomparison_med decimal(14,6),
+		pop_3yr_peercomparison_lrg decimal(14,6),
+		pop19_nationalcomparison decimal(14,6),
+		q1_21vd_nationalcomparison decimal(14,6),
+		change_vd_nationalcomparison decimal(14,6),
+		bb19_nationalcomparison decimal(14,6),
+		medinc19_nationalcomparison decimal(14,6),
+		housing19_nationalcomparison decimal(14,6),
+		college19_nationalcomparison decimal(14,6),
+		poverty19_nationalcomparison decimal(14,6),
+		unemp_dec20_nationalcomparison decimal(14,6),
+		pop_3yr_nationalcomparison decimal(14,6),
+		countymapflag tinyint(1),
+		legendflag tinyint(1),
+		is_archived tinyint(1),
+		ingestion_group varchar(25) NOT NULL,
+		created_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		PRIMARY KEY (id)
+	) $charset_collate;";
+	dbDelta( $sql );
 
 	// Create the WAM DATA table
 	$sql = "CREATE TABLE $vf_data_ingestor_wam_data_table_name (
@@ -87,6 +198,36 @@ function vf_data_ingestor_install() {
 		vd decimal(4,2) NULL,
 		havd decimal(4,2) NULL,
 		change_medinc_1619 smallint(4) NULL,
+		is_archived tinyint(1),
+		ingestion_group varchar(25) NOT NULL,
+		created_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		PRIMARY KEY (id)
+	) $charset_collate;";
+	dbDelta( $sql );
+
+	// Create the CBSA INDEX DATA table
+	$sql = "CREATE TABLE $vf_data_ingestor_cbsa_index_data_table_name (
+		id mediumint(9) NOT NULL AUTO_INCREMENT,
+		cbsa mediumint(6) UNSIGNED NOT NULL,
+		name varchar(48) NOT NULL,
+		month tinyint(2) UNSIGNED NOT NULL,
+		year smallint(4) UNSIGNED NOT NULL,
+		activity_index decimal(5,2) NULL,
+		is_archived tinyint(1),
+		ingestion_group varchar(25) NOT NULL,
+		created_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		PRIMARY KEY (id)
+	) $charset_collate;";
+	dbDelta( $sql );
+
+	// Create the COUNTY INDEX DATA table
+	$sql = "CREATE TABLE $vf_data_ingestor_county_index_data_table_name (
+		id mediumint(9) NOT NULL AUTO_INCREMENT,
+		county mediumint(6) UNSIGNED NOT NULL,
+		name varchar(48) NOT NULL,
+		month tinyint(2) UNSIGNED NOT NULL,
+		year smallint(4) UNSIGNED NOT NULL,
+		activity_index decimal(5,2) NULL,
 		is_archived tinyint(1),
 		ingestion_group varchar(25) NOT NULL,
 		created_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
@@ -174,6 +315,21 @@ function vf_data_ingestor_admin_page() {
 	include_once 'templates/index.php';
 
 	// Check whether the button has been pressed AND also check the nonce
+	if (isset($_POST['vf_city_portal_data_ingestion_requested'])) {
+
+		// the button has been pressed AND we've passed the security check
+		if(isset($_FILES['imported_file'])) {
+
+			if($_FILES['imported_file']['error'] > 0) {
+				die($_FILES["imported_file"]["error"]);
+			}
+
+			$ingestor = new VFDataIngestor;
+			$ingestor->ingestCityPortalDataFile($_FILES['imported_file']);
+		}		
+	}
+
+	// Check whether the button has been pressed AND also check the nonce
 	if (isset($_POST['vf_wam_data_ingestion_requested'])) {
 
 		// the button has been pressed AND we've passed the security check
@@ -230,6 +386,61 @@ function vf_data_ingestor_admin_page() {
 
 			$ingestor = new VFDataIngestor;
 			$ingestor->ingestCbsaDataFile($_FILES['imported_file']);
+		}
+	}
+
+	// Check whether the button has been pressed AND also check the nonce
+	if (isset($_POST['vf_cbsa_index_data_ingestion_requested'])) {
+		// the button has been pressed AND we've passed the security check
+
+		if(isset($_FILES['imported_file'])) {
+
+			if($_FILES['imported_file']['error'] > 0) {
+				die($_FILES["imported_file"]["error"]);
+			}
+
+			$ingestor = new VFDataIngestor;
+			$ingestor->ingestCbsaIndexDataFile($_FILES['imported_file']);
+		}
+	}
+
+	// Check whether the button has been pressed AND also check the nonce
+	if (isset($_POST['vf_county_index_data_ingestion_requested'])) {
+		// the button has been pressed AND we've passed the security check
+
+		if(isset($_FILES['imported_file'])) {
+
+			if($_FILES['imported_file']['error'] > 0) {
+				die($_FILES["imported_file"]["error"]);
+			}
+
+			if ( ! function_exists( 'wp_handle_upload' ) ) {
+				require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			}
+
+			$upload_overrides = array(
+				'test_form' => false
+			);
+ 
+			$movefile = wp_handle_upload( $_FILES['imported_file'], $upload_overrides );
+			 
+			if ( $movefile && ! isset( $movefile['error'] ) ) {
+
+				add_action( 'admin_footer', function() use ($movefile) {
+					?>
+					<script type="text/javascript" >
+						window.ingestCountyIndexDataFileByChunk('<?php echo $movefile["file"]; ?>');
+					</script>
+					<?php
+				} ); // Write our JS below here
+
+			} else {
+			    /*
+			     * Error generated by _wp_handle_upload()
+			     * @see _wp_handle_upload() in wp-admin/includes/file.php
+			     */
+			    echo 'Error: ' . $movefile['error'];
+			}
 		}
 	}
 
@@ -304,5 +515,18 @@ function vf_data_ingestor_ingest_county_data_chunk() {
 	wp_send_json_success( $results );
 }
 add_action( 'wp_ajax_vf_data_ingestor_ingest_county_data_chunk', 'vf_data_ingestor_ingest_county_data_chunk' );
+
+
+
+
+function vf_data_ingestor_ingest_county_index_data_chunk() {
+	global $wpdb;
+
+	$ingestor = new VFDataIngestor;
+	$results = $ingestor->ingestCountyIndexDataFileChunk($_POST['file'], (isset($_POST['start']) ? $_POST['start'] : 0), (isset($_POST['size']) ? $_POST['size'] : 999), (isset($_POST['ingestion_group']) ? $_POST['ingestion_group'] : null));
+	$results['method'] = 'vf_data_ingestor_ingest_county_index_data_chunk';
+	wp_send_json_success( $results );
+}
+add_action( 'wp_ajax_vf_data_ingestor_ingest_county_index_data_chunk', 'vf_data_ingestor_ingest_county_index_data_chunk' );
 
 

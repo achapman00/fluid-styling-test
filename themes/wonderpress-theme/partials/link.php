@@ -142,6 +142,9 @@ if ( $attachment ) {
 		case 'download-ani':
 			$content = $text . '<span title="download icon with animation when selected" class="download-ani"></span>';
 			break;
+		case 'lottie':
+			$content = $text . '<div id="' . ( isset( $lottie_id ) ? $lottie_id : md5( uniqid() ) ) . '" class="lottie-container"></div>';
+			break;
 		default:
 			$content = $content;
 			break;
@@ -173,17 +176,18 @@ $eid = wonder_create_eid_string(
 	<?php
 	if ( $accessibility_title ) {
 		?>
-		 aria-label="<?php echo esc_attr( $accessibility_title ); ?>"<?php } ?>
+		 aria-label="<?php echo esc_attr( trim( strip_tags( $accessibility_title ) ) ); ?>"<?php } ?>
 	<?php
 	if ( $accessibility_title ) {
 		?>
-		 title="<?php echo esc_attr( $accessibility_title ); ?>"<?php } ?>
+		 title="<?php echo esc_attr( trim( strip_tags( $accessibility_title ) ) ); ?>"<?php } ?>
 	<?php
 	if ( $eid ) {
 		?>
 		 data-eid="<?php echo esc_attr( $eid ); ?>"<?php } ?>
 	<?php if ( $open_in_new_tab ) { ?>
 		target="_blank"
+		rel="noopener"
 	<?php } ?>
 	<?php foreach ( $attributes as $attribute => $value ) { ?>
 		<?php echo esc_html( $attribute ); ?>="<?php echo esc_attr( $value ); ?>"

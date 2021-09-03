@@ -109,7 +109,7 @@ if ( have_posts() ) :
 				$c = try_to_show_extra_card( $c, $extra_grid_cards );
 			}
 
-			if ( ! is_sticky() ) {
+			// if ( ! is_sticky() ) {
 
 				// Template: global-story-card--style-1
 				wonder_include_template_file(
@@ -121,7 +121,7 @@ if ( have_posts() ) :
 					)
 				);
 				$c++;
-			}
+			// }
 			?>
 
 			<?php

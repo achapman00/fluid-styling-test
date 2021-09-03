@@ -81,7 +81,7 @@
 	&__header-filters {
 		position: relative;
 		max-width: #{ map_get($media-rules, desktop-width-max)};
-		justify-content: center;
+		justify-content: space-evenly;
 		text-align: center;
 		@include flex-container-display();
 		@include flex-container-flow(wrap row);

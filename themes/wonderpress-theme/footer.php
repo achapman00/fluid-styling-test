@@ -12,7 +12,7 @@
 	<section id="footer-links" class="global-footer__section">
 		<div class="global-footer__grid">
 			<a class="global-footer__tm" title="Contact the GoDaddy Venture Forward Team by email" href="mailto:ventureforward@godaddy.com?subject=GoDaddy%20Venture%20Forward%20Inquiry&body=Dear%20Venture%20Forward%20Team%2C%0D%0A" data-eid="comms.microsites.venture-forward/footer.nav.mailto.click">
-				<img alt="GoDaddy Venture Forward Trademark"
+				<img alt="GoDaddy Venture Forward Trademark" width="155" height="31"
 					 src="<?php WPStringUtil::get_base_uri(); ?>assets/imgs/global/godaddy-venture-forward_tm_1000x202_ffffff-on-trans.svg">
 			</a>
 

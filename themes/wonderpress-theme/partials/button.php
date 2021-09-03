@@ -153,6 +153,7 @@ if ( $url ) {
 			'eid_page_slug' => $eid_page_slug,
 			'eid_section_slug' => $eid_section_slug,
 			'eid_widget_slug' => $eid_widget_slug,
+			'lottie_id' => ( isset( $lottie_id ) ) ? $lottie_id : null,
 		)
 	);
 
@@ -175,6 +176,9 @@ if ( $url ) {
 				break;
 			case 'right_arrow':
 				$content = $text . '<img alt="right arrow" class="right-arrow" src="' . get_template_directory_uri() . '/assets/imgs/global/godaddy-venture-cta_arrow_21x12_00a4a6-on-trans.svg">';
+				break;
+			case 'mail':
+				$content = $text . '<img alt="mail icon" class="mail" src="' . get_template_directory_uri() . '/assets/imgs/global/mail.svg">';
 				break;
 			case 'download-ani':
 				$content = $text . '<span title="download icon with animation when selected" class="download-ani"></span>';
@@ -199,6 +203,7 @@ if ( $url ) {
 			 class="<?php echo esc_attr( $class ); ?>"<?php } ?>
 		<?php
 		if ( $accessibility_title ) {
+			$accessibility_title = trim( strip_tags( $accessibility_title ) );
 			?>
 			 aria-label="<?php echo esc_attr( $accessibility_title ); ?>"<?php } ?>
 		<?php

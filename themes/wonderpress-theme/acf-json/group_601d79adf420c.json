@@ -22,13 +22,40 @@
             "maxlength": ""
         },
         {
+            "key": "field_6116bdc526421",
+            "label": "Show Button?",
+            "name": "show_button",
+            "type": "true_false",
+            "instructions": "Whether to show the button on the right side.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_601d79cb5ac63",
             "label": "Button",
             "name": "button",
             "type": "clone",
             "instructions": "This will appear on the right of the section header.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6116bdc526421",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -60,5 +87,5 @@
     "hide_on_screen": "",
     "active": false,
     "description": "",
-    "modified": 1612545911
+    "modified": 1628880366
 }

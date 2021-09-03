@@ -18,7 +18,7 @@ function wonder_enqueue_styles() {
 	// wp_register_style( 'fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600', array(), '1.0', 'all' );
 	// wp_enqueue_style( 'fonts' );
 
-	if ( is_front_page() || wonder_body_id() == 'explore-the-data' ) {
+	if ( is_front_page() || wonder_body_id() == 'explore-the-data' || wonder_body_id() == 'city-portal' ) {
 		wp_register_style( 'mapbox', 'https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css', array(), '1.0.0', 'all' );
 		wp_enqueue_style( 'mapbox' );
 	}

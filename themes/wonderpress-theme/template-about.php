@@ -100,8 +100,8 @@ if ( have_posts() ) :
 			<!-- ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ Hero: End  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
 
 			<!-- ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ featured-articles ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
-			<section id="featured-articles" class="about__section about__section--featured-articles">
-				<div class="about-featured-articles__grid">
+			<section id="featured-articles" class="global-featured-articles">
+				<div class="global-featured-articles__grid">
 					<?php
 					while ( have_rows( 'articles_articles' ) ) {
 						the_row();
@@ -112,13 +112,18 @@ if ( have_posts() ) :
 							'click'
 						);
 						?>
-						<a href="<?php the_sub_field( 'url' ); ?>" class="about-featured-articles__a" title="<?php echo esc_attr( get_sub_field( 'title' ) ); ?>" data-eid="<?php echo esc_attr( $eid ); ?>" target="_blank" rel="noopener">
+						<a href="<?php the_sub_field( 'url' ); ?>" class="global-featured-articles__a" title="<?php echo esc_attr( get_sub_field( 'title' ) ); ?>" data-eid="<?php echo esc_attr( $eid ); ?>" target="_blank" rel="noopener">
 							<?php
 							// Template: Image
 							wonder_include_template_file(
 								'partials/image.php',
 								array(
 									'acf' => get_sub_field( 'logo' ),
+									'alt' => get_sub_field( 'title' ),
+									'attributes' => array(
+										'width' => '84',
+										'height' => '84',
+									),
 								)
 							);
 							?>

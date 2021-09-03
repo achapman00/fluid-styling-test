@@ -298,7 +298,7 @@
 	&__header-filters {
 		position: relative;
 		max-width: #{ map_get($media-rules, desktop-width-max)};
-		justify-content: center;
+		justify-content: space-evenly;
 		text-align: center;
 		@include flex-container-display();
 		grid-column: span 12;
@@ -309,6 +309,10 @@
 
 		@include tablet-only {
 			display: none;
+		}
+
+		&--city-portal {
+			justify-content: space-evenly;
 		}
 	}
 }
@@ -540,15 +544,15 @@
 		@include borderRadius(50%);
 
 		&[data-icon="down"] {
-			@include background-img-sprite('../assets/imgs/reports-and-resources/godaddy-venture-forward_info_graphic_arrow_down_79x48.svg', (140px / 2) - (79px / 2), 54px, 79px 48px);
+			@include background-img-sprite('../assets/imgs/reports-and-resources/godaddy-venture-forward_info_graphic_arrow_down_79x48.svg', (140px * 0.5) - (79px * 0.5), 54px, 79px 48px);
 		}
 
 		&[data-icon="up"] {
-			@include background-img-sprite('../assets/imgs/reports-and-resources/godaddy-venture-forward_info_graphic_arrow_79x48.svg', (140px / 2) - (79px / 2), 46px, 79px 48px);
+			@include background-img-sprite('../assets/imgs/reports-and-resources/godaddy-venture-forward_info_graphic_arrow_79x48.svg', (140px * 0.5) - (79px * 0.5), 46px, 79px 48px);
 		}
 
 		&[data-icon="up-to-the-right"] {
-			@include background-img-sprite('../assets/imgs/reports-and-resources/godaddy-venture-forward_info_graphic_arrow_up_tick_81x50.svg', (140px / 2) - (81px / 2), 50px, 81px 50px);
+			@include background-img-sprite('../assets/imgs/reports-and-resources/godaddy-venture-forward_info_graphic_arrow_up_tick_81x50.svg', (140px * 0.5) - (81px * 0.5), 50px, 81px 50px);
 		}
 	}
 

@@ -18,7 +18,7 @@ module.exports = function () {
 	 * init --- Initialize the view
 	 */
 	function init() {
-		w.log.log(NAME + ' > init');
+		// w.log.log(NAME + ' > init');
 
 		addHandlers();
 		addImgToAllButtons();
@@ -49,7 +49,7 @@ module.exports = function () {
 	 * addHandlers --- Add event handlers for view
 	 */
 	function addHandlers() {
-		w.log.log(NAME + ' > addHandlers');
+		// w.log.log(NAME + ' > addHandlers');
 		w.evt.add(document, 'scroll', onScroll);
 		w.evt.add(socials, 'click', onSocial);
 	}
@@ -149,21 +149,20 @@ module.exports = function () {
 					switch (classes[x]) {
 						case "story-article__social-btns__button":
 							const msg = target.getAttribute('data-share-msg');
-							console.log(msg);
+							const shareType      = target.getAttribute('data-share-button');
+							const windowFeatures = "width=600,height=300,menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes";
+							let url              = window.single_vars.permalink;
 
-							if(target.getAttribute('data-share-button') == 'facebook') {
+							if (shareType === 'facebook') {
 								FB.ui({
-								  method: 'share',
-								  href: window.single_vars.permalink,
-								}, function(response){});
+									method: 'share',
+									href: url,
+								}, (response) => console.info("Facebook " + response));
+							} else if (shareType === 'twitter') {
+								window.open('https://twitter.com/intent/tweet?url=' + url, 'twitter_wdw', windowFeatures);
 
-							} else if(target.getAttribute('data-share-button') == 'twitter') {
-							    var url = 'https://twitter.com/intent/tweet?url=' + window.single_vars.permalink;
-							    TwitterWindow = window.open(url, 'TwitterWindow', 600, 300);
-
-							} else if(target.getAttribute('data-share-button') == 'linkedin') {
-							    var url = 'https://www.linkedin.com/sharing/share-offsite/?url=' + window.single_vars.permalink;
-							    LinkedInWindow = window.open(url, 'LinkedInWindow', 600, 300);
+							} else if (shareType === 'linkedin') {
+								window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, 'linkedin_wdw', windowFeatures);
 							}
 							break;
 					}

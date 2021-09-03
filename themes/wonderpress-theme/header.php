@@ -53,6 +53,10 @@
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<link href="//www.google-analytics.com" rel="dns-prefetch">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link rel="preload" href="<?php WPStringUtil::get_base_uri(); ?>assets/fonts/GDSage-Bold.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="<?php WPStringUtil::get_base_uri(); ?>assets/fonts/GDSherpa-Bold.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="<?php WPStringUtil::get_base_uri(); ?>assets/fonts/GDSherpa-Regular.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="<?php WPStringUtil::get_base_uri(); ?>assets/fonts/GDSherpa-Semibold.woff2" as="font" type="font/woff2" crossorigin>
 		<?php
 		if ( is_singular() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );}
@@ -88,7 +92,7 @@
 			<!-- ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ Global Nav: Desktop ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
 			<nav class="global-nav-desktop">
 				<a class="global-nav-desktop__tm" title="GoDaddy Venture Forward home" href="<?php echo esc_url( home_url() ); ?>">
-					<img alt="GoDaddy Venture Forward Trademark"
+					<img alt="GoDaddy Venture Forward Trademark" width="149" height="30"
 						 src="<?php WPStringUtil::get_base_uri(); ?>assets/imgs/global/godaddy-venture-forward_tm_1000x202_000000-on-trans.svg">
 				</a>
 				<?php
@@ -114,13 +118,13 @@
 			<nav id="global-nav-mobile-tablet_nav" class="global-nav-mobile-tablet">
 				<section class="global-nav-mobile-tablet__section">
 					<button class="global-nav-mobile-tablet__button" aria-controls="mobile-tablet-menu" aria-label="Toggle the sub menu between close and open states" data-ani-action="mobile-close-button">
-						<img alt="menu" src="<?php WPStringUtil::get_base_uri(); ?>assets/imgs/global/godaddy-venture-forward_hamburger_14x12_004249-on-trans.svg">
+						<img alt="menu" width="14" height="12" src="<?php WPStringUtil::get_base_uri(); ?>assets/imgs/global/godaddy-venture-forward_hamburger_14x12_004249-on-trans.svg">
 						<div>
 							<span class="global-screen-reader-copy">Close icon that transitions in from small to full size X</span>
 						</div>
 					</button>
 					<a class="global-nav-mobile-tablet__tm" title="GoDaddy Venture Forward home" href="<?php echo esc_url( home_url() ); ?>">
-						<img alt="GoDaddy Venture Forward Trademark" src="<?php WPStringUtil::get_base_uri(); ?>assets/imgs/global/godaddy-venture-forward_tm_1000x202_000000-on-trans.svg">
+						<img alt="GoDaddy Venture Forward Trademark" width="161" height="31" src="<?php WPStringUtil::get_base_uri(); ?>assets/imgs/global/godaddy-venture-forward_tm_1000x202_000000-on-trans.svg">
 					</a>
 				</section>
 				<section id="mobile-tablet-menu" class="global-nav-mobile-tablet__section" aria-expanded="false">

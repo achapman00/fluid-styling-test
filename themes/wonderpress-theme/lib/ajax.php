@@ -6,7 +6,53 @@
  */
 
 global $vf_enable_ajax_transients;
-$vf_enable_ajax_transients = false;
+$vf_enable_ajax_transients = true;
+
+/**
+ * Get a specific county
+ *
+ * @param Integer $county_id The idea of the county.
+ */
+function vf_get_specific_county( $county_id ) {
+	global $vf_data_ingestor_county_data_table_name;
+	global $wpdb;
+
+	// Run the query
+	// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+	$results = $wpdb->get_results(
+		$wpdb->prepare(
+			'SELECT 
+				county, 
+				county as "value", 
+				name, 
+				AVG(vd) as vd_avg,
+				MAX(counts) as total_microbusinesses,
+				(SELECT MAX(year) FROM ' . $vf_data_ingestor_county_data_table_name . ') as latest_year
+			FROM ' . $vf_data_ingestor_county_data_table_name . ' 
+			WHERE 
+				county = %s
+				AND year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_county_data_table_name . ') 
+				AND month = (SELECT MAX(month) FROM ' . $vf_data_ingestor_county_data_table_name . ' WHERE year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_county_data_table_name . ')) 
+				AND vd IS NOT NULL
+				AND is_archived = 0
+			GROUP BY 
+				county, name 
+			ORDER BY 
+				name ASC',
+			array(
+				$county_id,
+			)
+		),
+		ARRAY_A
+	);
+	// phpcs:enable
+
+	if ( $results ) {
+		return $results[0];
+	}
+
+	return null;
+}
 
 /**
  * Get all the locations: CBSAs and Counties
@@ -148,6 +194,157 @@ add_action( 'wp_ajax_nopriv_vf_ajax_get_all_locations', 'vf_ajax_get_all_locatio
 
 
 
+
+/**
+ * Get a city for the CITY PORTAL page
+ *
+ * @param String $city_id The ID of the city to grab from the DB.
+ */
+function vf_get_city_for_city_portal( $city_id ) {
+	global $vf_data_ingestor_city_portal_data_table_name;
+	global $vf_enable_ajax_transients;
+	global $wpdb;
+
+	$transient_name = __FUNCTION__ . '-' . $city_id;
+
+	if ( isset( $_GET['clear_transients'] ) && sanitize_text_field( wp_unslash( $_GET['clear_transients'] ) ) ) {
+		delete_transient( $transient_name );
+	}
+
+	// Initialize our payload for the page
+	// Check for cached version, first
+	$payload = ( $vf_enable_ajax_transients ) ? get_transient( $transient_name ) : array();
+	if ( $payload ) {
+		return $payload;
+	}
+
+	/**
+	 * Get all the CBSAs
+	 */
+	// Run the query
+	// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+	$results = $wpdb->get_results(
+		$wpdb->prepare(
+			'SELECT 
+				city_table.*
+			FROM ' . $vf_data_ingestor_city_portal_data_table_name . ' as city_table
+			WHERE
+				city_id = %d 
+				AND city_table.is_archived = 0
+			LIMIT 1',
+			array(
+				$city_id,
+			)
+		),
+		ARRAY_A
+	);
+	// phpcs:enable
+
+	$payload['city'] = $results[0];
+
+	// Send it!
+	set_transient( $transient_name, $payload, ( 60 * 60 * 24 ) );
+
+	return $payload;
+}
+
+/**
+ * AJAX: Get all the locations: CBSAs and Counties
+ */
+function vf_ajax_get_city_for_city_portal() {
+
+	// Verify nonce
+	$nonce = isset( $_REQUEST['ajax_nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['ajax_nonce'] ) ) : null;
+	if ( ! wp_verify_nonce( $nonce, 'ajax-nonce' ) ) {
+		 die( 'Security check' );
+	}
+
+	// Verify nonce
+	$city_id = isset( $_REQUEST['city_id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['city_id'] ) ) : null;
+	if ( ! $city_id ) {
+		wp_send_json_error( array( 'msg' => 'Please provide a city_id.' ) );
+	}
+
+	$payload = vf_get_city_for_city_portal( $city_id );
+
+	wp_send_json_success( $payload );
+}
+add_action( 'wp_ajax_vf_ajax_get_city_for_city_portal', 'vf_ajax_get_city_for_city_portal' );
+add_action( 'wp_ajax_nopriv_vf_ajax_get_city_for_city_portal', 'vf_ajax_get_city_for_city_portal' );
+
+
+
+
+/**
+ * Get all cities for the CITY PORTAL page
+ */
+function vf_get_all_cities_for_city_portal() {
+	global $vf_data_ingestor_city_portal_data_table_name;
+	global $vf_enable_ajax_transients;
+	global $wpdb;
+
+	$transient_name = __FUNCTION__;
+
+	if ( isset( $_GET['clear_transients'] ) && sanitize_text_field( wp_unslash( $_GET['clear_transients'] ) ) ) {
+		delete_transient( $transient_name );
+	}
+
+	// Initialize our payload for the page
+	// Check for cached version, first
+	$payload = ( $vf_enable_ajax_transients ) ? get_transient( $transient_name ) : array();
+	if ( $payload ) {
+		return $payload;
+	}
+
+	/**
+	 * Get all the CBSAs
+	 */
+	// Run the query
+	// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+	$results = $wpdb->get_results(
+		$wpdb->prepare(
+			'SELECT 
+				city_table.*
+			FROM ' . $vf_data_ingestor_city_portal_data_table_name . ' as city_table
+			WHERE
+				city_table.is_archived = 0',
+			array()
+		),
+		ARRAY_A
+	);
+	// phpcs:enable
+
+	$payload['cities'] = $results;
+
+	// Send it!
+	set_transient( $transient_name, $payload, ( 60 * 60 * 24 ) );
+
+	return $payload;
+}
+
+/**
+ * AJAX: Get all the Cities
+ */
+function vf_ajax_get_all_cities_for_city_portal() {
+
+	// Verify nonce
+	$nonce = isset( $_REQUEST['ajax_nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['ajax_nonce'] ) ) : null;
+	if ( ! wp_verify_nonce( $nonce, 'ajax-nonce' ) ) {
+		 die( 'Security check' );
+	}
+
+	// Verify nonce
+	$city_id = isset( $_REQUEST['city_id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['city_id'] ) ) : null;
+	if ( ! $city_id ) {
+		wp_send_json_error( array( 'msg' => 'Please provide a city_id.' ) );
+	}
+
+	$payload = vf_get_all_cities_for_city_portal();
+
+	wp_send_json_success( $payload );
+}
+add_action( 'wp_ajax_vf_ajax_get_all_cities_for_city_portal', 'vf_ajax_get_all_cities_for_city_portal' );
+add_action( 'wp_ajax_nopriv_vf_ajax_get_all_cities_for_city_portal', 'vf_ajax_get_all_cities_for_city_portal' );
 
 
 
@@ -469,6 +666,7 @@ add_action( 'wp_ajax_nopriv_vf_ajax_get_data_page_hero_chart_data', 'vf_ajax_get
  **/
 function vf_get_county_specifics_for_data_page( $county ) {
 	global $vf_data_ingestor_county_data_table_name;
+	global $vf_data_ingestor_county_index_data_table_name;
 	global $vf_enable_ajax_transients;
 	global $wpdb;
 
@@ -515,6 +713,33 @@ function vf_get_county_specifics_for_data_page( $county ) {
 	);
 	// phpcs:enable
 
+	// Run the query
+	// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+	$results = $wpdb->get_results(
+		$wpdb->prepare(
+			'SELECT 
+				activity_index,
+				year,
+				month
+			FROM ' . $vf_data_ingestor_county_index_data_table_name . '
+			WHERE 
+				county = %s
+				AND year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_county_index_data_table_name . ') 
+				AND month = (SELECT MAX(month) FROM ' . $vf_data_ingestor_county_index_data_table_name . ' WHERE year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_county_index_data_table_name . ')) 
+				AND is_archived = 0
+			ORDER BY
+				year DESC,
+				month DESC
+			LIMIT 1',
+			array(
+				$county,
+			)
+		),
+		ARRAY_A
+	);
+	// phpcs:enable
+
+	$payload['activity_index'] = (float) $results[0]['activity_index'];
 	$payload['vd'] = (float) $results[0]['vd'];
 	$payload['unemp_percent'] = (float) $results[0]['unemp_percent'];
 	$payload['prosp19_ui'] = (float) $results[0]['prosp19_ui'];
@@ -567,6 +792,7 @@ function vf_get_compare_chart_for_data_page( $selection_1 = null, $comparison = 
 	global $vf_data_ingestor_cbsas_table_name;
 	global $vf_data_ingestor_cbsa_data_table_name;
 	global $vf_data_ingestor_county_data_table_name;
+	global $vf_data_ingestor_county_index_data_table_name;
 	global $vf_data_ingestor_wam_data_table_name;
 	global $vf_enable_ajax_transients;
 	global $wpdb;
@@ -727,6 +953,10 @@ function vf_get_compare_chart_for_data_page( $selection_1 = null, $comparison = 
 			'traffic',
 		);
 
+		$index_comparisons = array(
+			'activity_index',
+		);
+
 		if ( in_array( $comparison, $wam_comparisons ) ) {
 
 			// GET THE WAM COMPARISON DATA
@@ -755,6 +985,60 @@ function vf_get_compare_chart_for_data_page( $selection_1 = null, $comparison = 
 			$dataset = array(
 				'label' => false,
 				'borderColor' => '#00E356',
+				'borderDash' => array( 5, 10 ),
+				'data' => array(),
+				'fill' => false,
+				'pointRadius' => 0,
+				'yAxisID' => 'comparison',
+			);
+
+			$default = array();
+			foreach ( $payload['labels'] as $key => $label ) {
+				$default[ $key ] = null;
+			}
+
+			foreach ( $results as $result ) {
+				$comparison_label = gmdate( 'M \'y', strtotime( $result['year'] . '-' . $result['month'] . '-01' ) );
+
+				foreach ( $payload['labels'] as $key => $label ) {
+					if ( $comparison_label == $label ) {
+						$default[ $key ] = (float) $result['comparison'];
+					}
+				}
+			}
+
+			$dataset['data'] = $default;
+
+			$payload['datasets'][] = $dataset;
+
+		} elseif ( in_array( $comparison, $index_comparisons ) ) {
+
+			// GET THE INDEX COMPARISON DATA
+			// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+			$results = $wpdb->get_results(
+				$wpdb->prepare(
+					'SELECT 
+						AVG(' . $comparison . ') as comparison,
+						year,
+						month
+					FROM ' . $vf_data_ingestor_county_index_data_table_name . '
+					WHERE 
+						year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_county_index_data_table_name . ')
+						AND ' . $comparison . ' IS NOT NULL
+						AND is_archived = 0
+					GROUP BY
+						year, month
+					ORDER BY
+						year, month',
+					array()
+				),
+				ARRAY_A
+			);
+			// phpcs:enable
+
+			$dataset = array(
+				'label' => false,
+				'borderColor' => '#000000',
 				'borderDash' => array( 5, 10 ),
 				'data' => array(),
 				'fill' => false,
@@ -956,7 +1240,9 @@ add_action( 'wp_ajax_nopriv_vf_ajax_get_compare_chart_for_data_page', 'vf_ajax_g
  **/
 function vf_get_compare_table_data_for_data_page( $county = null ) {
 	global $vf_data_ingestor_cbsa_data_table_name;
+	global $vf_data_ingestor_cbsa_index_data_table_name;
 	global $vf_data_ingestor_county_data_table_name;
+	global $vf_data_ingestor_county_index_data_table_name;
 	global $vf_enable_ajax_transients;
 	global $wpdb;
 
@@ -1027,6 +1313,25 @@ function vf_get_compare_table_data_for_data_page( $county = null ) {
 	// phpcs:enable
 
 	// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+	$national_cbsa_index_results = $wpdb->get_results(
+		$wpdb->prepare(
+			'SELECT 
+				AVG(activity_index) as activity_index,
+				(SELECT MAX(year) FROM ' . $vf_data_ingestor_cbsa_index_data_table_name . ') as latest_year,
+				(SELECT MAX(month) FROM ' . $vf_data_ingestor_cbsa_index_data_table_name . ' WHERE year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_cbsa_index_data_table_name . ')) as latest_month
+			FROM ' . $vf_data_ingestor_cbsa_index_data_table_name . '
+			WHERE 
+				year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_cbsa_index_data_table_name . ') 
+				AND month = (SELECT MAX(month) FROM ' . $vf_data_ingestor_cbsa_index_data_table_name . ' WHERE year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_cbsa_index_data_table_name . '))
+				AND activity_index IS NOT NULL
+				AND is_archived = 0',
+			array()
+		),
+		ARRAY_A
+	);
+	// phpcs:enable
+
+	// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
 	$national_county_results = $wpdb->get_results(
 		$wpdb->prepare(
 			'SELECT 
@@ -1050,8 +1355,28 @@ function vf_get_compare_table_data_for_data_page( $county = null ) {
 	);
 	// phpcs:enable
 
+	// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+	$national_county_index_results = $wpdb->get_results(
+		$wpdb->prepare(
+			'SELECT 
+				AVG(activity_index) as activity_index,
+				(SELECT MAX(year) FROM ' . $vf_data_ingestor_county_index_data_table_name . ') as latest_year,
+				(SELECT MAX(month) FROM ' . $vf_data_ingestor_county_index_data_table_name . ' WHERE year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_county_index_data_table_name . ')) as latest_month
+			FROM ' . $vf_data_ingestor_county_index_data_table_name . '
+			WHERE 
+				year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_county_index_data_table_name . ') 
+				AND month = (SELECT MAX(month) FROM ' . $vf_data_ingestor_county_index_data_table_name . ' WHERE year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_county_index_data_table_name . '))
+				AND activity_index IS NOT NULL
+				AND is_archived = 0',
+			array()
+		),
+		ARRAY_A
+	);
+	// phpcs:enable
+
 	$payload['compare_table'] = array(
 		'national_cbsa' => array(
+			'activity_index' => (float) $national_cbsa_index_results[0]['activity_index'],
 			'income_median' => '$' . number_format( $national_cbsa_results[0]['income_median'] ),
 			'prosp_avg' => (float) $national_cbsa_results[0]['prosp_avg'],
 			'recovery_avg' => round( $national_cbsa_results[0]['recovery_avg'], 2 ),
@@ -1062,6 +1387,7 @@ function vf_get_compare_table_data_for_data_page( $county = null ) {
 			'year' => (int) $national_cbsa_results[0]['latest_year'],
 		),
 		'national_county' => array(
+			'activity_index' => (float) $national_county_index_results[0]['activity_index'],
 			'income_median' => '$' . number_format( $national_county_results[0]['income_median'] ),
 			'prosp_avg' => (float) $national_county_results[0]['prosp_avg'],
 			'recovery_avg' => round( $national_cbsa_results[0]['recovery_avg'], 2 ),
@@ -1110,3 +1436,178 @@ function vf_ajax_get_compare_table_data_for_data_page() {
 }
 add_action( 'wp_ajax_vf_ajax_get_compare_table_data_for_data_page', 'vf_ajax_get_compare_table_data_for_data_page' );
 add_action( 'wp_ajax_nopriv_vf_ajax_get_compare_table_data_for_data_page', 'vf_ajax_get_compare_table_data_for_data_page' );
+
+
+/**
+ * Get the national stats for activity index.
+ **/
+function vf_get_national_activity_index_stats() {
+	global $vf_data_ingestor_county_index_data_table_name;
+	global $wpdb;
+
+	// Grab vals for search bars
+	// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+	$results = $wpdb->get_results(
+		$wpdb->prepare(
+			'SELECT 
+				AVG(activity_index) as avg,
+				MAX(activity_index) as max,
+				MIN(activity_index) as min
+			FROM ' . $vf_data_ingestor_county_index_data_table_name . '
+			WHERE 
+				year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_county_index_data_table_name . ') 
+				AND month = (SELECT MAX(month) FROM ' . $vf_data_ingestor_county_index_data_table_name . ' WHERE year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_county_index_data_table_name . ')) 
+				AND is_archived = 0',
+			array()
+		),
+		ARRAY_A
+	);
+	// phpcs:enable
+
+	return array(
+		'avg' => $results[0]['avg'],
+		'min' => $results[0]['min'],
+		'max' => $results[0]['max'],
+
+	);
+
+}
+
+/**
+ * Get compare chart data
+ *
+ * @param Integer $county The id of the county.
+ **/
+function vf_get_compare_chart_for_index_page( $county = null ) {
+	global $vf_data_ingestor_county_index_data_table_name;
+	global $wpdb;
+
+	$transient_name = __FUNCTION__ . '_' . md5( $selection_1 ) . '_' . md5( $comparison );
+
+	if ( isset( $_GET['clear_transients'] ) && sanitize_text_field( wp_unslash( $_GET['clear_transients'] ) ) ) {
+		delete_transient( $transient_name );
+	}
+
+	// Initialize our payload for the page
+	// Check for cached version, first
+	$payload = ( $vf_enable_ajax_transients ) ? get_transient( $transient_name ) : array();
+	if ( $payload ) {
+		return $payload;
+	}
+
+	// Initialize our payload for the page
+	$payload = array();
+	$payload['labels'] = array();
+	$payload['datasets'] = array();
+
+	// GATHER THE NATIONAL COUNTY DATA
+	// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+	$results = $wpdb->get_results(
+		$wpdb->prepare(
+			'SELECT 
+				AVG(activity_index) as activity_index,
+				year,
+				month
+			FROM ' . $vf_data_ingestor_county_index_data_table_name . '
+			WHERE 
+				year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_county_index_data_table_name . ')
+				AND activity_index IS NOT NULL
+				AND is_archived = 0
+			GROUP BY
+				year, month
+			ORDER BY
+				year, month',
+			array()
+		),
+		ARRAY_A
+	);
+	// phpcs:enable
+
+	$dataset = array(
+		'label' => false,
+		'borderColor' => '#00C2FF',
+		'data' => array(),
+		'fill' => false,
+		'pointRadius' => 0,
+		'yAxisID' => 'activity_index',
+	);
+	foreach ( $results as $result ) {
+		$dataset['data'][] = (float) $result['activity_index'];
+
+		$month = gmdate( 'M \'y', strtotime( $result['year'] . '-' . $result['month'] . '-01' ) );
+		if ( ! in_array( $month, $payload['labels'] ) ) {
+			$payload['labels'][] = $month;
+		}
+	}
+	$payload['datasets'][] = $dataset;
+
+	// GATHER THE SPECIFIC COUNTY DATA
+	if ( $county ) {
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				'SELECT 
+					AVG(activity_index) as activity_index,
+					year,
+					month
+				FROM ' . $vf_data_ingestor_county_index_data_table_name . '
+				WHERE 
+					county = %s
+					AND year = (SELECT MAX(year) FROM ' . $vf_data_ingestor_county_index_data_table_name . ')
+					AND activity_index IS NOT NULL
+					AND is_archived = 0
+				GROUP BY
+					year, month
+				ORDER BY
+					year, month',
+				array(
+					$county,
+				)
+			),
+			ARRAY_A
+		);
+		// phpcs:enable
+
+		$dataset = array(
+			'label' => false,
+			'borderColor' => '#0DD0D0',
+			'data' => array(),
+			'fill' => false,
+			'pointRadius' => 0,
+			'yAxisID' => 'activity_index',
+		);
+		foreach ( $results as $result ) {
+			$dataset['data'][] = (float) $result['activity_index'];
+
+			$month = gmdate( 'M \'y', strtotime( $result['year'] . '-' . $result['month'] . '-01' ) );
+			if ( ! in_array( $month, $payload['labels'] ) ) {
+				$payload['labels'][] = $month;
+			}
+		}
+		$payload['datasets'][] = $dataset;
+	}
+
+	// Send it!
+	set_transient( $transient_name, $payload, ( 60 * 60 * 24 ) );
+
+	return $payload;
+}
+
+/**
+ * AJAX request for getting compare chart data
+ **/
+function vf_ajax_get_compare_chart_for_index_page() {
+	// Verify nonce
+	$nonce = isset( $_REQUEST['ajax_nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['ajax_nonce'] ) ) : null;
+	if ( ! wp_verify_nonce( $nonce, 'ajax-nonce' ) ) {
+		wp_send_json_error( array( 'msg' => 'Security check' ) );
+	}
+
+	$county = isset( $_REQUEST['county'] ) && ! empty( $_REQUEST['county'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['county'] ) ) : null;
+
+	// Send it!
+	$payload = vf_get_compare_chart_for_index_page( $county );
+	wp_send_json_success( $payload );
+}
+add_action( 'wp_ajax_vf_ajax_get_compare_chart_for_index_page', 'vf_ajax_get_compare_chart_for_index_page' );
+add_action( 'wp_ajax_nopriv_vf_ajax_get_compare_chart_for_index_page', 'vf_ajax_get_compare_chart_for_index_page' );

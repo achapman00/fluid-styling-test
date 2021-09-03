@@ -13,6 +13,11 @@ if ( ! $headline && $acf ) {
 	$headline = ( isset( $acf['headline'] ) ) ? $acf['headline'] : $headline;
 }
 
+$show_button = false;
+if ( $acf && $acf['show_button'] ) {
+	$show_button = boolval( $acf['show_button'] );
+}
+
 // Get the button payload
 $button_payload = array();
 
@@ -31,7 +36,7 @@ $eid_section_slug = isset( $eid_section_slug ) ? $eid_section_slug : null;
 
 	<h2 class="global-horizontal-section-header__heading"><?php echo esc_html( $headline ); ?></h2>
 
-	<?php if ( isset( $button_payload ) && $button_payload ) { ?>
+	<?php if ( isset( $show_button ) && $show_button && isset( $button_payload ) && $button_payload ) { ?>
 	<div class="global-horizontal-section-header__action">
 		<?php
 		// Template: Button

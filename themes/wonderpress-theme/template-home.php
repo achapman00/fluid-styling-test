@@ -27,13 +27,11 @@ if ( have_posts() ) :
 			<!-- ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ Banner ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
 			<header class="home-banner">
 				<div class="home-banner__grid">
-					<h1><?php the_field( 'hero_banner_label' ); ?></h1>
-					<div class="home-banner__grid__verticalGridItem">
-						<div></div>
+					<div>
+						<h1><?php the_field( 'hero_banner_label' ); ?></h1>
+						<span></span>
+						<h2><?php the_field( 'hero_banner_copy' ); ?></h2>
 					</div>
-					<h2>
-						<?php the_field( 'hero_banner_copy' ); ?>
-					</h2>
 				</div>
 			</header>
 
@@ -56,31 +54,17 @@ if ( have_posts() ) :
 										case 'text':
 											// 3/24/21 Removed ability to show 'paragraph' below as per QA
 											?>
-											<section class='home-hero-blades__card-section'>
+											<section class='home-hero-blades__card-section home-hero-blades__card-section--headline' data-type="text">
 												<h2><?php the_sub_field( 'headline' ); ?></h2>
 											</section>
-											<?php
-											break;
-										default:
-											?>
-											<section class='home-hero-blades__card-section' data-type="img">
-												<?php
-												// Template: Image
-												wonder_include_template_file(
-													'partials/image.php',
-													array(
-														'acf' => get_sub_field( 'image' ),
-													)
-												);
-												?>
-											</section>
-										<?php } ?>
-									<?php
-									switch ( get_sub_field( 'type' ) ) {
 
-										case 'text':
-											?>
-											<section class='home-hero-blades__card-section'>
+											<?php if ( 1 === $c ) { ?>
+												<section class='home-hero-blades__card-section home-hero-blades__card-section--vf-statement' data-type="text">
+													<p><?php the_field( 'hero_banner_copy' ); ?></p>
+												</section>
+											<?php } ?>
+
+											<section class='home-hero-blades__card-section home-hero-blades__card-section--unique' data-type="text">
 												<div class="home-hero-blades__card-stats-module" data-pos="left">
 													<h3><?php the_sub_field( 'stat_1_headline' ); ?></h3>
 													<span><?php the_sub_field( 'stat_1_number' ); ?></span>
@@ -108,14 +92,25 @@ if ( have_posts() ) :
 											break;
 										default:
 											?>
-											<section class='home-hero-blades__card-section' data-type="img">
+											<section class='home-hero-blades__card-section home-hero-blades__card-section--headline' data-type="img">
+												<?php
+												wonder_include_template_file(
+													'partials/image.php',
+													array(
+														'acf' => get_sub_field( 'image' ),
+													)
+												);
+												?>
+											</section>
+
+											<section class='home-hero-blades__card-section  home-hero-blades__card-section--unique' data-type="img">
 												<h2><?php the_sub_field( 'headline' ); ?></h2>
 												<p><?php the_sub_field( 'paragraph' ); ?></p>
 											</section>
 										<?php } ?>
+
 									<div class="global-cta-area">
 										<?php
-										// Template: Button
 										wonder_include_template_file(
 											'partials/button.php',
 											array(
@@ -146,8 +141,10 @@ if ( have_posts() ) :
 					</div>
 					<div id="blades-on-mobile" class="home-hero-blades__map-layer" data-type="mobile-tablet">
 						<?php
+						$c = 0;
 						while ( have_rows( 'hero_cards' ) ) {
 							the_row();
+							$c++;
 							?>
 							<div class="home-hero-blades__blade mobile">
 								<div class='home-hero-blades__card'>
@@ -155,46 +152,19 @@ if ( have_posts() ) :
 									switch ( get_sub_field( 'type' ) ) {
 
 										case 'text':
+											// 3/24/21 Removed ability to show 'paragraph' below as per QA
 											?>
-											<section class='home-hero-blades__card-section'>
+											<section class='home-hero-blades__card-section home-hero-blades__card-section--headline' data-type="text">
 												<h2><?php the_sub_field( 'headline' ); ?></h2>
-												<p><?php the_sub_field( 'paragraph' ); ?></p>
 											</section>
-											<?php
-											break;
-										default:
-											?>
-											<section class='home-hero-blades__card-section' data-type="img">
-												<?php
-												// Template: Button
-												wonder_include_template_file(
-													'partials/image.php',
-													array(
-														'acf' => get_sub_field( 'image' ),
-													)
-												);
-												?>
+
+											<?php if ( 1 === $c ) { ?>
+											<section class='home-hero-blades__card-section home-hero-blades__card-section--vf-statement' data-type="text">
+												<p><?php the_field( 'hero_banner_copy' ); ?></p>
 											</section>
 										<?php } ?>
-									<?php
-									switch ( get_sub_field( 'type' ) ) {
 
-										case 'text':
-											?>
-											<section class='home-hero-blades__card-section'>
-												<?php
-												// Show Microbusiness Density legend?
-												if ( get_sub_field( 'show_venture_density_legend' ) ) {
-													?>
-													<div class="home-hero-blades__card-density-legend"
-														 style="display: none">
-														<h4>Microbusiness Density</h4>
-														<div>0 to 2.9</div>
-														<div>3.0 to 4.9</div>
-														<div>5.0 to 7.9</div>
-														<div>8+</div>
-													</div>
-												<?php } ?>
+											<section class='home-hero-blades__card-section home-hero-blades__card-section--unique' data-type="text">
 												<div class="home-hero-blades__card-stats-module" data-pos="left">
 													<h3><?php the_sub_field( 'stat_1_headline' ); ?></h3>
 													<span><?php the_sub_field( 'stat_1_number' ); ?></span>
@@ -205,31 +175,50 @@ if ( have_posts() ) :
 													<span><?php the_sub_field( 'stat_2_number' ); ?></span>
 													<p><?php the_sub_field( 'stat_2_paragraph' ); ?></p>
 												</div>
+												<?php
+												// Show Venture Density legend?
+												if ( get_sub_field( 'show_venture_density_legend' ) ) {
+													?>
+													<div class="home-hero-blades__card-density-legend">
+														<h4>Microbusiness Density</h4>
+														<div>0 to 2.9</div>
+														<div>3.0 to 4.9</div>
+														<div>5.0 to 7.9</div>
+														<div>8+</div>
+													</div>
+												<?php } ?>
 											</section>
 											<?php
 											break;
 										default:
 											?>
-											<section class='home-hero-blades__card-section' data-type="img">
+											<section class='home-hero-blades__card-section home-hero-blades__card-section--headline' data-type="img">
+												<?php
+												wonder_include_template_file(
+													'partials/image.php',
+													array(
+														'acf' => get_sub_field( 'image' ),
+													)
+												);
+												?>
+											</section>
+
+											<section class='home-hero-blades__card-section  home-hero-blades__card-section--unique' data-type="img">
 												<h2><?php the_sub_field( 'headline' ); ?></h2>
 												<p><?php the_sub_field( 'paragraph' ); ?></p>
 											</section>
 										<?php } ?>
+
 									<div class="global-cta-area">
 										<?php
-										// Template: Button
 										wonder_include_template_file(
 											'partials/button.php',
 											array(
 												'acf' => get_sub_field( 'button' ),
 												'attachment' => 'right_arrow',
 												'class' => 'global-cta',
-												'eid' => wonder_create_eid_string(
-													get_field( 'eid_page_slug' ),
-													get_field( 'hero_eid_section_slug_eid_section_slug' ),
-													get_sub_field( 'eid_widget_slug' ),
-													'click'
-												),
+												'eid_page_slug' => get_field( 'eid_page_slug' ),
+												'eid_section_slug' => get_field( 'hero_eid_section_slug_eid_section_slug' ),
 											)
 										);
 										?>
@@ -294,6 +283,45 @@ if ( have_posts() ) :
 				)
 			);
 			?>
+
+			<!-- ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ featured-articles ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
+			<section id="featured-articles" class="global-featured-articles">
+				<div class="global-featured-articles__grid">
+					<?php
+					while ( have_rows( 'articles_articles' ) ) {
+						the_row();
+						$eid = wonder_create_eid_string(
+							get_field( 'eid_page_slug' ),
+							get_field( 'articles_eid_section_slug_eid_section_slug' ),
+							get_sub_field( 'title' ),
+							'click'
+						);
+						?>
+						<a href="<?php the_sub_field( 'url' ); ?>" class="global-featured-articles__a" title="<?php echo esc_attr( get_sub_field( 'title' ) ); ?>" data-eid="<?php echo esc_attr( $eid ); ?>" target="_blank" rel="noopener">
+							<?php
+							// Template: Image
+							wonder_include_template_file(
+								'partials/image.php',
+								array(
+									'acf' => get_sub_field( 'logo' ),
+									'alt' => get_sub_field( 'title' ),
+									'attributes' => array(
+										'width' => '84',
+										'height' => '84',
+									),
+								)
+							);
+							?>
+							<span>
+								<div><?php the_sub_field( 'date' ); ?></div>
+								<div><?php the_sub_field( 'title' ); ?></div>
+							</span>
+						</a>
+					<?php } ?>
+				</div>
+			</section>
+			<!-- ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ featured-articles: End ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
+
 			<!-- ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ Case Studies ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
 			<section id="case-studies" class="home__section home__section--case-studies">
 				<div class="home-case-studies__grid">

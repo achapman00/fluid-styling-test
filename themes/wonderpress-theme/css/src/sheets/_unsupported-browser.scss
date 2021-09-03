@@ -46,7 +46,7 @@
 
 		@for $i from 1 through 6 {
 			&:nth-of-type(#{$i}) {
-				@include transitionMultiple(opacity .44s linear $i/8+s);
+				@include transitionMultiple(opacity .44s linear $i*0.125+s);
 				//background: nth($colorChoices, $i);
 			}
 		}

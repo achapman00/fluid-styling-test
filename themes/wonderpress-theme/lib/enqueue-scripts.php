@@ -16,7 +16,7 @@ function wonder_enqueue_scripts() {
 		wp_deregister_script( 'jquery' );
 
 		// Replace with our own copy of jquery (and our custom scripts)
-		$path = '/js/scripts.js';
+		$path = '/js/min-scripts.js';
 		$version = filemtime( get_template_directory() . $path );
 		wp_register_script( 'global', get_template_directory_uri() . $path, array(), $version, true );
 		wp_enqueue_script( 'global' );
@@ -29,7 +29,7 @@ function wonder_enqueue_scripts() {
 			)
 		);
 
-		if ( is_front_page() || wonder_body_id() == 'explore-the-data' ) {
+		if ( is_front_page() || wonder_body_id() == 'explore-the-data' || wonder_body_id() == 'city-portal' ) {
 			wp_register_script( 'mapbox', 'https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js', array(), '1.0.0', true );
 			wp_enqueue_script( 'mapbox' );
 		}

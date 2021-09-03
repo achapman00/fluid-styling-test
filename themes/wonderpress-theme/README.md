@@ -26,3 +26,6 @@ To automatically fix errors found during lint:
 
 `$ composer run lint-fix`
 
+## References
+- [Vimeo SDK](https://developer.vimeo.com/player/sdk/reference)
+

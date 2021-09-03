@@ -29,10 +29,7 @@ module.exports = function () {
 		w.evt.add(body_blackout, 'click', onModalClose);
 
 		// const close_btns = document.querySelectorAll(".global-modal__close-btn");
-
-		// close_btns.forEach(function (btn, idx) {
-		// 	w.evt.add(btn, 'click', onModalClose);
-		// });
+		// close_btns.forEach(function (btn, idx) {w.evt.add(btn, 'click', onModalClose);});
 	}
 
 	/**
@@ -76,12 +73,11 @@ module.exports = function () {
 						body_blackout.classList.add('global-body-blackout--blacked-out');
 						requested_modal = document.querySelector(`[data-modal="${window.app.services.modal.evts.MODEL_TYPE.ABOUT}"]`);
 						requested_modal.classList.add('global-modal--visible');
-						// console.log(requested_modal);
 						useTemplate(window.app.services.modal.evts.MODEL_TYPE.ABOUT, evt.data);
 						break;
 				}
 				// if (bdy.getAttribute('data-device-ios').toLowerCase() ==="yes" )
-					window.scrollTo(0, 0);
+				window.scrollTo(0, 0);
 				break;
 			case window.app.services.modal.evts.MODEL_CLOSE:
 				html.classList.remove('html--blacked-out');
@@ -92,7 +88,6 @@ module.exports = function () {
 				const modals = document.querySelectorAll(".global-modal");
 
 				modals.forEach(function (el, idx) {
-					// console.log(el);
 					el.classList.remove('global-modal--visible');
 				});
 				break;
@@ -108,14 +103,13 @@ module.exports = function () {
 		 */
 		if ('content' in document.createElement('template')) {
 
-			let template = document.querySelector(`#${requestedTpl}_tpl`);
-			let clone    = template.content.cloneNode(true);
+			const template = document.querySelector(`#${requestedTpl}_tpl`);
+			const clone    = template.content.cloneNode(true);
 
 			switch (requestedTpl) {
 				case window.app.services.modal.evts.MODEL_TYPE.ABOUT:
 					if (document.contains(document.getElementById("video_player"))) document.getElementById("video_player").remove();
-					let clone = template.content.cloneNode(true);
-					let div   = clone.getElementById("video_player");
+					let div = clone.getElementById("video_player");
 					div.setAttribute('data-vimeo-id', options.video);
 					requested_modal.appendChild(clone);
 					break;

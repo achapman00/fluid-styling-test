@@ -6,8 +6,105 @@
  * @package Wonderpress Theme
  */
 
+$prefill_county = null;
+if ( isset( $_REQUEST['county'] ) && ! empty( $_REQUEST['county'] ) ) {
+	$prefill_county = vf_get_specific_county( sanitize_text_field( wp_unslash( $_REQUEST['county'] ) ) );
+}
+
+$default_page_section = null;
+if ( isset( $_REQUEST['section'] ) && ! empty( $_REQUEST['section'] ) ) {
+	$default_page_section = intval( $_REQUEST['section'] );
+}
+
 // Set the <body> id
 wonder_body_id( 'explore-the-data' );
+
+// Disable Yoast (so that we can do our custom share things)
+if ( $prefill_county ) {
+
+	// Override the Facebook url
+	add_filter(
+		'wpseo_opengraph_url',
+		function( $url ) use ( $prefill_county, $default_page_section ) {
+			$section = ( is_null( $default_page_section ) ) ? 0 : intval( $default_page_section );
+			$url = $url . '?county=' . $prefill_county['county'];
+			return $url;
+		}
+	);
+
+
+	// Override the Facebook description
+	add_filter(
+		'wpseo_opengraph_desc',
+		function( $description ) use ( $prefill_county, $default_page_section ) {
+			switch ( $default_page_section ) {
+				default:
+					$description = str_replace( 'your area', $prefill_county['name'], $description );
+					break;
+			}
+			return $description;
+		}
+	);
+
+	// Override the Facebook image
+	add_filter(
+		'wpseo_opengraph_image',
+		function( $image ) use ( $prefill_county, $default_page_section ) {
+			$section = ( is_null( $default_page_section ) ) ? 0 : intval( $default_page_section );
+			$image = 'https://godaddy-data-social.s3.amazonaws.com/images/' . $prefill_county['county'] . '_s_' . $section . '.png';
+			return $image;
+		}
+	);
+
+	// Override the Facebook title
+	add_filter(
+		'wpseo_opengraph_title',
+		function( $title ) use ( $prefill_county, $default_page_section ) {
+			switch ( $default_page_section ) {
+				default:
+					$title = str_replace( 'your community', $prefill_county['name'], $title );
+					break;
+			}
+			return $title;
+		}
+	);
+
+	// Override the Twitter description
+	add_filter(
+		'wpseo_twitter_description',
+		function( $description ) use ( $prefill_county, $default_page_section ) {
+			switch ( $default_page_section ) {
+				default:
+					$description = str_replace( 'your area', $prefill_county['name'], $description );
+					break;
+			}
+			return $description;
+		}
+	);
+
+	// Override the Twitter image
+	add_filter(
+		'wpseo_twitter_image',
+		function( $image ) use ( $prefill_county, $default_page_section ) {
+			$section = ( is_null( $default_page_section ) ) ? 0 : intval( $default_page_section );
+			$image = 'https://godaddy-data-social.s3.amazonaws.com/images/' . $prefill_county['county'] . '_s_' . $section . '.png';
+			return $image;
+		}
+	);
+
+	// Override the Twitter title
+	add_filter(
+		'wpseo_twitter_title',
+		function( $title ) use ( $prefill_county, $default_page_section ) {
+			switch ( $default_page_section ) {
+				default:
+					$title = str_replace( 'your community', $prefill_county['name'], $title );
+					break;
+			}
+			return $title;
+		}
+	);
+}
 
 get_header();
 ?>
@@ -32,7 +129,7 @@ if ( have_posts() ) :
 						<div class="explore-the-data-sticky-search__search-selection explore-the-data-sticky-search__search-selection--selection-1"
 							 data-search-selection-1></div>
 
-						<input type="text" name="sticky-search" placeholder="Enter a County or Metro" class="explore-the-data-sticky-search__input" autocomplete="none" data-search-input />
+						<input type="text" name="sticky-search" placeholder="Enter a County or Metro" class="explore-the-data-sticky-search__input" autocomplete="off" data-search-input />
 
 						<ul class="explore-the-data-sticky-search__search-autocomplete" data-search-autocomplete></ul>
 					</div>
@@ -83,7 +180,7 @@ if ( have_posts() ) :
 							<div class="explore-the-data-hero__search-selection data-hero__search-selection--selection-1"
 								 data-search-selection-1></div>
 
-							<input type="text" name="hero-search" placeholder="Enter a County or Metro" class="explore-the-data-hero__input" autocomplete="none" data-search-input/>
+							<input type="text" name="hero-search" placeholder="Enter a County or Metro" class="explore-the-data-hero__input" autocomplete="off" data-search-input/>
 
 							<ul class="explore-the-data-hero__search-autocomplete" data-search-autocomplete></ul>
 						</div>
@@ -117,7 +214,7 @@ if ( have_posts() ) :
 								<span data-hero-chart-x-axis-label-low-number></span>
 							</div>
 							<div class="explore-the-data-hero__chart-x-axis-label">
-								Microbusinesses per 100 people (Dec 2020)
+								Microbusinesses per 100 people (Mar 2021)
 							</div>
 							<div class="explore-the-data-hero__chart-x-axis-label">
 								National High
@@ -126,6 +223,15 @@ if ( have_posts() ) :
 						</div>
 					</div>
 				</div>
+				<?php
+				// Template: social-media-nav
+				wonder_include_template_file(
+					'partials/social-media-nav.php',
+					array(
+						'section' => 0,
+					)
+				);
+				?>
 			</section>
 			<!-- ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ Hero: End  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
 
@@ -444,6 +550,16 @@ if ( have_posts() ) :
 						</div>
 					</div>
 				</div>
+
+				<?php
+				// Template: social-media-nav
+				wonder_include_template_file(
+					'partials/social-media-nav.php',
+					array(
+						'section' => 1,
+					)
+				);
+				?>
 			</section>
 			<!-- ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ Interactive Map: End ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
 
@@ -625,6 +741,15 @@ if ( have_posts() ) :
 					</div>
 
 				</div>
+				<?php
+				// Template: social-media-nav
+				wonder_include_template_file(
+					'partials/social-media-nav.php',
+					array(
+						'section' => 2,
+					)
+				);
+				?>
 			</section>
 			<!-- ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ Line Graph: End ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
 
@@ -718,9 +843,27 @@ if ( have_posts() ) :
 								<td><span data-compare-table-county-median-income>-</span></td>
 								<td><span data-compare-table-cbsa-median-income>-</span></td>
 							</tr>
+<!-- 							<tr>
+								<td>
+									Microbusiness Index
+								</td>
+								<td class="explore-the-data-compare-the-numbers__table-selection-cell" data-compare-table-selection-column><span data-compare-table-selection-activity-index>-</span></td>
+								<td><span data-compare-table-county-activity-index>-</span></td>
+								<td><span data-compare-table-cbsa-activity-index>-</span></td>
+							</tr> -->
 						</table>
 					</div>
 				</div>
+				<?php
+				// Template: social-media-nav
+				wonder_include_template_file(
+					'partials/social-media-nav.php',
+					array(
+						'section' => 3,
+						'sectionYOverride' => 'adjust-y',
+					)
+				);
+				?>
 			</section>
 			<!-- ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ Compare the Numbers Graph: End ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
 
@@ -754,7 +897,6 @@ if ( have_posts() ) :
 					);
 					?>
 				</div>
-
 			</section>
 		</main>
 		<!-- ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ Main: End ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ -->
@@ -769,6 +911,7 @@ wp_localize_script(
 	'data_vars',
 	array(
 		'eid_page_slug' => get_field( 'eid_page_slug' ),
+		'prefill_county' => $prefill_county['county'],
 		'vf_get_compare_chart_for_data_page' => vf_get_compare_chart_for_data_page(),
 		'vf_get_compare_table_data_for_data_page' => vf_get_compare_table_data_for_data_page(),
 		'vf_get_data_page_explore_section_data' => vf_get_data_page_explore_section_data(),

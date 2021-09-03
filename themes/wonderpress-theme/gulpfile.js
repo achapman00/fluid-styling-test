@@ -1,25 +1,36 @@
 /*****************************************
-* DEPENDENCIES
-*****************************************/
+ * DEPENDENCIES
+ *****************************************/
 
-// Initialize modules
-// Importing specific gulp API functions lets us write them below as series() instead of gulp.series()
-const { src, dest, watch, series, parallel } = require('gulp');
+/**
+ * ••• Stream methods ••••
+ * gulp.src --- Reads files and directories and creates a stream of data for further processing. Src function supports globbing and filters to better select files.
+ * gulp.dest --- Takes a directory and writes the contents of the incoming stream as files. Dest by default overwrites existing files.
+ * gulp.watch --- Returns a “watcher” object that you can assign listeners to
+ * gulp.series --- Returns a function that runs each of the given tasks/functions sequentially in the order they were provided
+ * gulp.parallel --- Returns a function that runs each of the given tasks/function in parallel.
+ */
+const {src, dest, watch, series, parallel} = require("gulp"); // ES6 destructuring assignment
 // Importing all the Gulp-related packages we want to use
-const babelify = require('babelify');
-const browserify = require('browserify');
-const changed = require('gulp-changed')
-const colors = require('colors');
-const imagemin = require('gulp-imagemin');
-const sourcemaps = require('gulp-sourcemaps');
-const sass = require('gulp-sass');
-const uglify = require('gulp-uglify');
-const postcss = require('gulp-postcss');
+const gulp         = require("gulp");
+const colors       = require('colors'); // Add color and style in your node.js console. Ref.: https://github.com/marak/colors.js/
+const babelify     = require('babelify');
+const jsObfuscator = require('gulp-javascript-obfuscator');
+const browserify   = require('browserify');
+const sourcemaps   = require('gulp-sourcemaps');
+const uglify       = require('gulp-uglify');
+const sass         = require('gulp-sass')(require('sass'));
+const postcss      = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
-const source = require('vinyl-source-stream');
-const buffer = require('vinyl-buffer');
-const plumber = require('gulp-plumber');
-const notify = require('gulp-notify');
+const source       = require('vinyl-source-stream');
+const buffer       = require('vinyl-buffer');
+const plumber      = require('gulp-plumber');
+const renameFile   = require('gulp-rename');
+const notify       = require('gulp-notify');
+const notifier     = require('node-notifier'); // Make notify work outside of a stream
+const changed      = require('gulp-changed') // Detect whether files in the stream have changed
+const imagemin     = require('gulp-imagemin'); // Minify PNG, JPEG, GIF and SVG images
+const concat       = require('gulp-concat'); // Using this to combine multiple files into 1
 
 
 /*****************************************
@@ -92,14 +103,14 @@ function _error(msg) {
 }
 
 // An icon for gulp-notify notifications (just for a nice touch)
-const icon = 'data:image/png;base64,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';
+const iconGeneral = 'data:image/png;base64,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';
 
 function showErrorNotification(err) {
 	_error(err.formatted);
     notify.onError({
         title: '🚨 Oh no!',
         message:  'Bad things happened. Check your command line for details.',
-    	icon: icon
+    	icon: iconGeneral
     })(err);
 }
 
@@ -119,30 +130,63 @@ function imageMinTask() {
 	    .pipe(notify({
 	        title: '👍 Order up!',
 	        message:  'Images successfully optimized',
-	    	icon: icon,
+	    	icon: iconGeneral,
 	    	onLast: true
 	    }));
 }
 
-// JS task: concatenates and uglifies JS files to script.js
-function jsTask() {
+/**
+ * concatenateJS --- Concatenate/combine all JavaScript files before further processing.
+ * Files should be listed in dependency order.
+ * @returns {*}
+ */
+const concatenateJS = () =>
+	src([
+		directories.src.js + 'polyfills/Array.prototype.forEach.js',
+		directories.src.js + 'polyfills/NodeList.prototype.forEach.js',
+		directories.src.js + 'polyfills/Array.prototype.includes.js',
+		directories.src.js + 'libs/GSAP.js',
+		directories.src.js + 'libs/GD-Analytics.js',
+		directories.src.js + 'libs/GD-Engagement.js',
+		directories.src.js + 'libs/SwipeSensor001.js',
+		files.src.js
+	]).pipe(concat('src-scripts.js')).pipe(dest(directories.src.js));
 
-	let bundler = browserify(files.src.js).transform('babelify', {presets: ['@babel/preset-env']});
+/**
+ * processJS --- Lint, minify, obfuscate, create source maps, and the rename tmp-scripts file to script.js.
+ * @returns {*}
+ */
+async function processJS() {
+	console.log('▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒');
+	console.log('processJS');
+	console.log('▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒');
 
-    return bundler.bundle()
-        .pipe(plumber({ errorHandler: showErrorNotification}))
-	    .pipe(source('scripts.js'))
-	    .pipe(buffer())
-	    .pipe(sourcemaps.init())
-	    .pipe(uglify())
-	    .pipe(sourcemaps.write('./'))
-	    .pipe(dest(directories.dist.js))
-	    .pipe(notify({
-	        title: '👍 Order up!',
-	        message:  'Javascript successfully compiled',
-	    	icon: icon,
-	    	onLast: true
-	    }));
+	let bundler = browserify(directories.src.js + 'src-scripts.js').transform('babelify', {presets: ['@babel/preset-env']});
+
+	return bundler.bundle()
+		.pipe(plumber({errorHandler: showErrorNotification}))
+		.pipe(source('src-scripts.js'))
+		.pipe(buffer())
+		.pipe(jsObfuscator({
+			compact: true
+		}))
+		.pipe(sourcemaps.init())
+		.pipe(uglify())
+		.pipe(renameFile({
+			// dirname: "not/using/this/now",
+			basename: "scripts",
+			prefix: "min-",
+			// suffix: "-notUsed",
+			extname: ".js"
+		}))
+		.pipe(sourcemaps.write('./'))
+		.pipe(dest(directories.dist.js))
+		.pipe(notify({
+			title: '👍 Order up!',
+			message: 'JavaScript successfully compiled',
+			icon: iconGeneral,
+			onLast: true
+		}));
 }
 
 // Sass task: compiles the styles.scss file into styles.css
@@ -160,7 +204,7 @@ function scssTask() {
 	    .pipe(notify({
 	        title: '👍 Order up!',
 	        message:  'Scss successfully compiled',
-	    	icon: icon,
+	    	icon: iconGeneral,
 	    	onLast: true
 	    }));
 }
@@ -175,7 +219,8 @@ function watchTask() {
     	],
         {interval: 1000, usePolling: true}, //Makes docker work
         series(
-            parallel(imageMinTask, scssTask, jsTask)
+        	concatenateJS,
+            parallel(scssTask, processJS)
         )
     );
 }
@@ -184,6 +229,7 @@ function watchTask() {
 // Runs the images, scss and js tasks simultaneously
 // then watch task
 exports.default = series(
-    parallel(imageMinTask, scssTask, jsTask),
+	concatenateJS,
+    parallel(scssTask, processJS),
     watchTask
 );

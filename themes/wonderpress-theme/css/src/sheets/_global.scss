@@ -1,4 +1,6 @@
 // ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+@use "sass:math";
+
 a, button {
 	outline: none;
 	text-decoration: none;
@@ -65,6 +67,11 @@ main {
 	&[disabled="true"] {
 		display: none;
 	}
+}
+
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.white-space {
+	white-space: nowrap;
 }
 
 //  global-button --- General use button
@@ -338,20 +345,20 @@ main {
 		@include transitionMultiple(transform .44s $timingFuncEaseOutQuad);
 	}
 
-	.download-ani{
+	.download-ani {
 		margin: 0 0 0 10px;
 		width: 24px !important;
 		height: 24px !important;
 		overflow: hidden;
 		@include translate3d(0, -2px);
 		@include background-img-sprite('../assets/imgs/global/godaddy-venture-forward_download_sequence.svg',0,0,408px 24px);
+
 		&:link, &:visited {
 			color: $color-everyday-blue-500;
 			background: rgba(255, 255, 255, 0);
 		}
 
-
-		&:active{
+		&:active {
 			//background: $color-everyday-blue-500;
 			background: transparent !important;
 			//color: rgba(255, 255, 255, 0);
@@ -394,7 +401,7 @@ main {
 			filter: brightness(0) invert(1);
 		}
 
-		.download-ani{
+		.download-ani {
 			@include translate3d(4px, -2px);
 			-webkit-filter: brightness(0) invert(1);
 			filter: brightness(0) invert(1);
@@ -405,6 +412,13 @@ main {
 		// GoogleTouch target size
 		min-height: 48px;
 		@include borderRadius(100px);
+	}
+
+	&--lg {
+		min-height: 48px;
+		@include borderRadius(100px);
+		padding: 7px 20px;
+		@extend %typography-rounded-cta-lg;
 	}
 
 	&--style-1 {
@@ -455,10 +469,15 @@ main {
 		&:focus, &:hover, &:active {
 			//padding: 0 20px;
 
-			img,span {
+			span {
 				@include translate3d(3px);
 				-webkit-filter: unset !important;
 				filter: unset !important;
+			}
+
+			img {
+				/*-webkit-filter:invert(17%) sepia(64%) saturate(1093%) hue-rotate(147deg) brightness(97%) contrast(101%);*/
+				/*filter: invert(17%) sepia(64%) saturate(1093%) hue-rotate(147deg) brightness(97%) contrast(101%);*/
 			}
 		}
 	}
@@ -475,7 +494,27 @@ main {
 		&:focus, &:hover, &:active {
 			//padding: 0 20px;
 
-			img,span {
+			span {
+				@include translate3d(3px);
+				-webkit-filter: unset !important;
+				filter: unset !important;
+			}
+		}
+	}
+
+	&--dark-3 {
+		border: 2px solid $color-bkgd;
+		@include setPseudoClasses(rgba(0, 0, 0, 0), $color-bkgd, rgba(0, 0, 0, 0), $color-bkgd, .6s);
+
+		img,span {
+			-webkit-filter: brightness(0) invert(1);
+			filter: brightness(0) invert(1);
+		}
+
+		&:focus, &:hover, &:active {
+			//padding: 0 20px;
+
+			span {
 				@include translate3d(3px);
 				-webkit-filter: unset !important;
 				filter: unset !important;
@@ -552,6 +591,11 @@ main {
 		color: $color-bkgd;
 	}
 
+	&__checkbox--city-portal:checked + &__label--city-portal {
+		background-color: $color-bkgd;
+		color: $color-black-1;
+	}
+
 	&__label {
 		margin: 0 auto;
 	}
@@ -560,11 +604,10 @@ main {
 		margin: 4px;
 	}
 
-
 	&__label, &__a {
 		position: relative;
-		min-width: 160px;
-		max-width: 180px;
+		//min-width: 160px;
+		//max-width: 180px;
 		min-height: 32px;
 		padding: 0 20px;
 		background: $color-bkgd;
@@ -573,13 +616,14 @@ main {
 		align-items: center;
 		@include flex-container-display();
 		@include flex-container-flow(nowrap column);
-		@include flex(1 1 0);
+		//@include flex(1 1 0);
 		justify-content: center;
 		text-align: center;
 		@include user-select();
 		@include opacity(1);
 		@include borderRadius(20px);
 		@extend %typography-body-copy;
+		white-space: nowrap;
 
 		@include setPseudoClasses($color-bkgd, $color-black-1, $color-deep-sea-400, $color-bkgd, .6s);
 
@@ -588,6 +632,25 @@ main {
 			color: $color-bkgd !important;
 		}
 
+	}
+
+	&__label--city-portal {
+		position: relative;
+		padding: 8px 20px;
+		font-family: "GD Sherpa";
+		font-size: 16px;
+		font-weight: 600;
+		font-style: normal;
+		white-space: nowrap;
+
+		@include setPseudoClasses(rgba(216, 239, 239, 0.4), $color-everyday-blue-700, $color-bkgd, $color-black-1, .6s);
+		@include transitionMultiple(transform .4s $timingFuncEaseOutQuad);
+		@extend %add-hardware-acceleration;
+
+		&--active {
+			background-color: $color-bkgd;
+			color: $color-black-1;
+		}
 	}
 }
 
@@ -950,7 +1013,37 @@ main {
 	&--blacked-out {
 		display: none;
 	}
+}
 
+// Applied to bullet point lists
+.global-bullet-list {
+	$width-height: 12px;
+	$width-height-xs: 8px;
+	li {
+		color: $color-tech-gray-400;
+		@extend %typography-size-6;
+		font-weight: 600;
+		position: relative;
+		padding-left: $width-height-xs + 16px;
+		&:before {
+			content: '';
+			width: $width-height-xs;
+			height: $width-height-xs;
+			@include borderRadius(50%);
+			background-color: $color-everyday-blue-500;
+			position: absolute;
+			left: 0;
+			top: 5px;
+		}
+
+		@include tablet {
+			padding-left: $width-height + 32px;
+			&:before {
+				width: $width-height;
+				height: $width-height;
+			}
+		}
+	}
 }
 
 // This is applied to the nav element within the header element (above - global-nav)
@@ -1009,7 +1102,7 @@ main {
 	&__li {
 		@include flex-container-display();
 		@include flex-container-flow(nowrap row);
-		margin: 0 19px;
+		margin: 0 12px;
 		justify-content: space-between;
 
 		&:last-child{
@@ -1030,6 +1123,7 @@ main {
 
 		span {
 			position: relative;
+			font-display: optional !important;
 
 			&:after {
 				@include translate3d(0, 8px);
@@ -1079,7 +1173,7 @@ main {
 
 	@for $i from 1 through 10 {
 		ul li:nth-child(#{$i}) a {
-			@include transitionMultiple(opacity $i/4 +s linear $i/3+s);
+			@include transitionMultiple(opacity $i*0.25 +s linear math.div($i, 3)+s);
 			//background: nth($colorChoices, $i);
 		}
 	}
@@ -1496,8 +1590,9 @@ main {
 		@include flex-container-display();
 		padding: 24px 0;
 		justify-content: center;
+		z-index: 1;
 
-		@include desktop{
+		@include desktop {
 			padding: 48px 0 24px 0;
 		}
 	}
@@ -1776,23 +1871,12 @@ main {
 		@include opacity();
 		@include translate3d(-50%, -50%);
 		pointer-events: auto;
-
-		#video_player {
-			&:before {
-				//@include opacity();
-			}
-		}
-	}
-
-	[data-modal='about'] {
-
 	}
 
 	#video_player {
 		background: $color-black-1;
 
 		&:before {
-			//@include opacity(0);
 			content: '';
 			position: absolute;
 			display: block;
@@ -1810,12 +1894,12 @@ main {
 
 	&__close-btn {
 		position: absolute;
+		display: none; // hiding temp.
 		top: 8px;
 		right: 8px;
 		width: 48px;
 		height: 48px;
 		@include borderRadius(8px);
-		@include translate3d(-10000px, -10000); // hiding temp.
 	}
 }
 
@@ -2568,5 +2652,24 @@ main {
 			}
 		}
 	}
+}
+
+//  Mapbox
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+	background-color: rgba(0,0,0,0);
+}
+
+.mapboxgl-ctrl-attrib a {
+	font-size: 6px !important;
+
+	@include setPseudoClasses(rgba(0,0,0,0), $color-black-1, $color-bkgd, $color-black-1, .6s);
+	&:nth-child(3){
+		display: none;
+	}
+}
+
+a.mapboxgl-ctrl-logo{
+	display: none;
 }
 

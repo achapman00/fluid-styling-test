@@ -76,8 +76,6 @@
 	// Appears in mocks as:
 	// Display thin - not used in these designs (book weight)
 	&-display-thin {
-
-
 		@include mobile-only {
 
 		}
@@ -247,8 +245,14 @@
 		letter-spacing: -0.01em;
 		font-display: swap;
 
+		@include tablet {
+			// added for mb  index
+			font-size: 18px;
+		}
+
 		@include mobile-only {
-			// no corresponding mobile
+			// added for mb  index
+			font-size: 15px;
 		}
 
 	}
@@ -309,7 +313,6 @@
 			line-height: 16px;
 		}
 	}
-
 
 	// Appears in mocks as:
 	// Caption
@@ -423,6 +426,10 @@
 		font-weight: 600;
 	}
 
+	&-rounded-cta-lg {
+		font-size: 20px;
+	}
+
 	&-home-card-h2 {
 		font-family: 'GD Sage';
 		font-size: 27px;
@@ -443,8 +450,14 @@
 		font-family: 'GD Sherpa';
 		font-size: 17px;
 		font-weight: 600;
-		line-height: 128%;
+		line-height: 18px;
 		letter-spacing: -0.7px;
+
+		@media (min-width: 960px) and (max-width: 1119px) {
+			font-size: 16px;
+			line-height: 17px;
+		}
+
 		@include mobile-only {
 			font-size: 16px;
 		}
@@ -463,20 +476,27 @@
 		@include mobile-only {
 			line-height: 20.4px;
 		}
-
 	}
 
 	&-home-card-stats-module-number {
 		font-family: 'GD Sherpa';
 		font-size: 56px;
+		line-height: 58px;
 		font-weight: bold;
-		line-height: 114%;
 		letter-spacing: -0.7px;
+
+		@media (min-width: 960px) and (max-width: 1119px) {
+			font-size: 52px;
+			line-height: 53px;
+		}
+
 		@include mobile-only {
 			font-size: 50px;
+			line-height: 51px;
 		}
 		@include tablet-only {
 			font-size: 50px;
+			line-height: 51px;
 		}
 	}
 
@@ -813,6 +833,114 @@
 		}
 	}
 
+	&-city-portal-title {
+		font-family: 'GD Sherpa';
+		font-size: 20px;
+		line-height: 114%;
+		font-weight: bold;
+		font-style: normal;
+
+		@include tablet {
+			font-size: 26px;
+		}
+	}
+
+	&-city-portal-body {
+		font-family: 'GD Sherpa';
+		font-size: 20px;
+		font-weight: 600;
+		font-style: normal;
+		line-height: 25.6px;
+		letter-spacing: -0.01em;
+
+		@include mobile-only {
+			font-size: 15px;
+			line-height: 17px;
+		}
+	}
+
+	&-city-portal-h2 {
+		font-family: 'GD Sherpa';
+		font-weight: bold;
+		font-style: normal;
+		line-height: 114%;
+		font-size: 30px;
+
+		@include tablet {
+			font-size: 50px;
+		}
+	}
+
+	&-city-portal-h2-serif {
+		@extend %typography-city-portal-h2;
+		font-family: 'GD Sage';
+	}
+
+	&-city-portal-partners-body {
+		font-family: 'GD Sherpa';
+		font-size: 14px;
+		font-weight: 600;
+		font-style: normal;
+		line-height: 134%;
+
+		@include mobile-only {
+			font-size: 14px;
+			line-height: 17px;
+		}
+	}
+
+	&-city-portal-microbusiness-body {
+		@extend %typography-city-portal-body;
+		@include mobile-only {
+			font-size: 16px;
+			line-height: 154%;
+		}
+	}
+
+	&-city-portal-microbusiness-h3 {
+		@extend %typography-city-portal-partners-body;
+		@include mobile-only {
+			font-size: 16px;
+			line-height: 114%;
+		}
+	}
+
+	&-city-portal-table-heading {
+		@extend %typography-city-portal-table-body;
+		@include mobile-only {
+			font-size: 13px;
+			line-height: 114%;
+		}
+	}
+
+	&-city-portal-table-body {
+		font-family: GD Sherpa;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 14px;
+		line-height: 16px;
+
+		@include tablet {
+			font-size: 17px;
+			line-height: 134%;
+		}
+	}
+
+	&-city-portal-partners-h2 {
+		@extend %typography-size-3;
+		@include mobile-only {
+			font-size: 20px;
+			line-height: 114%;
+		}
+	}
+
+	&-city-portal-connect-h2 {
+		@extend %typography-size-3;
+		@include mobile-only {
+			font-size: 24px;
+			line-height: 114%;
+		}
+	}
 
 	&-article-h2 {
 		font-family: 'GD Sherpa';
@@ -891,7 +1019,7 @@
 
 	&-ul {
 		font-family: 'GD Sherpa';
-		font-size: 24px;
+		font-size: 18px;
 		font-weight: bold;
 		font-style: normal;
 		font-variant: normal;
@@ -900,9 +1028,16 @@
 		font-display: swap;
 
 		@include mobile-only {
-			font-size: 15px;
-			line-height: 114%;
+			font-size: 16px;
 		}
+	}
+
+	&-mb-index-h2 {
+
+	}
+
+	&-mb-index-h3 {
+
 	}
 
 }
@@ -955,7 +1090,6 @@
 		grid-gap: 16px;
 		grid-template-columns: repeat(12, [col-start] minmax(0, #{ map_get($media-rules, desktop-width-max)}));
 	}
-
 
 	& > * {
 		word-wrap: break-word;
@@ -1683,6 +1817,3 @@
 	-ms-perspective: 1000px;
 	perspective: 1000px;
 }
-
-
-

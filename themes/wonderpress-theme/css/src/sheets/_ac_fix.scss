@@ -7,10 +7,6 @@
 	font-size: 1.25rem;
 	line-height:1.438rem;
 }
-.global-horizontal-carousel__section, .global-featured-stories-grid-row__section, .global-http-status__section, .global-stories-hero__section, .home__section, .explore-the-data__section, .reports-and-resources__section, .stories-and-use-cases__section, .about__section, .story__section, .unsupported-browsers__section, .global-filter__label, .global-filter__a, .global-text, .global-horizontal-carousel__p, .global-http-status__h2, .global-header-filters-touch label, .global-story__p, .reports-and-resources__report p, .reports-and-resources__report-publication-date, .global-stories-hero__time, .global-stories-hero__excerpt, .global-stories-hero__author, .story-article__social-btns div, .story-article__the-content .wp-block-quote cite, .story-article__the-content .wp-block-pullquote cite, .global-rte p, .explore-the-data-featured-stat__attribution-link, .explore-the-data-featured-stat__date-range {
-	font-size: 1.1rem;
-	line-height: 1.375rem;
-}
 .global-cta, .global-pagination__links-area > a, .story-article__the-content .wp-block-buttons .wp-block-button .wp-block-button__link, .home-case-studies__card p {
 	font-size: 1rem;
 }
@@ -133,6 +129,17 @@
 .home-data-summary__card-footer {
 	font-size: .875rem;
 }
+.home-testimonial__citation-img {
+	width: 11.4893vw;
+	height: 25.8119vh;
+	margin: 0 2.13vw 0 0;
+}
+.home-data-summary__card--header h2 {
+    margin: 3.09vh 0;
+}
+.home-data-summary__card h3 {
+	margin: 1.032vh auto;
+}
 /********* Explore Settings  *********/
 .explore-the-data-interactive-map__map-legend {
 	padding: .86vh .55vw;
@@ -181,6 +188,13 @@ height:3.86vh;
 .home-testimonial__blockquote::before {
 	height: 2.318vh;
 	width: 1.339vw;
+}
+.explore-the-data-hero__paragraph {
+    margin-top: 3.09vh;
+}
+.explore-the-data-hero__search-input {
+    max-width: 25.5vw;
+    margin: 3.09vh auto 0 auto;
 }
 /********* Global Settings  *********/
 .global-cta {
@@ -250,12 +264,356 @@ height:3.86vh;
 .global-footer__menu-legal-links a {
 	line-height: 2.75rem;
 }
-
 .global-footer__menu-legal-links a:first-child {
-	padding-right:0.78vw;
+	padding-right:0.95vw;
 }
-
 .global-footer__copyright {
 	line-height: 0.875rem;
 	height:10.144vh;
 }
+.global-featured-articles, .microbusiness-index__section, .microbusiness-index-footer, .city-portal__section, .unsupported-browsers__section, .story__section, .about__section, .stories-and-use-cases__section, .reports-and-resources__section, .explore-the-data__section, .home__section, .global-stories-hero__section, .global-http-status__section, .global-featured-stories-grid-row__section, .global-horizontal-carousel__section {
+	padding-top:4.19vh;
+	padding-bottom:4.19vh;
+}
+.global-featured-articles, .microbusiness-index__section, .microbusiness-index-footer, .city-portal__section, .city-portal-banner, .unsupported-browsers__section, .story__section, .about__section, .stories-and-use-cases-stories__header, .stories-and-use-cases__section, .reports-and-resources-reports-and-filters__header, .reports-and-resources__section, .explore-the-data-sticky-search, .explore-the-data__section, .home__section, .home-banner, .global-stories-hero__section, .global-pagination__footer, .global-http-status__section, .global-featured-stories-grid-row__section, .global-horizontal-carousel__section, .global-nav-desktop, .global-footer {
+	padding-left:4.19vh;
+	padding-right:4.19vh;
+}
+.reports-and-resources__report-publication-date, .reports-and-resources__report p, .global-story__p, .global-header-filters-touch label, .global-http-status__h2, .global-horizontal-carousel__p, .global-text, .global-filter__label, .global-filter__a, .global-featured-articles, .microbusiness-index__section, .microbusiness-index-footer, .city-portal__section, .unsupported-browsers__section, .story__section, .about__section, .stories-and-use-cases__section, .reports-and-resources__section, .explore-the-data__section, .home__section, .global-stories-hero__section, .global-http-status__section, .global-featured-stories-grid-row__section, .global-horizontal-carousel__section, .city-portal-microbusiness__carousel--content--attribution span span, .city-portal__social-btns div, .story-article__the-content .wp-block-pullquote cite, .story-article__the-content .wp-block-quote cite, .story-article__social-btns div, .explore-the-data__social-btns div, .global-stories-hero__author, .global-stories-hero__excerpt, .global-stories-hero__time, .explore-the-data-featured-stat__date-range, .explore-the-data-featured-stat__attribution-link, .global-rte p {
+	font-size:0.875rem;
+	line-height:1.375rem;
+}
+.global-featured-articles__a {
+	padding:1.032vh 0.542vw;
+}
+.global-featured-articles__a span {
+	padding-top:1.55vh;
+	padding-left:0.542vw;
+}
+.global-featured-articles__a span div {
+	font-size:0.75rem;
+	padding-bottom:1.032vh;
+}
+.global-featured-articles__a span div:nth-of-type(2) {
+	font-size:0.75rem;
+}
+.global-footer a {
+	font-size:0.875rem;
+	line-height:1.5rem;
+}
+.global-footer__tm img {
+	max-width:10.52vw;
+}
+.global-footer__h2 {
+	font-size:1.25rem;
+}
+.global-stats-table th {
+    padding: 0.51vh 0.67vw 2.06vh;
+}
+.microbusiness-index__h1, .unsupported-browsers-hero__h1, .story-article__the-content .wp-block-pullquote, .about-hero__h1, .reports-and-resources-hero__h1, .explore-the-data-hero__h1, .global-stories-hero__h1, .global-http-status__h1 {
+	font-size: 2.125rem;
+	line-height:2.438rem;
+}
+.microbusiness-index-graph-2__body, .microbusiness-index-search__search-selection, .microbusiness-index-search__search-autocomplete a, .microbusiness-index-search__body, .microbusiness-index-three-sub-indexes__h2-cont, .microbusiness-index-hero__body, .city-portal-four-factors__subtitle-copy, .city-portal-hero__search-no-results a, .city-portal-hero__search-autocomplete a, .unsupported-browsers-hero__h2, .reports-and-resources-quick-facts__info_copy, .reports-and-resources-quick-facts__info-stat, .explore-the-data-interactive-map__stats-module-headline, .explore-the-data-hero__search-selection, .explore-the-data-hero__search-autocomplete a, .explore-the-data-hero__paragraph, .explore-the-data-featured-stat__paragraph, .explore-the-data-sticky-search__search-selection, .explore-the-data-sticky-search__search-autocomplete a, .global-section-header-text-stack__subtitle, .global-headline--subtitle {
+	font-size: 1.125rem;
+	line-height: 1.6rem;
+}
+.explore-the-data-hero__search-selection {
+    height: 7.22vh;
+	padding: 0 3.36vw 0 1.12vw;
+}
+.explore-the-data-hero__input {
+	height:7.23vh;
+	font-size: 1.25rem;
+	line-height: 3.75rem;
+	padding: 0 3.36vw 0 1.12vw;
+}
+.explore-the-data__social-btns {
+	width: 4.82vw;
+	min-height: 22.71;
+}
+.explore-the-data-hero__search-autocomplete {
+    right: 2.80vw;
+    left:  2.80vw;
+}
+.explore-the-data-hero__chart {
+    padding-left: 1.67vw;
+    margin-top: 3.09vh;
+}
+.explore-the-data-hero__chart-bar-annotation-number {
+    font-size: .875rem;
+}
+.story-article__social-btns__button {
+	height: 3.09vh;
+	width: 1.62vw;
+}
+.city-portal-microbusiness-stats__h2, .city-portal-data-summary__graph-header-headline, .city-portal-four-factors__h2, .city-portal-hero__h1, .story__h2, .about__h2, .reports-and-resources-highlights-2__bullet, .explore-the-data-compare-the-numbers__headline, .global-small-dual-bar-chart__inside-number, .global-small-dual-bar-chart__above-number, .global-section-header-text-stack__headline, .global-headline--size-2, .microbusiness-index-graph-2__h2, .microbusiness-index-search__h2 {
+	font-size: 2.813rem;
+}
+.explore-the-data-featured-stat__number-container {
+	font-size:3.25rem;
+	line-height:3.875rem;
+}
+.explore-the-data-hero__chart-bar-annotation-label b {
+    font-size: 1rem;
+}
+.explore-the-data-hero__chart-bar-annotation-label span {
+    font-size: 0.688rem;
+    margin-top: 1.03vh;
+    padding-top: 1.03vh;
+}
+.explore-the-data-hero__chart-y-axis-label {
+	font-size: 1rem;
+	line-height: 1.313rem;
+}
+.explore-the-data-featured-stat__number {
+	height: 20.9vh;
+	padding: 5.7vh 1.36vw 0;
+}
+.explore-the-data-featured-stat__content {
+	padding: 2.06vh 1.08vw 9.03vh
+}
+.explore-the-data-featured-stat__headline {
+	font-size: 1rem;
+	line-height: 2.25rem;
+}
+.explore-the-data-interactive-map__chart-headline {
+	font-size:1.625rem;
+}
+.explore-the-data-line-graph__link {
+	line-height:0 2.17vw;
+	padding:0 2.48vh; 
+}
+.explore-the-data-hero__chart-bars {
+    height: 38.7vh;
+}
+.city-portal-four-factors__list small, .explore-the-data-interactive-map__stories-grid-item-category, .explore-the-data-line-graph__chart-tools-label {
+	font-size:0.75rem;
+}
+.explore-the-data-interactive-map__stories-grid-item-category {
+    margin-top: 1.54vh;
+}
+.explore-the-data-interactive-map__stories-grid-item-paragraph {
+    font-size: 0.875rem;
+    margin-top:0.516vh;
+}
+.explore-the-data-interactive-map__stories-grid-item-image {
+    height: 12.13vh;
+}
+.explore-the-data-line-graph__chart-tools-selector {
+	line-height:5.67vh;
+	height:5.67vh;
+	padding:0 2.98vw 0 1.08vw;
+}
+.explore-the-data-interactive-map__chart-table-wrapper {
+    margin-top: 2.06vh;
+    padding: 4.12vh 1.79vw; 
+}
+.global-stats-table td {
+	padding: 0.51vh 0.81vw;
+}
+.explore-the-data-line-graph__chart-legend-item, .global-header-filters-touch .select, .global-stats-table th, .global-stats-table td {
+	font-size: 1rem;
+}
+.explore-the-data-line-graph__logos img {
+    max-height: 5.67vh;
+    max-width: 13.46vw
+}
+.reports-and-resources-hero__header {
+	padding-bottom:4.13vh;
+}
+.reports-and-resources__h3 {
+	padding:5.67vh;
+}
+.global-cta {
+	padding:0 1.08vw;
+}
+.reports-and-resources-hero__featured-report-section:nth-of-type(2) {
+	padding: 2.06vh 1.08vw;
+}
+.reports-and-resources-reports-and-filters__header {
+	min-height:0.32vh;
+}
+.global-filter__label, .global-filter__a {
+	padding:0 1.35vw;
+	min-height: 4.13vh;
+}
+.reports-and-resources__h3 {
+	padding: 5.67vh 0 0 0;
+}
+.reports-and-resources__report h6 {
+	height: 3.870vh;
+	line-height: 3.870vh;
+}
+.microbusiness-index-hero__h2, .about-hero__h2, .reports-and-resources__report h4, .global-story__h3 {
+	font-size:1.75rem;
+}
+.reports-and-resources__report {
+	padding: 2.064vh 1.08vw 3.096vh 1.08vw;
+}
+.global-small-dual-bar-chart__above-number {
+	line-height:6.709vh;
+}
+.home-data-summary__top-needs-label, .global-small-dual-bar-chart__inside-label, .global-headline--size-4 {
+	font-size: 1.125rem;
+}
+.global-stories-hero__min-read-wrapper {
+	padding: 0.25vh 0.53vw;
+}
+.global-stories-hero__category {
+	height: 1.80vh;
+	line-height: 1.80vh;
+}
+.stories-and-use-cases-stories__header-filters {
+	max-width: 74.46vw;
+}
+.global-filter__label, .global-filter__a {
+	min-height:2.18;
+	padding:0 2.58vh;
+}
+.stories-and-use-cases__pagination {
+	padding-bottom: 7.22vh;
+}
+.global-pagination__footer{
+	padding: 2.06vh 0;
+}
+.global-pagination__links-area {
+	max-width:74.46vw;
+}
+.global-pagination__links-area > a {
+	min-width:11.43vw;
+	max-width:19.02vw;
+	min-height:6.19vh;
+	padding:0 1.19vw;
+}
+.about-hero__header [role="doc-subtitle"], .reports-and-resources-hero__header [role="doc-subtitle"] {
+	font-size:1.25rem;
+}
+.about-hero__h2 {
+	height:14.45vh;
+	line-height:14.45vh;
+}
+.about-hero-video__h3 {
+	height:14.45vh;
+	padding: 0 0 2.06vh 0;
+}
+.city-portal-four-factors__resource-link, .city-portal-four-factors__list--style-2 ul li, .about-hero-video__h3, .global-bullet-list li {
+	font-size:1rem;
+}
+.about-hero-video__h3 span {
+	width:0.13vw;
+	height:2.06vh;
+	margin-right:0.53vw;
+}
+.about-hero-video__thumbnail--large {
+	height:39.22vh;
+	margin-bottom:01.03vh;
+}
+.about-hero-video__thumbnail {
+	height: 8.38vh;
+}
+.about__h2 {
+	height: 14.45vh;
+}
+.about-faq__question {
+	min-height: 6.19vh;
+	padding: 1.54vh 3.19vw 1.54vh 0;
+}
+.about-faq__answer {
+	padding: 0 2.65vw 0 0;
+}
+.city-portal-banner {
+	height: 9.29vh;
+}
+.global-featured-articles__grid, .microbusiness-index-graph-2__grid, .microbusiness-index-search__grid, .microbusiness-index-map__grid, .microbusiness-index-graph-1__grid, .microbusiness-index-a-closer-look__grid, .microbusiness-index-three-sub-indexes__grid, .microbusiness-index-overview__grid, .microbusiness-index-hero__header, .microbusiness-index-hero__grid, .city-portal-connect__grid, .city-portal-partners__grid, .city-portal-microbusiness-stats__grid, .city-portal-microbusiness__grid, .city-portal-data-summary__grid, .city-portal-four-factors__list--style-2 ul, .city-portal-four-factors__list--grid, .city-portal-four-factors__list--style-1 ul, .city-portal-four-factors__grid, .city-portal-hero__grid, .city-portal-banner__grid, .unsupported-browsers-hero__grid, .story-article__grid, .about-contact-us__grid, .about-partner-orgs__grid, .about-faq__grid, .about-hero__header, .about-hero__grid, .stories-and-use-cases-stories__header-grid, .reports-and-resources-quick-facts__grid, .reports-and-resources-highlights-2__grid, .reports-and-resources-highlights-1__grid, .reports-and-resources-data-sets__grid, .reports-and-resources-reports-and-filters__header-grid, .reports-and-resources-reports-and-filters__grid-block, .reports-and-resources-reports-and-filters__grid, .reports-and-resources-hero__header, .reports-and-resources-hero__grid, .explore-the-data-stats__grid, .explore-the-data-stats__featured-stats, .explore-the-data-logos__grid, .explore-the-data-interactive-map__stories-grid, .explore-the-data-interactive-map__stats-modules, .explore-the-data-interactive-map__grid, .explore-the-data-hero__grid, .explore-the-data-line-graph__grid, .explore-the-data-line-graph__chart-tools, .explore-the-data-community-spotlight__grid, .explore-the-data-compare-the-numbers__header, .explore-the-data-compare-the-numbers__grid, .explore-the-data-compare__grid, .explore-the-data-sticky-search__grid, .home-testimonial__grid, .home-data-summary__grid, .home-case-studies__grid, .home-hero-blades, .home-banner__grid, .global-stories-hero__grid, .global-pagination__grid, .global-story__grid, .global-http-status__grid, .global-featured-stories-grid-row__grid, .global-horizontal-carousel__grid, .global-stories-grid__grid, .global-section-header-text-stack, .global-nav-mobile-tablet__section:first-child, .global-nav-mobile-tablet, .global-nav-desktop, .global-footer__grid {
+	max-width: 74.468vw;
+}
+.city-portal-banner__grid h1, .home-banner__grid h1 {
+	font-size:1.25rem;
+}
+.city-portal-banner__grid span {
+	margin:0 1.59vw;
+}
+.city-portal-banner__grid h2, .home-hero-blades__card-section--vf-statement[data-type="text"] p, .home-banner__grid h2 {
+	font-size:1.125rem;
+}
+.city-portal-connect__body, .city-portal-microbusiness__carousel--content--body, .city-portal-data-summary__paragraph, .city-portal-hero__paragraph, .city-portal-microbusiness-stats__paragraph {
+	font-size:1.25rem;
+	line-height:1.6rem;
+}
+.city-portal-microbusiness-stats__map {
+	padding-top:10.32vh;
+}
+.city-portal-microbusiness-stats__map img {
+	max-width: 33.24vw;
+	max-height:64.51vh;
+}
+.city-portal-microbusiness-stats__map-legend--size-5 {
+	width:32.71vw;
+}
+.city-portal-microbusiness-stats__map-legend {
+	padding: 1.03vh 0.531vw;
+}
+.city-portal-microbusiness-stats__map-legend-city {
+	font-size:1.125rem;
+}
+.city-portal-microbusiness-stats__map-legend-headline {
+	font-size: 0.75rem;
+	margin-bottom: 0.516vh;
+}
+.city-portal-microbusiness__h2, .city-portal-data-summary__h2 {
+	font-size: 3.125;
+}
+.city-portal-microbusiness__carousel--blade-container {
+	padding: 0 1.01vw 4.12vh;
+}
+.city-portal-microbusiness__carousel--blade {
+	height: 55.09vh;
+	padding: 3.87vh 3.140vw 2.06vh;
+}
+.city-portal-microbusiness__carousel--content {
+	padding:4.12vh 0 0 0;
+}
+.city-portal-microbusiness__carousel--content--h2 {
+	font-size: 6.45vh;
+	line-height: 6.45vh;
+}
+.city-portal-microbusiness__carousel--content--h3 {
+    margin-bottom: 1.03vh;
+}
+.city-portal-partners__body, .city-portal-microbusiness__carousel--content--h3 {
+    font-size: 0.875rem;
+}
+
+.city-portal-microbusiness__carousel .global-horizontal-carousel__pagination-dots {
+    padding: 2.06vh 0 0 0;
+}
+.city-portal-microbusiness__carousel .global-horizontal-carousel__pagination-dot {
+    width: 1.548vh;
+    height: 1.548vh;
+    margin: 0 0.336vw;
+}
+.city-portal-microbusiness-stats__map-legend-level {
+    font-size: 0.688rem;
+    padding: 0.258vh 0.44vw;
+}
+.city-portal-microbusiness-stats__chart-table th, .city-portal-microbusiness-stats__chart-table td {
+    padding: 1.161vh 0.44vw;
+
+.city-portal-microbusiness-stats__chart-table td, .city-portal-microbusiness-stats__chart-table th {
+    font-size: 1.063rem;
+}
+.city-portal-microbusiness-stats__chart-table-legend {
+    margin-top: 1.54vh;
+}
+.city-portal-microbusiness-stats__chart-table-legend span {
+    font-size: 0.75rem;
+}
+.city-portal-microbusiness-stats__chart-table-legend span span {
+	width: 1.34vw;
+}
+
+
+}
+
+

@@ -4,12 +4,11 @@
 		width: 100%;
 		height: 72px; // 3/24/21 was 79
 		background: $color-black-1;
-		align-items: center;
 		color: $color-bkgd;
-		@include flex(1 1 0);
+		@extend %apply-padding-for-left-and-right-sides;
 		@include flex-container-display();
+		align-items: center;
 		justify-content: center;
-		text-align: center;
 
 		@include mobile-only {
 			height: 49px;
@@ -91,22 +90,46 @@
 
 	&__grid {
 		height: inherit;
+		//background-color: darkolivegreen;
 		@extend %grid-12;
 
+		div {
+			//background-color: deeppink;
+			grid-column: span 12;
+			height: 100%;
+			width: 100%;
+			position: relative;
+			@include flex-container-display();
+			@include flex-container-flow(row nowrap);
+			//@include flex(1 1 0);
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+
+			@include tablet-only {
+				grid-area: 1 / 1 / 2 / 12;
+				justify-content: flex-start;
+			}
+
+			@include mobile-only {
+				grid-column: span 12;
+				justify-content: flex-start;
+			}
+		}
+
 		h1, h2 {
-			height: inherit;
 			color: $color-bkgd;
 			align-items: center;
 			@include flex-container-display();
-			justify-content: center;
-			text-align: center;
 		}
 
 		h1 {
-			grid-area: 1 / 2 / 2 / 6;
-			@include flex-container-flow(nowrap row);
-			justify-self: flex-end;
+			width: 27%;
+			//background-color: #0F2B47;
+			justify-content: flex-end;
+			text-align: right;
 			@extend %typography-home-1;
+
 			@include mobile-only {
 				display: none;
 			}
@@ -115,50 +138,34 @@
 			}
 		}
 
-		&__verticalGridItem {
-			height: inherit;
-			align-items: center;
-			@include flex-container-display();
-			@include flex-container-flow(nowrap row);
-			justify-content: left;
-			grid-area: 1 / 6 / 2 / 6;
+		span {
+			margin: 0 24px;
+			width: 1px;
+			height: 72%;
+			background: $color-everyday-blue-500;
 
 			@include mobile-only {
-				justify-content: right;
-				grid-area: 1 / 1 / 2 / 1;
+				margin: 0 12px 0 0;
 			}
 
 			@include tablet-only {
-				justify-content: right;
-				grid-area: 1 / 2 / 2 / 2;
-			}
-
-			div {
-				width: 1px;
-				height: 72%;
-				background: $color-everyday-blue-500;
-				@include tablet-only {
-					margin-left: auto;
-				}
-				@include mobile-only {
-					margin-left: auto;
-				}
+				margin: 0 16px 0 0;
 			}
 		}
 
 		h2 {
-			padding: 0 0 0 12px;
-			grid-area: 1 / 6 / 2 / 12;
+			//background-color: #0e7b17;
+			width: 65%;
+			justify-content: flex-start;
+			text-align: left;
 			@extend %typography-home-2;
 
 			@include mobile-only {
-				padding: 0 44px;
-				grid-column: 1 / -1;
+				width: 90%;
 			}
 
 			@include tablet-only {
-				padding: 0 44px;
-				grid-column: 2 / -2;
+				width: 85%;
 			}
 		}
 	}
@@ -256,12 +263,12 @@
 		left: 0;
 		width: 100%;
 		height: 80%;
-		background: rgba(255, 255, 255, 1);
+		background: $color-bkgd;
 		color: $color-black-1;
 		overflow: hidden;
 		@include borderRadius(8px);
 		@include box-shadow(0, 4px, 10px, 4px, rgba(0, 0, 0, 0.33));
-		@include user-select();
+		//@include user-select();
 
 		@include mobile-only {
 			top: 0;
@@ -274,37 +281,47 @@
 		}
 	}
 
-	.global-cta-area {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		min-height: unset;
-		padding-bottom: 32px;
-	}
-
 	// Section within card
 	&__card-section {
 		position: relative;
 		width: 100%;
-		background: $color-everyday-blue-600;
 		@include clearfix();
-		// Top section
-		&:nth-of-type(1) {
-			//height: 212px;
-			padding: 16px;
 
-			// Top section but of type img
+		h2 {
+			display: block;
+			color: $color-bkgd;
+			@extend %typography-home-card-h2;
+		}
+
+		p {
+			color: $color-bkgd;
+			@extend %typography-home-card-copy;
+		}
+
+		// Top section
+		&--headline {
+			padding: 12px;
+			&[data-type='text'] {
+				background-color: $color-everyday-blue-600;
+
+				@media (min-width: #{ map_get($media-rules, tablet-width-min)}) and (max-width: #{ map_get($media-rules, desktop-width-min) - 1px}) {
+					padding-bottom: 24px;
+				}
+				@media (max-width: #{ map_get($media-rules, tablet-width-min) - 1px}) {
+					padding-bottom: 20px;
+				}
+			}
+
 			&[data-type='img'] {
-				margin-bottom: 24px;
-				padding: 8px 8px 0 8px;
-				background: $color-bkgd;
+				margin-bottom: 16px;
+				background-color: $color-bkgd;
 
 				@include mobile-only {
-					margin-bottom: 16px;
+					margin-bottom: 4px;
 				}
 
 				@include tablet-only {
-					margin-bottom: 16px;
+					margin-bottom: 12px;
 				}
 
 				picture, img {
@@ -331,21 +348,37 @@
 					display: block;
 				}
 			}
+		}
 
-			@include mobile-only {
-				//height: 153px;
+		// optional second section
+		&--vf-statement {
+			padding: 12px;
+			&[data-type='text'] {
+				p {
+					color: $color-black-1;
+					@extend %typography-home-2;
+				}
 			}
 
-			@include tablet-only {
-				//height: 153px;
+			&[data-type='img'] {
 			}
 		}
 
-		&:nth-of-type(2) {
-			background: $color-bkgd;
+		// either 3rd or 2nd section
+		&--unique {
+			&[data-type='text'] {
+				padding: 12px;
+
+				@media (min-width: #{ map_get($media-rules, tablet-width-min)}) and (max-width: #{ map_get($media-rules, desktop-width-min) - 1px}) {
+					padding-bottom: 24px;
+				}
+				@media (max-width: #{ map_get($media-rules, tablet-width-min) - 1px}) {
+					padding: 0 12px;
+				}
+			}
 
 			&[data-type='img'] {
-				padding: 0 16px 16px 16px;
+				padding: 0 12px 12px 12px;
 				color: $color-black-1;
 
 				h2 {
@@ -361,66 +394,12 @@
 			}
 		}
 
-		h2 {
-			display: block;
-			margin: 0 0 10px 0;
-			color: $color-bkgd;
-			@extend %typography-home-card-h2;
-		}
-
-		p {
-			color: $color-bkgd;
-			@extend %typography-home-card-copy;
-		}
-	}
-
-	&__card-density-legend {
-		position: relative;
-		display: grid;
-		margin: 8px auto;
-		padding: 0 16px;
-		align-items: flex-start;
-		grid-gap: 16px;
-		grid-template-columns: repeat(4, [col-start] minmax(30px, 400px));
-
-		h4 {
-			padding: 8px 0 0 0;
-			color: $color-black-1;
-			grid-area: 1 / 2 / 2 / 4;
-			text-align: center;
-			@include flex-container-display();
-			@include flex-container-flow(column wrap);
-			align-items: center;
-			@extend %typography-home-card-legend-heading;
-		}
-
-		$legendColors: $color-teal, $color-everyday-blue-600, $color-everyday-blue-500, $color-mint;
-
-		@for $i from 1 through 4 {
-			& > div:nth-of-type(#{$i}) {
-				min-height: 70px;
-				grid-row-start: 2;
-				text-align: center;
-				color: $color-bkgd;
-				background: nth($legendColors, $i);
-				padding: 8px 2px;
-				@include borderRadius(8px);
-				@include flex-container-display();
-				@include flex-container-flow(column wrap);
-				align-items: center;
-				justify-content: center;
-				@extend %typography-home-card-legend;
-			}
-		}
 	}
 
 	&__card-stats-module {
 		position: relative;
 		float: left;
 		width: 50%;
-		height: 100%;
-		min-height: 181px;
-		padding: 0 16px 0 16px;
 		@include flex-container-display();
 		@include flex-container-flow(column wrap);
 		color: $color-bkgd;
@@ -433,7 +412,12 @@
 			justify-content:flex-start;
 		}
 
+		&[data-pos='right'] {
+			padding: 0 0 0 16px;
+		}
+
 		&[data-pos='left'] {
+			padding: 0 16px 0 0;
 			&:after {
 				content: '';
 				position: absolute;
@@ -447,12 +431,20 @@
 		h3 {
 			position: relative;
 			display: inline-flex;
-			min-height: 42px;
-			@extend %typography-home-card-h4;
+			min-height:40px;
 			color: $color-black-1;
+			@extend %typography-home-card-h4;
 
-			@include mobile-only{
+			@media (min-width: 960px) and (max-width: 1119px) {
+				min-height:50px;
+			}
+
+			@include tablet-0-959{
 				min-height:40px;
+			}
+
+			@include mobile-only {
+				margin-top: 4px;
 			}
 		}
 
@@ -482,6 +474,73 @@
 			justify-content: center;
 			@extend %typography-home-card-stats-module-small-copy;
 		}
+	}
+
+	&__card-density-legend {
+		position: relative;
+		width: 100%;
+		display: grid;
+		padding: 12px 0 0 0;
+		align-items: flex-start;
+		grid-gap: 12px;
+		grid-template-columns: repeat(4, [col-start] minmax(30px, 400px));
+
+		h4 {
+			padding: 8px 0 0 0;
+			color: $color-black-1;
+			grid-area: 1 / 2 / 2 / 4;
+			text-align: center;
+			@include flex-container-display();
+			@include flex-container-flow(column wrap);
+			align-items: center;
+			@extend %typography-home-card-legend-heading;
+
+			@include mobile-only {
+				grid-column: 1 / -1;
+			}
+		}
+
+		$legendColors: $color-teal, $color-everyday-blue-600, $color-everyday-blue-500, $color-mint;
+
+		@for $i from 1 through 4 {
+			& > div:nth-of-type(#{$i}) {
+				display: inline-block;
+				position: relative;
+				padding: 8px;
+				width: 100%;
+				min-height: 100%;
+				grid-row-start: 2;
+				text-align: center;
+				color: $color-bkgd;
+				background-color: nth($legendColors, $i);
+				@extend %typography-home-card-legend;
+				@include borderRadius(8px);
+				@include flex-container-display();
+				@include flex-container-flow(column wrap);
+				align-items: center;
+				justify-content: center;
+
+				@media (min-width: 960px) and (max-width: 1119px) {
+					padding: 12px 8px;
+				}
+
+				@include tablet-only {
+					padding: 16px 8px;
+				}
+
+				@include mobile-only {
+					padding: 4px;
+				}
+			}
+		}
+	}
+
+	.global-cta-area {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		min-height: unset;
+		padding-bottom: 32px;
 	}
 }
 
@@ -922,7 +981,7 @@ body {
 		$table-header-font-weight: 400;
 		$table-header-font-color: #757575;
 		$table-cell-padding: 8px; //1.0rem
-		$table-condensed-cell-padding: $table-cell-padding/2;
+		$table-condensed-cell-padding: $table-cell-padding*0.5;
 		$table-bg: #fff;
 		$table-bg-accent: #f5f5f5;
 		$table-bg-hover: rgba(0, 0, 0, .12);
@@ -1294,7 +1353,7 @@ body {
 		}
 
 		@include tablet-only {
-			margin: 0 26px 0 (-135px/4);
+			margin: 0 26px 0 (-135px*0.25);
 		}
 	}
 

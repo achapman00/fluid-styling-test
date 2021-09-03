@@ -1,0 +1,90 @@
+//  global-featured-articles  --- 1 row of buttons
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+.global-featured-articles {
+	@extend %global-main-section;
+	@extend %apply-padding-for-left-and-right-sides;
+	@extend %typography-body-copy;
+	min-height: unset;
+	background: $color-ui-chrome-300;
+
+	&__grid {
+		@extend %grid-12;
+		align-items: center;
+	}
+
+	&__a {
+		position: relative;
+		display: block;
+		height: 100%;
+		padding: 8px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+		overflow: hidden;
+		align-items: center;
+		vertical-align: middle;
+		@include borderRadius(8px);
+		@include setPseudoClasses($color-bkgd, $color-black-1, $color-everyday-blue-500, $color-bkgd, .6s);
+		@include opacity(0);
+		@include flex-container-display();
+		grid-column: span 3;
+		justify-items: center;
+
+		@for $i from 1 through 8 {
+			&:nth-of-type(#{$i}) {
+				@include transitionMultiple(opacity .4s linear $i*0.125+s, box-shadow .32s linear 0s, transform .2s ease-out 0s);
+			}
+		}
+
+		@include tablet-0-959 {
+			grid-column: span 12;
+		}
+
+		&:focus, &:hover, &:active {
+			transform: scale(1.02);
+			@include box-shadow(0, 10px, 20px, 0, rgba(54, 54, 54, 0.29));
+
+			span div {
+				color: $color-bkgd !important;
+			}
+		}
+
+		picture {
+			position: relative;
+			width: auto;
+		}
+
+		img {
+			position: relative;
+			display: block;
+			float: left;
+			max-width: 84px;
+			height: auto;
+			margin: auto 0;
+			overflow: hidden;
+			vertical-align: middle;
+		}
+
+		span {
+			position: relative;
+			display: block;
+			width: 100%;
+			padding-top: 12px;
+			padding-left: 8px;
+			text-align: left;
+			vertical-align: top;
+			justify-self: flex-start;
+
+			div {
+				padding: 0 0 8px 0;
+				@extend %typography-about-featured-article-date;
+				color: $color-tech-gray-400;
+
+				&:nth-of-type(2) {
+					color: $color-black-1;
+					@extend %typography-about-featured-article-a-body;
+				}
+			}
+		}
+	}
+}
+
+

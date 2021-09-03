@@ -1,0 +1,265 @@
+
+/********* Font Override Settings *********/
+*, .home-banner__grid h2 {
+	font-size:1.125rem;
+}
+.home-banner__grid h1 {
+	font-size: 1.25rem;
+	line-height:1.438rem;
+}
+.global-horizontal-carousel__section, .global-featured-stories-grid-row__section, .global-http-status__section, .global-stories-hero__section, .home__section, .explore-the-data__section, .reports-and-resources__section, .stories-and-use-cases__section, .about__section, .story__section, .unsupported-browsers__section, .global-filter__label, .global-filter__a, .global-text, .global-horizontal-carousel__p, .global-http-status__h2, .global-header-filters-touch label, .global-story__p, .reports-and-resources__report p, .reports-and-resources__report-publication-date, .global-stories-hero__time, .global-stories-hero__excerpt, .global-stories-hero__author, .story-article__social-btns div, .story-article__the-content .wp-block-quote cite, .story-article__the-content .wp-block-pullquote cite, .global-rte p, .explore-the-data-featured-stat__attribution-link, .explore-the-data-featured-stat__date-range {
+	font-size: 1.1rem;
+	line-height: 1.375rem;
+}
+.global-cta, .global-pagination__links-area > a, .story-article__the-content .wp-block-buttons .wp-block-button .wp-block-button__link, .home-case-studies__card p {
+	font-size: 1rem;
+}
+.home-hero-blades__card-section:nth-of-type(2)[data-type="img"] h2, .home-hero-blades__card-section h2 {
+	font-size: 1.688rem;
+	line-height: 1.875rem;
+}
+.home-hero-blades__card-stats-module h3 {
+	font-size: 1.063rem;
+}
+.global-nav-desktop__a, .global-nav-mobile-tablet__a {
+    font-size: 1.25rem;
+}
+.home-hero-blades__card-stats-module span {
+	font-size: 3.5rem;
+}
+.home-hero-blades__card-stats-module p {
+	font-size:0.688rem;
+}
+.home-hero-blades__card-section p {
+	font-size: 1.125rem;
+	line-height: 1.4rem;
+}
+.global-horizontal-section-header__heading, .home-case-studies__card--header h2, .home-data-summary__card--header h2 {
+	font-size: 2.813rem;
+}
+.global-headline--micro, .global-horizontal-carousel__category, .global-story__h6, .global-story__category, .global-stories-hero__category, .reports-and-resources__h6 {
+	font-size:0.688rem;
+}
+.global-headline--size-3, .global-horizontal-carousel__title, .global-story__title, .reports-and-resources__h3, .about-faq__question, .global-story__card--explore-the-data-story h3, .global-story__card--story-style-2 h3, .story-article__the-content .schema-faq-question::before, .unsupported-browsers-hero__h3 {
+	font-size:1.625rem;
+}
+.home-case-studies__card--header p, .home-data-summary__card--header p {
+	font-size: 1.25rem;
+}
+.home-case-studies__card h3, .home-case-studies__card--3 header h3, .home-data-summary__card h3, .home-case-studies__stats-number {
+	font-size: 1.625rem;
+}
+.home-case-studies__stats-label {
+	font-size:1.125rem;
+}
+.home-data-summary__top-needs-percentage {
+	font-size: 1.063rem;
+}
+.home-data-summary__top-needs-label {
+	font-size: 1rem;
+}
+.home-testimonial__blockquote, .home-testimonial__citation-name, .home-testimonial__citation-title, .story-article__the-content .wp-block-pullquote p {
+	font-size:3.5rem;
+}
+.home-testimonial__blockquote::before {
+	font-size:5.938rem;
+}
+.global-footer {
+	font-size: .875rem;
+}
+/********* Header Settings *********/
+.body {
+    padding: 6.9vw 0 0 0;
+}
+.global-nav-desktop {
+    height: 11vh;
+}
+.global-footer, .global-nav-desktop, .global-horizontal-carousel__section, .global-featured-stories-grid-row__section, .global-http-status__section, .global-pagination__footer, .global-stories-hero__section, .home__section, .explore-the-data__section, .explore-the-data-sticky-search, .reports-and-resources__section, .reports-and-resources-reports-and-filters__header, .stories-and-use-cases__section, .stories-and-use-cases-stories__header, .about__section, .story__section, .unsupported-browsers__section {
+	padding-right: 2.2vw;
+	padding-left: 2.2vw;
+
+}
+.global-footer__grid, .global-nav-desktop, .global-nav-mobile-tablet, .global-nav-mobile-tablet__section:first-child, .global-section-header-text-stack, .global-stories-grid__grid, .global-horizontal-carousel__grid, .global-featured-stories-grid-row__grid, .global-http-status__grid, .global-story__grid, .global-pagination__grid, .global-stories-hero__grid, .home-banner__grid, .home-hero-blades, .home-case-studies__grid, .home-data-summary__grid, .home-testimonial__grid, .explore-the-data-sticky-search__grid, .explore-the-data-compare__grid, .explore-the-data-compare-the-numbers__grid, .explore-the-data-compare-the-numbers__header, .explore-the-data-community-spotlight__grid, .explore-the-data-line-graph__chart-tools, .explore-the-data-line-graph__grid, .explore-the-data-hero__grid, .explore-the-data-interactive-map__grid, .explore-the-data-interactive-map__stats-modules, .explore-the-data-interactive-map__stories-grid, .explore-the-data-logos__grid, .explore-the-data-stats__featured-stats, .explore-the-data-stats__grid, .reports-and-resources-hero__grid, .reports-and-resources-hero__header, .reports-and-resources-reports-and-filters__grid, .reports-and-resources-reports-and-filters__grid-block, .reports-and-resources-reports-and-filters__header-grid, .reports-and-resources-data-sets__grid, .reports-and-resources-highlights-1__grid, .reports-and-resources-highlights-2__grid, .reports-and-resources-quick-facts__grid, .stories-and-use-cases-stories__header-grid, .about-hero__grid, .about-hero__header, .about-featured-articles__grid, .about-faq__grid, .about-partner-orgs__grid, .about-contact-us__grid, .story-article__grid, .unsupported-browsers-hero__grid {
+	max-width: unset;
+	grid-gap: 2.2vw;
+}
+
+.global-nav-desktop__a span::after {
+	height: .289vh;
+}
+/********* Homepage Settings *********/
+.home-banner {
+	height: 7.77vh;
+}
+.home__section--hero {
+    padding: 0 2.2vw;
+    height: 63.76vh !important;
+}
+.home-hero-blades__map-layer {
+	padding: 0 5.8vw;
+}
+.home-hero-blades__card-section:nth-of-type(1) {
+    padding: 1.7vh 1.1vw;
+}
+.home-hero-blades__card-section:nth-of-type(1)[data-type="img"] {
+	padding: .772vh 0.446vw 0vh;
+}
+.home-hero-blades__card-stats-module {
+	min-height: 19.5vh;
+	padding: 0 1.1vw;
+}
+.home-hero-blades__card-stats-module h3 {
+	min-height:4.5vh;
+}
+.home-hero-blades__card-density-legend {
+	padding: 0 1.1vw;
+}
+.home-hero-blades__card-density-legend h4 {
+	padding: 0.8vh 0 0 0;
+}
+.home-hero-blades__card-density-legend > div:nth-of-type(1) {
+	min-height: 7.5vh;
+	padding: .8vh .13vw;
+}
+.home-hero-blades .global-cta-area {
+	padding-bottom: 3.5vh;
+}
+.home-banner__grid__verticalGridItem div {
+	width: 0.0558vw;
+}
+.home-banner__grid h2 {
+	padding-left: .669rem;
+}
+.home-data-summary__card-footer {
+	font-size: .875rem;
+}
+.home-testimonial__citation-img {
+	width: 11.4893vw;
+	height: 16.8119vh;
+}
+/********* Explore Settings  *********/
+.explore-the-data-interactive-map__map-legend {
+	padding: .86vh .55vw;
+	bottom: 6.05vh;
+}
+.home-hero-blades__card-section:nth-of-type(1)[data-type="img"] picture, .home-hero-blades__card-section:nth-of-type(1)[data-type="img"] img {
+	height: 18.93vh;
+	min-height: 8.115vh;
+}
+.home-hero-blades__card-section:nth-of-type(2)[data-type="img"],
+.home-case-studies__card, .home-case-studies__card--3 header {
+	padding: 1.55vh .89vw;
+}
+.home-hero-blades__card-stats-module[data-pos="left"]::after {
+	width: 0.0558vw;
+}
+.home-case-studies__card--header {
+	min-height:20.2898vh;
+	padding:1.5458vh .802vw;
+}
+.home-case-studies__card--3 li {
+	padding: 1.5458vh 0;
+}
+.home-data-summary__card {
+	padding: 3.091vh 1.78vw;
+}
+.home-data-summary__card--1 table {
+	width: 39.06vw;
+	max-width: unset;
+}
+.home-data-summary__top-needs-list-item {
+	min-height: 5.41vh;
+}
+.home-data-summary__top-needs-percentage-bar {
+height:3.86vh;
+}
+.home-data-summary__card--2 li {
+	min-height:5.410vh;
+}
+.home-data-summary__card--2 li picture {
+	height: 2.31vh;
+}
+.home-testimonial__blockquote {
+	min-height: 31.40vh;
+}
+.home-testimonial__blockquote::before {
+	height: 2.318vh;
+	width: 1.339vw;
+}
+/********* Global Settings  *********/
+.global-cta {
+	min-width: 8.43vw;
+	min-height: 3.56vh;
+}
+.global-cta--style-2 {
+	padding: 0 0.27vw;
+}
+.global-cta--style-3 {
+	padding: 0 0.669vw
+}
+.global-cta img{
+	height: 1.5vw;
+}
+.global-cta img.right-arrow {
+	width:1.3vw;
+}
+.global-horizontal-carousel {
+	min-height: 43.19vh;
+}
+.global-horizontal-carousel__pagination-dots {
+	padding: 4.637vh 0 2.3188vh;
+}
+.keen-slider__slide {
+	min-height: 42.5vh;
+}
+.global-horizontal-carousel__copyCont {
+	padding: 1.7vh 1.1vw;
+}
+
+.global-direction-controls__button {
+	width: 2.455vw; 
+	height: 4.25vh;
+}
+.global-horizontal-carousel__title,
+.global-horizontal-carousel__p,
+.global-story__title,
+.global-story__p {
+	padding: 0.772vh 0 0;
+}
+
+.global-horizontal-carousel__section, .global-featured-stories-grid-row__section, .global-http-status__section, .global-stories-hero__section, .home__section, .explore-the-data__section, .reports-and-resources__section, .stories-and-use-cases__section, .about__section, .story__section, .unsupported-browsers__section {
+	padding:3.09vh 2vw;
+}
+
+.global-cta-area {
+	min-height: 17.7vh;
+}
+.global-cta .download-ani {
+	height: 2.318vh !important;
+	width: 1.339vw !important;
+}
+.global-footer--style-1 {
+	min-height: 46.570vh;
+}
+.global-footer__section {
+	padding: 7.729vh 0 3.86vh;
+	min-height:36.42vh;
+}
+.global-footer__section:nth-of-type(2) {
+	padding: 3.86vh 0vw;
+}
+.global-footer__menu-legal-links {
+	height: 10.144vh;
+}
+.global-footer__menu-legal-links a {
+	line-height: 2.75rem;
+}
+
+.global-footer__menu-legal-links a:first-child {
+	padding-right:0.78vw;
+}
+
+.global-footer__copyright {
+	line-height: 0.875rem;
+	height:10.144vh;
+}
